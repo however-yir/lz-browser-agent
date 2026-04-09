@@ -13,7 +13,7 @@ import httpx
 from pydantic import BaseModel
 from uuid_extensions import uuid7str
 
-from browser_use.config import CONFIG
+from lz_browser_agent.config import CONFIG
 
 # Temporary user ID for pre-auth events (matches cloud backend)
 TEMP_USER_ID = '99999999-9999-9999-9999-999999999999'

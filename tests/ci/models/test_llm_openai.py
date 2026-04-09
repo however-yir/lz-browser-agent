@@ -1,6 +1,6 @@
 """Test OpenAI model button click."""
 
-from browser_use.llm.openai.chat import ChatOpenAI
+from lz_browser_agent.llm.openai.chat import ChatOpenAI
 from tests.ci.models.model_test_helper import run_model_button_click_test
 
 

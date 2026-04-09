@@ -4,23 +4,23 @@ import asyncio
 import time
 from typing import TYPE_CHECKING
 
-from browser_use.browser.events import (
+from lz_browser_agent.browser.events import (
 	BrowserErrorEvent,
 	BrowserStateRequestEvent,
 	ScreenshotEvent,
 	TabCreatedEvent,
 )
-from browser_use.browser.watchdog_base import BaseWatchdog
-from browser_use.dom.service import DomService
-from browser_use.dom.views import (
+from lz_browser_agent.browser.watchdog_base import BaseWatchdog
+from lz_browser_agent.dom.service import DomService
+from lz_browser_agent.dom.views import (
 	EnhancedDOMTreeNode,
 	SerializedDOMState,
 )
-from browser_use.observability import observe_debug
-from browser_use.utils import create_task_with_error_handling, time_execution_async
+from lz_browser_agent.observability import observe_debug
+from lz_browser_agent.utils import create_task_with_error_handling, time_execution_async
 
 if TYPE_CHECKING:
-	from browser_use.browser.views import BrowserStateSummary, NetworkRequest, PageInfo, PaginationButton
+	from lz_browser_agent.browser.views import BrowserStateSummary, NetworkRequest, PageInfo, PaginationButton
 
 
 class DOMWatchdog(BaseWatchdog):
@@ -97,7 +97,7 @@ class DOMWatchdog(BaseWatchdog):
 		Returns:
 			List of NetworkRequest objects representing currently loading resources
 		"""
-		from browser_use.browser.views import NetworkRequest
+		from lz_browser_agent.browser.views import NetworkRequest
 
 		try:
 			# get_or_create_cdp_session() now handles focus validation automatically
@@ -250,7 +250,7 @@ class DOMWatchdog(BaseWatchdog):
 		Returns:
 			Complete BrowserStateSummary with DOM, screenshot, and target info
 		"""
-		from browser_use.browser.views import BrowserStateSummary, PageInfo
+		from lz_browser_agent.browser.views import BrowserStateSummary, PageInfo
 
 		self.logger.debug('🔍 DOMWatchdog.on_BrowserStateRequestEvent: STARTING browser state request')
 		page_url = await self.browser_session.get_current_page_url()
@@ -719,7 +719,7 @@ class DOMWatchdog(BaseWatchdog):
 		Returns:
 			List of PaginationButton instances found in the DOM
 		"""
-		from browser_use.browser.views import PaginationButton
+		from lz_browser_agent.browser.views import PaginationButton
 
 		pagination_buttons_data = []
 		try:
@@ -754,7 +754,7 @@ class DOMWatchdog(BaseWatchdog):
 			PageInfo with all viewport, page dimensions, and scroll information
 		"""
 
-		from browser_use.browser.views import PageInfo
+		from lz_browser_agent.browser.views import PageInfo
 
 		# get_or_create_cdp_session() handles focus validation automatically
 		cdp_session = await self.browser_session.get_or_create_cdp_session(

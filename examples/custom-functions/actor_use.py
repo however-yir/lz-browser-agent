@@ -2,7 +2,7 @@ import asyncio
 import os
 import sys
 
-from browser_use.browser.session import BrowserSession
+from lz_browser_agent.browser.session import BrowserSession
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use import ActionResult, Agent, ChatOpenAI, Tools
+from lz_browser_agent import ActionResult, Agent, ChatOpenAI, Tools
 
 tools = Tools()
 

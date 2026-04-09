@@ -9,11 +9,11 @@ from unittest.mock import AsyncMock
 
 import pytest
 
-from browser_use.agent.views import AgentOutput
-from browser_use.llm import BaseChatModel
-from browser_use.llm.exceptions import ModelProviderError, ModelRateLimitError
-from browser_use.llm.views import ChatInvokeCompletion
-from browser_use.tools.service import Tools
+from lz_browser_agent.agent.views import AgentOutput
+from lz_browser_agent.llm import BaseChatModel
+from lz_browser_agent.llm.exceptions import ModelProviderError, ModelRateLimitError
+from lz_browser_agent.llm.views import ChatInvokeCompletion
+from lz_browser_agent.tools.service import Tools
 
 
 def create_mock_llm(
@@ -86,7 +86,7 @@ class TestFallbackLLMParameter:
 
 	def test_fallback_llm_none_by_default(self):
 		"""Verify fallback_llm defaults to None."""
-		from browser_use import Agent
+		from lz_browser_agent import Agent
 
 		primary = create_mock_llm('primary-model')
 		agent = Agent(task='Test task', llm=primary)
@@ -97,7 +97,7 @@ class TestFallbackLLMParameter:
 
 	def test_fallback_llm_single_model(self):
 		"""Test passing a fallback LLM."""
-		from browser_use import Agent
+		from lz_browser_agent import Agent
 
 		primary = create_mock_llm('primary-model')
 		fallback = create_mock_llm('fallback-model')
@@ -109,7 +109,7 @@ class TestFallbackLLMParameter:
 
 	def test_public_properties(self):
 		"""Test the public properties for fallback status."""
-		from browser_use import Agent
+		from lz_browser_agent import Agent
 
 		primary = create_mock_llm('primary-model')
 		fallback = create_mock_llm('fallback-model')
@@ -134,7 +134,7 @@ class TestFallbackLLMSwitching:
 
 	def test_switch_on_rate_limit_error(self):
 		"""Test that agent switches to fallback on ModelRateLimitError."""
-		from browser_use import Agent
+		from lz_browser_agent import Agent
 
 		primary = create_mock_llm('primary-model')
 		fallback = create_mock_llm('fallback-model')
@@ -150,7 +150,7 @@ class TestFallbackLLMSwitching:
 
 	def test_switch_on_503_error(self):
 		"""Test that agent switches to fallback on 503 Service Unavailable."""
-		from browser_use import Agent
+		from lz_browser_agent import Agent
 
 		primary = create_mock_llm('primary-model')
 		fallback = create_mock_llm('fallback-model')
@@ -166,7 +166,7 @@ class TestFallbackLLMSwitching:
 
 	def test_switch_on_500_error(self):
 		"""Test that agent switches to fallback on 500 Internal Server Error."""
-		from browser_use import Agent
+		from lz_browser_agent import Agent
 
 		primary = create_mock_llm('primary-model')
 		fallback = create_mock_llm('fallback-model')
@@ -181,7 +181,7 @@ class TestFallbackLLMSwitching:
 
 	def test_switch_on_502_error(self):
 		"""Test that agent switches to fallback on 502 Bad Gateway."""
-		from browser_use import Agent
+		from lz_browser_agent import Agent
 
 		primary = create_mock_llm('primary-model')
 		fallback = create_mock_llm('fallback-model')
@@ -196,7 +196,7 @@ class TestFallbackLLMSwitching:
 
 	def test_no_switch_on_400_error(self):
 		"""Test that agent does NOT switch on 400 Bad Request (not retryable)."""
-		from browser_use import Agent
+		from lz_browser_agent import Agent
 
 		primary = create_mock_llm('primary-model')
 		fallback = create_mock_llm('fallback-model')
@@ -212,7 +212,7 @@ class TestFallbackLLMSwitching:
 
 	def test_switch_on_401_error(self):
 		"""Test that agent switches to fallback on 401 Unauthorized (API key error)."""
-		from browser_use import Agent
+		from lz_browser_agent import Agent
 
 		primary = create_mock_llm('primary-model')
 		fallback = create_mock_llm('fallback-model')
@@ -228,7 +228,7 @@ class TestFallbackLLMSwitching:
 
 	def test_switch_on_402_error(self):
 		"""Test that agent switches to fallback on 402 Payment Required (insufficient credits)."""
-		from browser_use import Agent
+		from lz_browser_agent import Agent
 
 		primary = create_mock_llm('primary-model')
 		fallback = create_mock_llm('fallback-model')
@@ -244,7 +244,7 @@ class TestFallbackLLMSwitching:
 
 	def test_no_switch_when_no_fallback_configured(self):
 		"""Test that agent returns False when no fallback is configured."""
-		from browser_use import Agent
+		from lz_browser_agent import Agent
 
 		primary = create_mock_llm('primary-model')
 		agent = Agent(task='Test task', llm=primary)
@@ -257,7 +257,7 @@ class TestFallbackLLMSwitching:
 
 	def test_no_switch_when_already_using_fallback(self):
 		"""Test that agent doesn't switch again when already using fallback."""
-		from browser_use import Agent
+		from lz_browser_agent import Agent
 
 		primary = create_mock_llm('primary-model')
 		fallback = create_mock_llm('fallback-model')
@@ -350,7 +350,7 @@ class TestFallbackLLMIntegration:
 	@pytest.mark.asyncio
 	async def test_get_model_output_switches_to_fallback_on_rate_limit(self, browser_session):
 		"""Test that get_model_output automatically switches to fallback on rate limit."""
-		from browser_use import Agent
+		from lz_browser_agent import Agent
 
 		# Create agent first with a working mock LLM
 		placeholder = create_mock_llm('placeholder')
@@ -370,7 +370,7 @@ class TestFallbackLLMIntegration:
 		agent._original_llm = primary
 		agent._fallback_llm = fallback
 
-		from browser_use.llm.messages import BaseMessage, UserMessage
+		from lz_browser_agent.llm.messages import BaseMessage, UserMessage
 
 		messages: list[BaseMessage] = [UserMessage(content='Test message')]
 
@@ -384,7 +384,7 @@ class TestFallbackLLMIntegration:
 	@pytest.mark.asyncio
 	async def test_get_model_output_raises_when_no_fallback(self, browser_session):
 		"""Test that get_model_output raises error when no fallback is configured."""
-		from browser_use import Agent
+		from lz_browser_agent import Agent
 
 		# Create agent first with a working mock LLM
 		placeholder = create_mock_llm('placeholder')
@@ -401,7 +401,7 @@ class TestFallbackLLMIntegration:
 		agent._original_llm = primary
 		agent._fallback_llm = None  # No fallback
 
-		from browser_use.llm.messages import BaseMessage, UserMessage
+		from lz_browser_agent.llm.messages import BaseMessage, UserMessage
 
 		messages: list[BaseMessage] = [UserMessage(content='Test message')]
 
@@ -412,7 +412,7 @@ class TestFallbackLLMIntegration:
 	@pytest.mark.asyncio
 	async def test_get_model_output_raises_when_fallback_also_fails(self, browser_session):
 		"""Test that error is raised when fallback also fails."""
-		from browser_use import Agent
+		from lz_browser_agent import Agent
 
 		# Create agent first with a working mock LLM
 		placeholder = create_mock_llm('placeholder')
@@ -426,7 +426,7 @@ class TestFallbackLLMIntegration:
 		agent._original_llm = primary
 		agent._fallback_llm = fallback
 
-		from browser_use.llm.messages import BaseMessage, UserMessage
+		from lz_browser_agent.llm.messages import BaseMessage, UserMessage
 
 		messages: list[BaseMessage] = [UserMessage(content='Test message')]
 

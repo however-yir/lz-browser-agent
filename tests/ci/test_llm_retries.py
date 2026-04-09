@@ -20,8 +20,8 @@ class TestChatBrowserUseRetries:
 	@pytest.mark.asyncio
 	async def test_retries_on_503_with_exponential_backoff(self, mock_env):
 		"""Test that 503 errors trigger retries with exponential backoff."""
-		from browser_use.llm.browser_use.chat import ChatBrowserUse
-		from browser_use.llm.messages import UserMessage
+		from lz_browser_agent.llm.lz_browser_agent.chat import ChatBrowserUse
+		from lz_browser_agent.llm.messages import UserMessage
 
 		# Track timing of each attempt
 		attempt_times: list[float] = []
@@ -84,9 +84,9 @@ class TestChatBrowserUseRetries:
 	@pytest.mark.asyncio
 	async def test_no_retry_on_401(self, mock_env):
 		"""Test that 401 errors do NOT trigger retries."""
-		from browser_use.llm.browser_use.chat import ChatBrowserUse
-		from browser_use.llm.exceptions import ModelProviderError
-		from browser_use.llm.messages import UserMessage
+		from lz_browser_agent.llm.lz_browser_agent.chat import ChatBrowserUse
+		from lz_browser_agent.llm.exceptions import ModelProviderError
+		from lz_browser_agent.llm.messages import UserMessage
 
 		attempt_count = 0
 
@@ -116,8 +116,8 @@ class TestChatBrowserUseRetries:
 	@pytest.mark.asyncio
 	async def test_retries_on_timeout(self, mock_env):
 		"""Test that timeouts trigger retries."""
-		from browser_use.llm.browser_use.chat import ChatBrowserUse
-		from browser_use.llm.messages import UserMessage
+		from lz_browser_agent.llm.lz_browser_agent.chat import ChatBrowserUse
+		from lz_browser_agent.llm.messages import UserMessage
 
 		attempt_count = 0
 
@@ -148,9 +148,9 @@ class TestChatBrowserUseRetries:
 	@pytest.mark.asyncio
 	async def test_max_retries_exhausted(self, mock_env):
 		"""Test that error is raised after max retries exhausted."""
-		from browser_use.llm.browser_use.chat import ChatBrowserUse
-		from browser_use.llm.exceptions import ModelProviderError
-		from browser_use.llm.messages import UserMessage
+		from lz_browser_agent.llm.lz_browser_agent.chat import ChatBrowserUse
+		from lz_browser_agent.llm.exceptions import ModelProviderError
+		from lz_browser_agent.llm.messages import UserMessage
 
 		attempt_count = 0
 
@@ -189,15 +189,15 @@ class TestChatGoogleRetries:
 	@pytest.mark.asyncio
 	async def test_retries_on_503_with_exponential_backoff(self, mock_env):
 		"""Test that 503 errors trigger retries with exponential backoff."""
-		from browser_use.llm.exceptions import ModelProviderError
-		from browser_use.llm.google.chat import ChatGoogle
-		from browser_use.llm.messages import UserMessage
+		from lz_browser_agent.llm.exceptions import ModelProviderError
+		from lz_browser_agent.llm.google.chat import ChatGoogle
+		from lz_browser_agent.llm.messages import UserMessage
 
 		attempt_times: list[float] = []
 		attempt_count = 0
 
 		# Mock the genai client
-		with patch('browser_use.llm.google.chat.genai') as mock_genai:
+		with patch('lz_browser_agent.llm.google.chat.genai') as mock_genai:
 			mock_client = MagicMock()
 			mock_genai.Client.return_value = mock_client
 
@@ -238,13 +238,13 @@ class TestChatGoogleRetries:
 	@pytest.mark.asyncio
 	async def test_no_retry_on_400(self, mock_env):
 		"""Test that 400 errors do NOT trigger retries."""
-		from browser_use.llm.exceptions import ModelProviderError
-		from browser_use.llm.google.chat import ChatGoogle
-		from browser_use.llm.messages import UserMessage
+		from lz_browser_agent.llm.exceptions import ModelProviderError
+		from lz_browser_agent.llm.google.chat import ChatGoogle
+		from lz_browser_agent.llm.messages import UserMessage
 
 		attempt_count = 0
 
-		with patch('browser_use.llm.google.chat.genai') as mock_genai:
+		with patch('lz_browser_agent.llm.google.chat.genai') as mock_genai:
 			mock_client = MagicMock()
 			mock_genai.Client.return_value = mock_client
 
@@ -266,13 +266,13 @@ class TestChatGoogleRetries:
 	@pytest.mark.asyncio
 	async def test_retries_on_429_rate_limit(self, mock_env):
 		"""Test that 429 rate limit errors trigger retries."""
-		from browser_use.llm.exceptions import ModelProviderError
-		from browser_use.llm.google.chat import ChatGoogle
-		from browser_use.llm.messages import UserMessage
+		from lz_browser_agent.llm.exceptions import ModelProviderError
+		from lz_browser_agent.llm.google.chat import ChatGoogle
+		from lz_browser_agent.llm.messages import UserMessage
 
 		attempt_count = 0
 
-		with patch('browser_use.llm.google.chat.genai') as mock_genai:
+		with patch('lz_browser_agent.llm.google.chat.genai') as mock_genai:
 			mock_client = MagicMock()
 			mock_genai.Client.return_value = mock_client
 

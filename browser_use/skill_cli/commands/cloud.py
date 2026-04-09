@@ -54,26 +54,26 @@ def _spec_url(version: str) -> str:
 
 
 def _get_config_path() -> Path:
-	from browser_use.skill_cli.utils import get_config_path
+	from lz_browser_agent.skill_cli.utils import get_config_path
 
 	return get_config_path()
 
 
 def _read_config() -> dict:
-	from browser_use.skill_cli.config import read_config
+	from lz_browser_agent.skill_cli.config import read_config
 
 	return read_config()
 
 
 def _write_config(data: dict) -> None:
-	from browser_use.skill_cli.config import write_config
+	from lz_browser_agent.skill_cli.config import write_config
 
 	write_config(data)
 
 
 def _get_api_key_or_none() -> str | None:
 	"""Return API key from CLI config file, or None if not found."""
-	from browser_use.skill_cli.config import get_config_value
+	from lz_browser_agent.skill_cli.config import get_config_value
 
 	val = get_config_value('api_key')
 	return str(val) if val is not None else None
@@ -146,7 +146,7 @@ def _get_or_create_cloud_profile() -> str:
 
 def _get_cloud_connect_proxy() -> str | None:
 	"""Return the cloud connect proxy country code from config."""
-	from browser_use.skill_cli.config import get_config_value
+	from lz_browser_agent.skill_cli.config import get_config_value
 
 	val = get_config_value('cloud_connect_proxy')
 	return str(val) if val is not None else None
@@ -154,7 +154,7 @@ def _get_cloud_connect_proxy() -> str | None:
 
 def _get_cloud_connect_timeout() -> int | None:
 	"""Return the cloud connect timeout (minutes) from config."""
-	from browser_use.skill_cli.config import get_config_value
+	from lz_browser_agent.skill_cli.config import get_config_value
 
 	val = get_config_value('cloud_connect_timeout')
 	return int(val) if val is not None else None

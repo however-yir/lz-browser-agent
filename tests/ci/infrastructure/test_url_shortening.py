@@ -11,9 +11,9 @@ import json
 
 import pytest
 
-from browser_use.agent.service import Agent
-from browser_use.agent.views import AgentOutput
-from browser_use.llm.messages import AssistantMessage, BaseMessage, UserMessage
+from lz_browser_agent.agent.service import Agent
+from lz_browser_agent.agent.views import AgentOutput
+from lz_browser_agent.llm.messages import AssistantMessage, BaseMessage, UserMessage
 
 # Super long URL to reuse across tests - much longer than the 25 character limit
 # Includes both query params (?...) and fragment params (#...)

@@ -31,8 +31,8 @@ parser.add_argument('--auto', action='store_true', help='Auto mode: respond to u
 args = parser.parse_args()
 setup_environment(args.debug)
 
-from browser_use import Agent, BrowserSession
-from browser_use.llm.google import ChatGoogle
+from lz_browser_agent import Agent, BrowserSession
+from lz_browser_agent.llm.google import ChatGoogle
 
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY') or os.getenv('GEMINI_API_KEY')
 
@@ -95,7 +95,7 @@ async def parse_messages():
 	- "next tuesday" or similar means the next occurrence of that day
 	"""
 
-	from browser_use.llm.messages import UserMessage
+	from lz_browser_agent.llm.messages import UserMessage
 
 	response = await llm.ainvoke([UserMessage(content=prompt)])
 	response_text = response.completion if hasattr(response, 'completion') else str(response)

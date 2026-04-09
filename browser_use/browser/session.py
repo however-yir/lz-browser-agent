@@ -20,12 +20,12 @@ from cdp_use.cdp.target.commands import CreateTargetParameters
 from pydantic import BaseModel, ConfigDict, Field, PrivateAttr
 from uuid_extensions import uuid7str
 
-from browser_use.browser.cloud.cloud import CloudBrowserAuthError, CloudBrowserClient, CloudBrowserError
+from lz_browser_agent.browser.cloud.cloud import CloudBrowserAuthError, CloudBrowserClient, CloudBrowserError
 
 # CDP logging is now handled by setup_logging() in logging_config.py
-# It automatically sets CDP logs to the same level as browser_use logs
-from browser_use.browser.cloud.views import CloudBrowserParams, CreateBrowserRequest, ProxyCountryCode
-from browser_use.browser.events import (
+# It automatically sets CDP logs to the same level as lz_browser_agent logs
+from lz_browser_agent.browser.cloud.views import CloudBrowserParams, CreateBrowserRequest, ProxyCountryCode
+from lz_browser_agent.browser.events import (
 	AgentFocusChangedEvent,
 	BrowserConnectedEvent,
 	BrowserErrorEvent,
@@ -46,16 +46,16 @@ from browser_use.browser.events import (
 	TabClosedEvent,
 	TabCreatedEvent,
 )
-from browser_use.browser.profile import BrowserProfile, ProxySettings
-from browser_use.browser.views import BrowserStateSummary, TabInfo
-from browser_use.dom.views import DOMRect, EnhancedDOMTreeNode, TargetInfo
-from browser_use.observability import observe_debug
-from browser_use.utils import _log_pretty_url, create_task_with_error_handling, is_new_tab_page
+from lz_browser_agent.browser.profile import BrowserProfile, ProxySettings
+from lz_browser_agent.browser.views import BrowserStateSummary, TabInfo
+from lz_browser_agent.dom.views import DOMRect, EnhancedDOMTreeNode, TargetInfo
+from lz_browser_agent.observability import observe_debug
+from lz_browser_agent.utils import _log_pretty_url, create_task_with_error_handling, is_new_tab_page
 
 if TYPE_CHECKING:
-	from browser_use.actor.page import Page
-	from browser_use.browser.demo_mode import DemoMode
-	from browser_use.browser.watchdogs.captcha_watchdog import CaptchaWaitResult
+	from lz_browser_agent.actor.page import Page
+	from lz_browser_agent.browser.demo_mode import DemoMode
+	from lz_browser_agent.browser.watchdogs.captcha_watchdog import CaptchaWaitResult
 
 DEFAULT_BROWSER_PROFILE = BrowserProfile()
 
@@ -391,7 +391,7 @@ class BrowserSession(BaseModel):
 	@classmethod
 	def from_system_chrome(cls, profile_directory: str | None = None, **kwargs: Any) -> Self:
 		"""Create a BrowserSession using system's Chrome installation and profile"""
-		from browser_use.skill_cli.utils import find_chrome_executable, get_chrome_profile_path, list_chrome_profiles
+		from lz_browser_agent.skill_cli.utils import find_chrome_executable, get_chrome_profile_path, list_chrome_profiles
 
 		executable_path = find_chrome_executable()
 		if executable_path is None:
@@ -419,7 +419,7 @@ class BrowserSession(BaseModel):
 			if profiles:
 				# Use first available profile
 				profile_directory = profiles[0]['directory']
-				logging.getLogger('browser_use').info(
+				logging.getLogger('lz_browser_agent').info(
 					f'Auto-selected Chrome profile: {profiles[0]["name"]} ({profile_directory})'
 				)
 			else:
@@ -435,7 +435,7 @@ class BrowserSession(BaseModel):
 	@classmethod
 	def list_chrome_profiles(cls) -> list[dict[str, str]]:
 		"""List available Chrome profiles on the system"""
-		from browser_use.skill_cli.utils import list_chrome_profiles
+		from lz_browser_agent.skill_cli.utils import list_chrome_profiles
 
 		return list_chrome_profiles()
 
@@ -493,7 +493,7 @@ class BrowserSession(BaseModel):
 		if not self.browser_profile.demo_mode:
 			return None
 		if self._demo_mode is None:
-			from browser_use.browser.demo_mode import DemoMode
+			from lz_browser_agent.browser.demo_mode import DemoMode
 
 			self._demo_mode = DemoMode(self)
 		return self._demo_mode
@@ -551,8 +551,8 @@ class BrowserSession(BaseModel):
 		"""Get instance-specific logger with session ID in the name"""
 		# **regenerate it every time** because our id and str(self) can change as browser connection state changes
 		# if self._logger is None or not self._cdp_client_root:
-		# 	self._logger = logging.getLogger(f'browser_use.{self}')
-		return logging.getLogger(f'browser_use.{self}')
+		# 	self._logger = logging.getLogger(f'lz_browser_agent.{self}')
+		return logging.getLogger(f'lz_browser_agent.{self}')
 
 	@cached_property
 	def _id_for_logs(self) -> str:
@@ -646,7 +646,7 @@ class BrowserSession(BaseModel):
 		self._reconnect_event.set()
 
 		# Check if handlers are already registered to prevent duplicates
-		from browser_use.browser.watchdog_base import BaseWatchdog
+		from lz_browser_agent.browser.watchdog_base import BaseWatchdog
 
 		start_handlers = self.event_bus.handlers.get('BrowserStartEvent', [])
 		start_handler_names = [getattr(h, '__name__', str(h)) for h in start_handlers]
@@ -682,7 +682,7 @@ class BrowserSession(BaseModel):
 		self.logger.debug('🛑 kill() called - stopping browser with force=True and resetting state')
 
 		# First save storage state while CDP is still connected
-		from browser_use.browser.events import SaveStorageStateEvent
+		from lz_browser_agent.browser.events import SaveStorageStateEvent
 
 		save_event = self.event_bus.dispatch(SaveStorageStateEvent())
 		await save_event
@@ -706,7 +706,7 @@ class BrowserSession(BaseModel):
 		self.logger.debug('⏸️  stop() called - stopping browser gracefully (force=False) and resetting state')
 
 		# First save storage state while CDP is still connected
-		from browser_use.browser.events import SaveStorageStateEvent
+		from lz_browser_agent.browser.events import SaveStorageStateEvent
 
 		save_event = self.event_bus.dispatch(SaveStorageStateEvent())
 		await save_event
@@ -1268,7 +1268,7 @@ class BrowserSession(BaseModel):
 		target_id = result['targetId']
 
 		# Import here to avoid circular import
-		from browser_use.actor.page import Page as Target
+		from lz_browser_agent.actor.page import Page as Target
 
 		return Target(self, target_id)
 
@@ -1279,7 +1279,7 @@ class BrowserSession(BaseModel):
 		if not target_info:
 			return None
 
-		from browser_use.actor.page import Page as Target
+		from lz_browser_agent.actor.page import Page as Target
 
 		return Target(self, target_info['targetId'])
 
@@ -1294,7 +1294,7 @@ class BrowserSession(BaseModel):
 	async def get_pages(self) -> list['Page']:
 		"""Get all available pages using SessionManager (source of truth)."""
 		# Import here to avoid circular import
-		from browser_use.actor.page import Page as PageActor
+		from lz_browser_agent.actor.page import Page as PageActor
 
 		page_targets = self.session_manager.get_all_page_targets() if self.session_manager else []
 
@@ -1329,7 +1329,7 @@ class BrowserSession(BaseModel):
 		from cdp_use.cdp.target.commands import CloseTargetParameters
 
 		# Import here to avoid circular import
-		from browser_use.actor.page import Page as Target
+		from lz_browser_agent.actor.page import Page as Target
 
 		if isinstance(page, Target):
 			target_id = page._target_id
@@ -1561,21 +1561,21 @@ class BrowserSession(BaseModel):
 			self.logger.debug('Watchdogs already attached, skipping duplicate attachment')
 			return
 
-		from browser_use.browser.watchdogs.aboutblank_watchdog import AboutBlankWatchdog
-		from browser_use.browser.watchdogs.captcha_watchdog import CaptchaWatchdog
+		from lz_browser_agent.browser.watchdogs.aboutblank_watchdog import AboutBlankWatchdog
+		from lz_browser_agent.browser.watchdogs.captcha_watchdog import CaptchaWatchdog
 
-		# from browser_use.browser.crash_watchdog import CrashWatchdog
-		from browser_use.browser.watchdogs.default_action_watchdog import DefaultActionWatchdog
-		from browser_use.browser.watchdogs.dom_watchdog import DOMWatchdog
-		from browser_use.browser.watchdogs.downloads_watchdog import DownloadsWatchdog
-		from browser_use.browser.watchdogs.har_recording_watchdog import HarRecordingWatchdog
-		from browser_use.browser.watchdogs.local_browser_watchdog import LocalBrowserWatchdog
-		from browser_use.browser.watchdogs.permissions_watchdog import PermissionsWatchdog
-		from browser_use.browser.watchdogs.popups_watchdog import PopupsWatchdog
-		from browser_use.browser.watchdogs.recording_watchdog import RecordingWatchdog
-		from browser_use.browser.watchdogs.screenshot_watchdog import ScreenshotWatchdog
-		from browser_use.browser.watchdogs.security_watchdog import SecurityWatchdog
-		from browser_use.browser.watchdogs.storage_state_watchdog import StorageStateWatchdog
+		# from lz_browser_agent.browser.crash_watchdog import CrashWatchdog
+		from lz_browser_agent.browser.watchdogs.default_action_watchdog import DefaultActionWatchdog
+		from lz_browser_agent.browser.watchdogs.dom_watchdog import DOMWatchdog
+		from lz_browser_agent.browser.watchdogs.downloads_watchdog import DownloadsWatchdog
+		from lz_browser_agent.browser.watchdogs.har_recording_watchdog import HarRecordingWatchdog
+		from lz_browser_agent.browser.watchdogs.local_browser_watchdog import LocalBrowserWatchdog
+		from lz_browser_agent.browser.watchdogs.permissions_watchdog import PermissionsWatchdog
+		from lz_browser_agent.browser.watchdogs.popups_watchdog import PopupsWatchdog
+		from lz_browser_agent.browser.watchdogs.recording_watchdog import RecordingWatchdog
+		from lz_browser_agent.browser.watchdogs.screenshot_watchdog import ScreenshotWatchdog
+		from lz_browser_agent.browser.watchdogs.security_watchdog import SecurityWatchdog
+		from lz_browser_agent.browser.watchdogs.storage_state_watchdog import StorageStateWatchdog
 
 		# Initialize CrashWatchdog
 		# CrashWatchdog.model_rebuild()
@@ -1747,7 +1747,7 @@ class BrowserSession(BaseModel):
 			is_localhost = parsed_url.hostname in ('localhost', '127.0.0.1', '::1')
 			async with httpx.AsyncClient(timeout=httpx.Timeout(30.0), trust_env=not is_localhost) as client:
 				headers = dict(self.browser_profile.headers or {})
-				from browser_use.utils import get_browser_use_version
+				from lz_browser_agent.utils import get_browser_use_version
 
 				headers.setdefault('User-Agent', f'browser-use/{get_browser_use_version()}')
 				version_info = await client.get(url, headers=headers)
@@ -1763,7 +1763,7 @@ class BrowserSession(BaseModel):
 			# Create and store the CDP client for direct CDP communication
 			headers = dict(getattr(self.browser_profile, 'headers', None) or {})
 			if not self.is_local:
-				from browser_use.utils import get_browser_use_version
+				from lz_browser_agent.utils import get_browser_use_version
 
 				headers.setdefault('User-Agent', f'browser-use/{get_browser_use_version()}')
 			self._cdp_client_root = CDPClient(
@@ -1780,7 +1780,7 @@ class BrowserSession(BaseModel):
 			# 2. Discover and attach to all existing targets
 			# 3. Initialize sessions and enable lifecycle monitoring
 			# 4. Enable autoAttach for future targets
-			from browser_use.browser.session_manager import SessionManager
+			from lz_browser_agent.browser.session_manager import SessionManager
 
 			self.session_manager = SessionManager(self)
 			await self.session_manager.start_monitoring()
@@ -1798,7 +1798,7 @@ class BrowserSession(BaseModel):
 			page_targets_from_manager = self.session_manager.get_all_page_targets()
 
 			# Check for chrome://newtab pages and redirect them to about:blank (in parallel)
-			from browser_use.utils import is_new_tab_page
+			from lz_browser_agent.utils import is_new_tab_page
 
 			async def _redirect_newtab(target):
 				target_url = target.url
@@ -2061,7 +2061,7 @@ class BrowserSession(BaseModel):
 		# 3. Create new CDPClient with the same cdp_url
 		headers = dict(getattr(self.browser_profile, 'headers', None) or {})
 		if not self.is_local:
-			from browser_use.utils import get_browser_use_version
+			from lz_browser_agent.utils import get_browser_use_version
 
 			headers.setdefault('User-Agent', f'browser-use/{get_browser_use_version()}')
 		self._cdp_client_root = CDPClient(
@@ -2072,7 +2072,7 @@ class BrowserSession(BaseModel):
 		await self._cdp_client_root.start()
 
 		# 4. Re-initialize SessionManager
-		from browser_use.browser.session_manager import SessionManager
+		from lz_browser_agent.browser.session_manager import SessionManager
 
 		self.session_manager = SessionManager(self)
 		await self.session_manager.start_monitoring()
@@ -2301,7 +2301,7 @@ class BrowserSession(BaseModel):
 			url: URL to navigate to
 			new_tab: Whether to open in a new tab
 		"""
-		from browser_use.browser.events import NavigateToUrlEvent
+		from lz_browser_agent.browser.events import NavigateToUrlEvent
 
 		event = self.event_bus.dispatch(NavigateToUrlEvent(url=url, new_tab=new_tab))
 		await event
@@ -2357,7 +2357,7 @@ class BrowserSession(BaseModel):
 		Returns:
 			EnhancedDOMTreeNode at the coordinates, or None if no element found
 		"""
-		from browser_use.dom.views import NodeType
+		from lz_browser_agent.dom.views import NodeType
 
 		# Get current page to access CDP session
 		page = await self.get_current_page()
@@ -2532,7 +2532,7 @@ class BrowserSession(BaseModel):
 		Returns:
 			The nearest file input element, or None if not found
 		"""
-		from browser_use.dom.views import EnhancedDOMTreeNode
+		from lz_browser_agent.dom.views import EnhancedDOMTreeNode
 
 		def _find_in_descendants(n: EnhancedDOMTreeNode, depth: int) -> EnhancedDOMTreeNode | None:
 			if depth < 0:
@@ -3541,7 +3541,7 @@ class BrowserSession(BaseModel):
 
 		# Always allow new tab pages (chrome://new-tab-page/, chrome://newtab/, about:blank)
 		# so they can be redirected to about:blank in connect()
-		from browser_use.utils import is_new_tab_page
+		from lz_browser_agent.utils import is_new_tab_page
 
 		if is_new_tab_page(url):
 			url_allowed = True

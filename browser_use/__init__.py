@@ -1,11 +1,11 @@
 import os
 from typing import TYPE_CHECKING
 
-from browser_use.logging_config import setup_logging
+from lz_browser_agent.logging_config import setup_logging
 
 # Only set up logging if not in MCP mode or if explicitly requested
 if os.environ.get('BROWSER_USE_SETUP_LOGGING', 'true').lower() != 'false':
-	from browser_use.config import CONFIG
+	from lz_browser_agent.config import CONFIG
 
 	# Get log file paths from config/environment
 	debug_log_file = getattr(CONFIG, 'BROWSER_USE_DEBUG_LOG_FILE', None)
@@ -16,7 +16,7 @@ if os.environ.get('BROWSER_USE_SETUP_LOGGING', 'true').lower() != 'false':
 else:
 	import logging
 
-	logger = logging.getLogger('browser_use')
+	logger = logging.getLogger('lz_browser_agent')
 
 # Monkeypatch BaseSubprocessTransport.__del__ to handle closed event loops gracefully
 from asyncio import base_subprocess
@@ -45,64 +45,64 @@ base_subprocess.BaseSubprocessTransport.__del__ = _patched_del
 
 # Type stubs for lazy imports - fixes linter warnings
 if TYPE_CHECKING:
-	from browser_use.agent.prompts import SystemPrompt
-	from browser_use.agent.service import Agent
+	from lz_browser_agent.agent.prompts import SystemPrompt
+	from lz_browser_agent.agent.service import Agent
 
-	# from browser_use.agent.service import Agent
-	from browser_use.agent.views import ActionModel, ActionResult, AgentHistoryList
-	from browser_use.browser import BrowserProfile, BrowserSession
-	from browser_use.browser import BrowserSession as Browser
-	from browser_use.dom.service import DomService
-	from browser_use.llm import models
-	from browser_use.llm.anthropic.chat import ChatAnthropic
-	from browser_use.llm.azure.chat import ChatAzureOpenAI
-	from browser_use.llm.browser_use.chat import ChatBrowserUse
-	from browser_use.llm.google.chat import ChatGoogle
-	from browser_use.llm.groq.chat import ChatGroq
-	from browser_use.llm.litellm.chat import ChatLiteLLM
-	from browser_use.llm.mistral.chat import ChatMistral
-	from browser_use.llm.oci_raw.chat import ChatOCIRaw
-	from browser_use.llm.ollama.chat import ChatOllama
-	from browser_use.llm.openai.chat import ChatOpenAI
-	from browser_use.llm.vercel.chat import ChatVercel
-	from browser_use.sandbox import sandbox
-	from browser_use.tools.service import Controller, Tools
+	# from lz_browser_agent.agent.service import Agent
+	from lz_browser_agent.agent.views import ActionModel, ActionResult, AgentHistoryList
+	from lz_browser_agent.browser import BrowserProfile, BrowserSession
+	from lz_browser_agent.browser import BrowserSession as Browser
+	from lz_browser_agent.dom.service import DomService
+	from lz_browser_agent.llm import models
+	from lz_browser_agent.llm.anthropic.chat import ChatAnthropic
+	from lz_browser_agent.llm.azure.chat import ChatAzureOpenAI
+	from lz_browser_agent.llm.lz_browser_agent.chat import ChatBrowserUse
+	from lz_browser_agent.llm.google.chat import ChatGoogle
+	from lz_browser_agent.llm.groq.chat import ChatGroq
+	from lz_browser_agent.llm.litellm.chat import ChatLiteLLM
+	from lz_browser_agent.llm.mistral.chat import ChatMistral
+	from lz_browser_agent.llm.oci_raw.chat import ChatOCIRaw
+	from lz_browser_agent.llm.ollama.chat import ChatOllama
+	from lz_browser_agent.llm.openai.chat import ChatOpenAI
+	from lz_browser_agent.llm.vercel.chat import ChatVercel
+	from lz_browser_agent.sandbox import sandbox
+	from lz_browser_agent.tools.service import Controller, Tools
 
 	# Lazy imports mapping - only import when actually accessed
 _LAZY_IMPORTS = {
 	# Agent service (heavy due to dependencies)
-	# 'Agent': ('browser_use.agent.service', 'Agent'),
-	'Agent': ('browser_use.agent.service', 'Agent'),
+	# 'Agent': ('lz_browser_agent.agent.service', 'Agent'),
+	'Agent': ('lz_browser_agent.agent.service', 'Agent'),
 	# System prompt (moderate weight due to agent.views imports)
-	'SystemPrompt': ('browser_use.agent.prompts', 'SystemPrompt'),
+	'SystemPrompt': ('lz_browser_agent.agent.prompts', 'SystemPrompt'),
 	# Agent views (very heavy - over 1 second!)
-	'ActionModel': ('browser_use.agent.views', 'ActionModel'),
-	'ActionResult': ('browser_use.agent.views', 'ActionResult'),
-	'AgentHistoryList': ('browser_use.agent.views', 'AgentHistoryList'),
-	'BrowserSession': ('browser_use.browser', 'BrowserSession'),
-	'Browser': ('browser_use.browser', 'BrowserSession'),  # Alias for BrowserSession
-	'BrowserProfile': ('browser_use.browser', 'BrowserProfile'),
+	'ActionModel': ('lz_browser_agent.agent.views', 'ActionModel'),
+	'ActionResult': ('lz_browser_agent.agent.views', 'ActionResult'),
+	'AgentHistoryList': ('lz_browser_agent.agent.views', 'AgentHistoryList'),
+	'BrowserSession': ('lz_browser_agent.browser', 'BrowserSession'),
+	'Browser': ('lz_browser_agent.browser', 'BrowserSession'),  # Alias for BrowserSession
+	'BrowserProfile': ('lz_browser_agent.browser', 'BrowserProfile'),
 	# Tools (moderate weight)
-	'Tools': ('browser_use.tools.service', 'Tools'),
-	'Controller': ('browser_use.tools.service', 'Controller'),  # alias
+	'Tools': ('lz_browser_agent.tools.service', 'Tools'),
+	'Controller': ('lz_browser_agent.tools.service', 'Controller'),  # alias
 	# DOM service (moderate weight)
-	'DomService': ('browser_use.dom.service', 'DomService'),
+	'DomService': ('lz_browser_agent.dom.service', 'DomService'),
 	# Chat models (very heavy imports)
-	'ChatOpenAI': ('browser_use.llm.openai.chat', 'ChatOpenAI'),
-	'ChatGoogle': ('browser_use.llm.google.chat', 'ChatGoogle'),
-	'ChatAnthropic': ('browser_use.llm.anthropic.chat', 'ChatAnthropic'),
-	'ChatBrowserUse': ('browser_use.llm.browser_use.chat', 'ChatBrowserUse'),
-	'ChatGroq': ('browser_use.llm.groq.chat', 'ChatGroq'),
-	'ChatLiteLLM': ('browser_use.llm.litellm.chat', 'ChatLiteLLM'),
-	'ChatMistral': ('browser_use.llm.mistral.chat', 'ChatMistral'),
-	'ChatAzureOpenAI': ('browser_use.llm.azure.chat', 'ChatAzureOpenAI'),
-	'ChatOCIRaw': ('browser_use.llm.oci_raw.chat', 'ChatOCIRaw'),
-	'ChatOllama': ('browser_use.llm.ollama.chat', 'ChatOllama'),
-	'ChatVercel': ('browser_use.llm.vercel.chat', 'ChatVercel'),
+	'ChatOpenAI': ('lz_browser_agent.llm.openai.chat', 'ChatOpenAI'),
+	'ChatGoogle': ('lz_browser_agent.llm.google.chat', 'ChatGoogle'),
+	'ChatAnthropic': ('lz_browser_agent.llm.anthropic.chat', 'ChatAnthropic'),
+	'ChatBrowserUse': ('lz_browser_agent.llm.lz_browser_agent.chat', 'ChatBrowserUse'),
+	'ChatGroq': ('lz_browser_agent.llm.groq.chat', 'ChatGroq'),
+	'ChatLiteLLM': ('lz_browser_agent.llm.litellm.chat', 'ChatLiteLLM'),
+	'ChatMistral': ('lz_browser_agent.llm.mistral.chat', 'ChatMistral'),
+	'ChatAzureOpenAI': ('lz_browser_agent.llm.azure.chat', 'ChatAzureOpenAI'),
+	'ChatOCIRaw': ('lz_browser_agent.llm.oci_raw.chat', 'ChatOCIRaw'),
+	'ChatOllama': ('lz_browser_agent.llm.ollama.chat', 'ChatOllama'),
+	'ChatVercel': ('lz_browser_agent.llm.vercel.chat', 'ChatVercel'),
 	# LLM models module
-	'models': ('browser_use.llm.models', None),
+	'models': ('lz_browser_agent.llm.models', None),
 	# Sandbox execution
-	'sandbox': ('browser_use.sandbox', 'sandbox'),
+	'sandbox': ('lz_browser_agent.sandbox', 'sandbox'),
 }
 
 

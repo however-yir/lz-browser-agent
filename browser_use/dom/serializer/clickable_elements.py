@@ -1,4 +1,4 @@
-from browser_use.dom.views import EnhancedDOMTreeNode, NodeType
+from lz_browser_agent.dom.views import EnhancedDOMTreeNode, NodeType
 
 
 class ClickableElementDetector:

@@ -11,7 +11,7 @@ from pathlib import Path
 
 import pytest
 
-from browser_use.skill_cli.main import build_parser
+from lz_browser_agent.skill_cli.main import build_parser
 
 
 class TestUploadArgParsing:
@@ -55,10 +55,10 @@ class TestUploadCommandHandler:
 
 	async def test_upload_file_not_found(self):
 		"""Non-existent file returns error without touching the browser."""
-		from browser_use.browser.session import BrowserSession
-		from browser_use.skill_cli.actions import ActionHandler
-		from browser_use.skill_cli.commands.browser import handle
-		from browser_use.skill_cli.sessions import SessionInfo
+		from lz_browser_agent.browser.session import BrowserSession
+		from lz_browser_agent.skill_cli.actions import ActionHandler
+		from lz_browser_agent.skill_cli.commands.browser import handle
+		from lz_browser_agent.skill_cli.sessions import SessionInfo
 
 		session_info = SessionInfo(
 			name='test',
@@ -75,10 +75,10 @@ class TestUploadCommandHandler:
 
 	async def test_upload_empty_file(self):
 		"""Empty file returns error."""
-		from browser_use.browser.session import BrowserSession
-		from browser_use.skill_cli.actions import ActionHandler
-		from browser_use.skill_cli.commands.browser import handle
-		from browser_use.skill_cli.sessions import SessionInfo
+		from lz_browser_agent.browser.session import BrowserSession
+		from lz_browser_agent.skill_cli.actions import ActionHandler
+		from lz_browser_agent.skill_cli.commands.browser import handle
+		from lz_browser_agent.skill_cli.sessions import SessionInfo
 
 		session_info = SessionInfo(
 			name='test',
@@ -101,11 +101,11 @@ class TestUploadCommandHandler:
 
 	async def test_upload_element_not_found(self, httpserver):
 		"""Invalid element index returns error."""
-		from browser_use.browser.events import NavigateToUrlEvent
-		from browser_use.browser.session import BrowserSession
-		from browser_use.skill_cli.actions import ActionHandler
-		from browser_use.skill_cli.commands.browser import handle
-		from browser_use.skill_cli.sessions import SessionInfo
+		from lz_browser_agent.browser.events import NavigateToUrlEvent
+		from lz_browser_agent.browser.session import BrowserSession
+		from lz_browser_agent.skill_cli.actions import ActionHandler
+		from lz_browser_agent.skill_cli.commands.browser import handle
+		from lz_browser_agent.skill_cli.sessions import SessionInfo
 
 		httpserver.expect_request('/').respond_with_data(
 			'<html><body><input type="file" /></body></html>',
@@ -141,11 +141,11 @@ class TestUploadCommandHandler:
 
 	async def test_upload_happy_path(self, httpserver):
 		"""Upload to a file input element succeeds."""
-		from browser_use.browser.events import NavigateToUrlEvent
-		from browser_use.browser.session import BrowserSession
-		from browser_use.skill_cli.actions import ActionHandler
-		from browser_use.skill_cli.commands.browser import handle
-		from browser_use.skill_cli.sessions import SessionInfo
+		from lz_browser_agent.browser.events import NavigateToUrlEvent
+		from lz_browser_agent.browser.session import BrowserSession
+		from lz_browser_agent.skill_cli.actions import ActionHandler
+		from lz_browser_agent.skill_cli.commands.browser import handle
+		from lz_browser_agent.skill_cli.sessions import SessionInfo
 
 		httpserver.expect_request('/').respond_with_data(
 			'<html><body><input type="file" id="upload" /></body></html>',
@@ -193,11 +193,11 @@ class TestUploadCommandHandler:
 
 	async def test_upload_not_file_input_suggests_indices(self, httpserver):
 		"""Targeting a non-file-input element with no nearby file input returns error with suggestions."""
-		from browser_use.browser.events import NavigateToUrlEvent
-		from browser_use.browser.session import BrowserSession
-		from browser_use.skill_cli.actions import ActionHandler
-		from browser_use.skill_cli.commands.browser import handle
-		from browser_use.skill_cli.sessions import SessionInfo
+		from lz_browser_agent.browser.events import NavigateToUrlEvent
+		from lz_browser_agent.browser.session import BrowserSession
+		from lz_browser_agent.skill_cli.actions import ActionHandler
+		from lz_browser_agent.skill_cli.commands.browser import handle
+		from lz_browser_agent.skill_cli.sessions import SessionInfo
 
 		# Use deeply nested, separate DOM subtrees so the heuristic won't bridge them
 		httpserver.expect_request('/').respond_with_data(
@@ -250,11 +250,11 @@ class TestUploadCommandHandler:
 
 	async def test_upload_wrapped_file_input(self, httpserver):
 		"""File input wrapped in a label/div is found via find_file_input_near_element."""
-		from browser_use.browser.events import NavigateToUrlEvent
-		from browser_use.browser.session import BrowserSession
-		from browser_use.skill_cli.actions import ActionHandler
-		from browser_use.skill_cli.commands.browser import handle
-		from browser_use.skill_cli.sessions import SessionInfo
+		from lz_browser_agent.browser.events import NavigateToUrlEvent
+		from lz_browser_agent.browser.session import BrowserSession
+		from lz_browser_agent.skill_cli.actions import ActionHandler
+		from lz_browser_agent.skill_cli.commands.browser import handle
+		from lz_browser_agent.skill_cli.sessions import SessionInfo
 
 		httpserver.expect_request('/').respond_with_data(
 			"""<html><body>

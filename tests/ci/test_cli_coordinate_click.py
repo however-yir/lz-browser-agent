@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import pytest
 
-from browser_use.skill_cli.main import build_parser
+from lz_browser_agent.skill_cli.main import build_parser
 
 
 class TestClickArgParsing:
@@ -52,10 +52,10 @@ class TestClickCommandHandler:
 
 	async def test_coordinate_click_handler(self, httpserver):
 		"""Coordinate click dispatches ClickCoordinateEvent."""
-		from browser_use.browser.session import BrowserSession
-		from browser_use.skill_cli.actions import ActionHandler
-		from browser_use.skill_cli.commands.browser import handle
-		from browser_use.skill_cli.sessions import SessionInfo
+		from lz_browser_agent.browser.session import BrowserSession
+		from lz_browser_agent.skill_cli.actions import ActionHandler
+		from lz_browser_agent.skill_cli.commands.browser import handle
+		from lz_browser_agent.skill_cli.sessions import SessionInfo
 
 		httpserver.expect_request('/').respond_with_data(
 			'<html><body><button>Click me</button></body></html>',
@@ -65,7 +65,7 @@ class TestClickCommandHandler:
 		session = BrowserSession(headless=True)
 		await session.start()
 		try:
-			from browser_use.browser.events import NavigateToUrlEvent
+			from lz_browser_agent.browser.events import NavigateToUrlEvent
 
 			await session.event_bus.dispatch(NavigateToUrlEvent(url=httpserver.url_for('/')))
 
@@ -86,10 +86,10 @@ class TestClickCommandHandler:
 
 	async def test_index_click_handler(self, httpserver):
 		"""Index click dispatches ClickElementEvent."""
-		from browser_use.browser.session import BrowserSession
-		from browser_use.skill_cli.actions import ActionHandler
-		from browser_use.skill_cli.commands.browser import handle
-		from browser_use.skill_cli.sessions import SessionInfo
+		from lz_browser_agent.browser.session import BrowserSession
+		from lz_browser_agent.skill_cli.actions import ActionHandler
+		from lz_browser_agent.skill_cli.commands.browser import handle
+		from lz_browser_agent.skill_cli.sessions import SessionInfo
 
 		httpserver.expect_request('/').respond_with_data(
 			'<html><body><button id="btn">Click me</button></body></html>',
@@ -99,7 +99,7 @@ class TestClickCommandHandler:
 		session = BrowserSession(headless=True)
 		await session.start()
 		try:
-			from browser_use.browser.events import NavigateToUrlEvent
+			from lz_browser_agent.browser.events import NavigateToUrlEvent
 
 			await session.event_bus.dispatch(NavigateToUrlEvent(url=httpserver.url_for('/')))
 
@@ -120,10 +120,10 @@ class TestClickCommandHandler:
 
 	async def test_invalid_args_count(self):
 		"""Three args returns error without touching the browser."""
-		from browser_use.browser.session import BrowserSession
-		from browser_use.skill_cli.actions import ActionHandler
-		from browser_use.skill_cli.commands.browser import handle
-		from browser_use.skill_cli.sessions import SessionInfo
+		from lz_browser_agent.browser.session import BrowserSession
+		from lz_browser_agent.skill_cli.actions import ActionHandler
+		from lz_browser_agent.skill_cli.commands.browser import handle
+		from lz_browser_agent.skill_cli.sessions import SessionInfo
 
 		# BrowserSession constructed but not started — handler hits the
 		# 3-arg error branch before doing anything with the session.

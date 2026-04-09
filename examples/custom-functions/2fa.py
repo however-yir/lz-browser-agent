@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-from browser_use import Agent
+from lz_browser_agent import Agent
 
 secret_key = os.environ.get('OTP_SECRET_KEY')
 if not secret_key:

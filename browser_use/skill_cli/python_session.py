@@ -9,8 +9,8 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal
 
 if TYPE_CHECKING:
-	from browser_use.browser.session import BrowserSession
-	from browser_use.skill_cli.actions import ActionHandler
+	from lz_browser_agent.browser.session import BrowserSession
+	from lz_browser_agent.skill_cli.actions import ActionHandler
 
 
 @dataclass

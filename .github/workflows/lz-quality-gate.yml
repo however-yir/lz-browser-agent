@@ -1,0 +1,43 @@
+name: LZ Quality Gate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  python-matrix-smoke:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+          activate-environment: true
+      - name: Install dependencies
+        run: uv sync --dev --all-extras
+      - name: Import and compile smoke check
+        run: |
+          uv run python -m compileall -q lz_browser_agent tests
+      - name: Run critical CI tests
+        run: |
+          uv run pytest tests/ci/test_tools.py tests/ci/test_cli_lifecycle.py -q
+
+  dependency-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+          enable-cache: true
+      - name: Export dependency graph
+        run: uv export --all-extras --dev --format requirements-txt > /tmp/requirements-audit.txt
+      - name: Run vulnerability audit
+        run: uv run --with pip-audit pip-audit -r /tmp/requirements-audit.txt

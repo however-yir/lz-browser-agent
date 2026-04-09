@@ -3,7 +3,7 @@
 from markdownify import markdownify as md
 from pytest_httpserver import HTTPServer
 
-from browser_use.dom.markdown_extractor import chunk_markdown_by_structure
+from lz_browser_agent.dom.markdown_extractor import chunk_markdown_by_structure
 
 # ---------------------------------------------------------------------------
 # Unit tests — synchronous, no browser needed
@@ -314,7 +314,7 @@ class TestTableNormalizationIntegration:
 
 		await browser_session.navigate_to(url)
 
-		from browser_use.dom.markdown_extractor import extract_clean_markdown
+		from lz_browser_agent.dom.markdown_extractor import extract_clean_markdown
 
 		content, _ = await extract_clean_markdown(browser_session=browser_session)
 
@@ -340,7 +340,7 @@ class TestTableNormalizationIntegration:
 
 		await browser_session.navigate_to(url)
 
-		from browser_use.dom.markdown_extractor import extract_clean_markdown
+		from lz_browser_agent.dom.markdown_extractor import extract_clean_markdown
 
 		content, _ = await extract_clean_markdown(browser_session=browser_session)
 

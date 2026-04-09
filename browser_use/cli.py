@@ -37,8 +37,8 @@ if len(sys.argv) > 1 and sys.argv[1] == 'install':
 
 # Check for init subcommand early to avoid loading TUI dependencies
 if 'init' in sys.argv:
-	from browser_use.init_cmd import INIT_TEMPLATES
-	from browser_use.init_cmd import main as init_main
+	from lz_browser_agent.init_cmd import INIT_TEMPLATES
+	from lz_browser_agent.init_cmd import main as init_main
 
 	# Check if --template or -t flag is present without a value
 	# If so, just remove it and let init_main handle interactive mode
@@ -67,7 +67,7 @@ if '--template' in sys.argv:
 
 	import click
 
-	from browser_use.init_cmd import INIT_TEMPLATES
+	from lz_browser_agent.init_cmd import INIT_TEMPLATES
 
 	# Parse template and output from sys.argv
 	try:
@@ -79,7 +79,7 @@ if '--template' in sys.argv:
 	# If template is not provided or is another flag, use interactive mode
 	if not template or template.startswith('-'):
 		# Redirect to init command with interactive template selection
-		from browser_use.init_cmd import main as init_main
+		from lz_browser_agent.init_cmd import main as init_main
 
 		# Remove --template from sys.argv
 		sys.argv.remove('--template')
@@ -148,18 +148,18 @@ from typing import Any
 
 from dotenv import load_dotenv
 
-from browser_use.llm.anthropic.chat import ChatAnthropic
-from browser_use.llm.google.chat import ChatGoogle
-from browser_use.llm.openai.chat import ChatOpenAI
+from lz_browser_agent.llm.anthropic.chat import ChatAnthropic
+from lz_browser_agent.llm.google.chat import ChatGoogle
+from lz_browser_agent.llm.openai.chat import ChatOpenAI
 
 load_dotenv()
 
-from browser_use import Agent, Controller
-from browser_use.agent.views import AgentSettings
-from browser_use.browser import BrowserProfile, BrowserSession
-from browser_use.logging_config import addLoggingLevel
-from browser_use.telemetry import CLITelemetryEvent, ProductTelemetry
-from browser_use.utils import get_browser_use_version
+from lz_browser_agent import Agent, Controller
+from lz_browser_agent.agent.views import AgentSettings
+from lz_browser_agent.browser import BrowserProfile, BrowserSession
+from lz_browser_agent.logging_config import addLoggingLevel
+from lz_browser_agent.telemetry import CLITelemetryEvent, ProductTelemetry
+from lz_browser_agent.utils import get_browser_use_version
 
 try:
 	import click
@@ -189,7 +189,7 @@ except ImportError:
 
 os.environ['BROWSER_USE_LOGGING_LEVEL'] = 'result'
 
-from browser_use.config import CONFIG
+from lz_browser_agent.config import CONFIG
 
 # Set USER_DATA_DIR now that CONFIG is imported
 USER_DATA_DIR = CONFIG.BROWSER_USE_PROFILES_DIR / 'cli'
@@ -632,7 +632,7 @@ class BrowserUseApp(App):
 
 		class BrowserUseFormatter(logging.Formatter):
 			def format(self, record):
-				# if isinstance(record.name, str) and record.name.startswith('browser_use.'):
+				# if isinstance(record.name, str) and record.name.startswith('lz_browser_agent.'):
 				# 	record.name = record.name.split('.')[-2]
 				return super().format(record)
 
@@ -658,15 +658,15 @@ class BrowserUseApp(App):
 		else:
 			root.setLevel(logging.INFO)
 
-		# Configure browser_use logger and all its sub-loggers
-		browser_use_logger = logging.getLogger('browser_use')
+		# Configure lz_browser_agent logger and all its sub-loggers
+		browser_use_logger = logging.getLogger('lz_browser_agent')
 		browser_use_logger.propagate = False  # Don't propagate to root logger
 		browser_use_logger.handlers = [log_handler]  # Replace any existing handlers
 		browser_use_logger.setLevel(root.level)
 
 		# Also ensure agent loggers go to the main output
 		# Use a wildcard pattern to catch all agent-related loggers
-		for logger_name in ['browser_use.Agent', 'browser_use.controller', 'browser_use.agent', 'browser_use.agent.service']:
+		for logger_name in ['lz_browser_agent.Agent', 'lz_browser_agent.controller', 'lz_browser_agent.agent', 'lz_browser_agent.agent.service']:
 			agent_logger = logging.getLogger(logger_name)
 			agent_logger.propagate = False
 			agent_logger.handlers = [log_handler]
@@ -674,7 +674,7 @@ class BrowserUseApp(App):
 
 		# Also catch any dynamically created agent loggers with task IDs
 		for name, logger in logging.Logger.manager.loggerDict.items():
-			if isinstance(name, str) and 'browser_use.Agent' in name:
+			if isinstance(name, str) and 'lz_browser_agent.Agent' in name:
 				if isinstance(logger, logging.Logger):
 					logger.propagate = False
 					logger.handlers = [log_handler]
@@ -705,7 +705,7 @@ class BrowserUseApp(App):
 	def on_mount(self) -> None:
 		"""Set up components when app is mounted."""
 		# We'll use a file logger since stdout is now controlled by Textual
-		logger = logging.getLogger('browser_use.on_mount')
+		logger = logging.getLogger('lz_browser_agent.on_mount')
 		logger.debug('on_mount() method started')
 
 		# Step 1: Set up custom logging to RichLog
@@ -990,7 +990,7 @@ class BrowserUseApp(App):
 		agent_settings = AgentSettings.model_validate(self.config.get('agent', {}))
 
 		# Get the logger
-		logger = logging.getLogger('browser_use.app')
+		logger = logging.getLogger('lz_browser_agent.app')
 
 		# Make sure intro is hidden and log is ready
 		self.hide_intro_panels()
@@ -1488,7 +1488,7 @@ class BrowserUseApp(App):
 async def run_prompt_mode(prompt: str, ctx: click.Context, debug: bool = False):
 	"""Run browser-use in non-interactive mode with a single prompt."""
 	# Import and call setup_logging to ensure proper initialization
-	from browser_use.logging_config import setup_logging
+	from lz_browser_agent.logging_config import setup_logging
 
 	# Set up logging to only show results by default
 	os.environ['BROWSER_USE_LOGGING_LEVEL'] = 'result'
@@ -1610,10 +1610,10 @@ async def run_prompt_mode(prompt: str, ctx: click.Context, debug: bool = False):
 
 async def textual_interface(config: dict[str, Any]):
 	"""Run the Textual interface."""
-	# Prevent browser_use from setting up logging at import time
+	# Prevent lz_browser_agent from setting up logging at import time
 	os.environ['BROWSER_USE_SETUP_LOGGING'] = 'false'
 
-	logger = logging.getLogger('browser_use.startup')
+	logger = logging.getLogger('lz_browser_agent.startup')
 
 	# Set up logging for Textual UI - prevent any logging to stdout
 	def setup_textual_logging():
@@ -1655,7 +1655,7 @@ async def textual_interface(config: dict[str, Any]):
 
 		# Set up FIFO logging pipes for streaming logs to UI
 		try:
-			from browser_use.logging_config import setup_log_pipes
+			from lz_browser_agent.logging_config import setup_log_pipes
 
 			setup_log_pipes(session_id=browser_session.id)
 			logger.debug(f'FIFO logging pipes set up for session {browser_session.id[-4:]}')
@@ -1730,7 +1730,7 @@ async def run_auth_command():
 	import asyncio
 	import os
 
-	from browser_use.sync.auth import DeviceAuthClient
+	from lz_browser_agent.sync.auth import DeviceAuthClient
 
 	print('🔐 Browser Use Cloud Authentication')
 	print('=' * 40)
@@ -1771,13 +1771,13 @@ async def run_auth_command():
 		# Create authentication flow with dummy task
 		from uuid_extensions import uuid7str
 
-		from browser_use.agent.cloud_events import (
+		from lz_browser_agent.agent.cloud_events import (
 			CreateAgentSessionEvent,
 			CreateAgentStepEvent,
 			CreateAgentTaskEvent,
 			UpdateAgentTaskEvent,
 		)
-		from browser_use.sync.service import CloudSync
+		from lz_browser_agent.sync.service import CloudSync
 
 		# IDs for our session and task
 		session_id = uuid7str()
@@ -1860,7 +1860,7 @@ async def run_auth_command():
 
 			# Run authentication and progress updates concurrently
 			auth_start_time = asyncio.get_event_loop().time()
-			from browser_use.utils import create_task_with_error_handling
+			from lz_browser_agent.utils import create_task_with_error_handling
 
 			auth_task = create_task_with_error_handling(
 				sync_service.authenticate(show_instructions=True), name='sync_authenticate'
@@ -1970,7 +1970,7 @@ async def run_auth_command():
 		# Still try to complete the task in UI with error message
 		if task_id and sync_service:
 			try:
-				from browser_use.agent.cloud_events import UpdateAgentTaskEvent
+				from lz_browser_agent.agent.cloud_events import UpdateAgentTaskEvent
 
 				completion_event = UpdateAgentTaskEvent(
 					id=task_id,
@@ -2058,7 +2058,7 @@ def run_main_interface(ctx: click.Context, debug: bool = False, **kwargs):
 			# Ignore telemetry errors in MCP mode to prevent any stdout contamination
 			pass
 		# Run as MCP server
-		from browser_use.mcp.server import main as mcp_main
+		from lz_browser_agent.mcp.server import main as mcp_main
 
 		asyncio.run(mcp_main())
 		return
@@ -2080,7 +2080,7 @@ def run_main_interface(ctx: click.Context, debug: bool = False, **kwargs):
 	root_logger.setLevel(logging.INFO if not debug else logging.DEBUG)
 	root_logger.addHandler(console_handler)
 
-	logger = logging.getLogger('browser_use.startup')
+	logger = logging.getLogger('lz_browser_agent.startup')
 	logger.info('Starting Browser-Use initialization')
 	if debug:
 		logger.debug(f'System info: Python {sys.version.split()[0]}, Platform: {sys.platform}')

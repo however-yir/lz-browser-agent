@@ -6,7 +6,7 @@ from typing import Any
 
 from pydantic import BaseModel
 
-from browser_use.llm.schema import SchemaOptimizer
+from lz_browser_agent.llm.schema import SchemaOptimizer
 
 
 class MistralSchemaOptimizer:

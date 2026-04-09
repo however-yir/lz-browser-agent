@@ -1,14 +1,14 @@
 """Unit tests for variable detection in agent history"""
 
-from browser_use.agent.variable_detector import (
+from lz_browser_agent.agent.variable_detector import (
 	_detect_from_attributes,
 	_detect_from_value_pattern,
 	_detect_variable_type,
 	_ensure_unique_name,
 	detect_variables_in_history,
 )
-from browser_use.agent.views import DetectedVariable
-from browser_use.dom.views import DOMInteractedElement, NodeType
+from lz_browser_agent.agent.views import DetectedVariable
+from lz_browser_agent.dom.views import DOMInteractedElement, NodeType
 
 
 def create_test_element(attributes: dict[str, str] | None = None) -> DOMInteractedElement:

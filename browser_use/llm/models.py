@@ -2,7 +2,7 @@
 Convenient access to LLM models.
 
 Usage:
-    from browser_use import llm
+    from lz_browser_agent import llm
 
     # Simple model access
     model = llm.azure_gpt_4_1_mini
@@ -14,16 +14,16 @@ Usage:
 import os
 from typing import TYPE_CHECKING
 
-from browser_use.llm.azure.chat import ChatAzureOpenAI
-from browser_use.llm.browser_use.chat import ChatBrowserUse
-from browser_use.llm.cerebras.chat import ChatCerebras
-from browser_use.llm.google.chat import ChatGoogle
-from browser_use.llm.mistral.chat import ChatMistral
-from browser_use.llm.openai.chat import ChatOpenAI
+from lz_browser_agent.llm.azure.chat import ChatAzureOpenAI
+from lz_browser_agent.llm.lz_browser_agent.chat import ChatBrowserUse
+from lz_browser_agent.llm.cerebras.chat import ChatCerebras
+from lz_browser_agent.llm.google.chat import ChatGoogle
+from lz_browser_agent.llm.mistral.chat import ChatMistral
+from lz_browser_agent.llm.openai.chat import ChatOpenAI
 
 # Optional OCI import
 try:
-	from browser_use.llm.oci_raw.chat import ChatOCIRaw
+	from lz_browser_agent.llm.oci_raw.chat import ChatOCIRaw
 
 	OCI_AVAILABLE = True
 except ImportError:
@@ -31,7 +31,7 @@ except ImportError:
 	OCI_AVAILABLE = False
 
 if TYPE_CHECKING:
-	from browser_use.llm.base import BaseChatModel
+	from lz_browser_agent.llm.base import BaseChatModel
 
 # Type stubs for IDE autocomplete
 openai_gpt_4o: 'BaseChatModel'

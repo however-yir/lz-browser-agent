@@ -2,8 +2,8 @@ import asyncio
 import os
 from pathlib import Path
 
-from browser_use import Agent, BrowserSession
-from browser_use.llm.google import ChatGoogle
+from lz_browser_agent import Agent, BrowserSession
+from lz_browser_agent.llm.google import ChatGoogle
 
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 

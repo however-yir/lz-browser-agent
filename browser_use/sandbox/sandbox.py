@@ -15,7 +15,7 @@ from typing import TYPE_CHECKING, Any, Concatenate, ParamSpec, TypeVar, Union, c
 import cloudpickle
 import httpx
 
-from browser_use.sandbox.views import (
+from lz_browser_agent.sandbox.views import (
 	BrowserCreatedData,
 	ErrorData,
 	LogData,
@@ -26,7 +26,7 @@ from browser_use.sandbox.views import (
 )
 
 if TYPE_CHECKING:
-	from browser_use.browser import BrowserSession
+	from lz_browser_agent.browser import BrowserSession
 
 T = TypeVar('T')
 P = ParamSpec('P')
@@ -298,9 +298,9 @@ def sandbox(
 
 			# Always include Browser import since it's required for the function signature
 			if needed_imports:
-				needed_imports = 'from browser_use import Browser\n' + needed_imports
+				needed_imports = 'from lz_browser_agent import Browser\n' + needed_imports
 			else:
-				needed_imports = 'from browser_use import Browser'
+				needed_imports = 'from lz_browser_agent import Browser'
 
 			# 4. Pickle parameters using cloudpickle for robust serialization
 			pickled_params = base64.b64encode(cloudpickle.dumps(all_params)).decode()

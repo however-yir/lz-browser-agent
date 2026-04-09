@@ -10,9 +10,9 @@ from urllib.parse import urlparse
 
 from pydantic import AfterValidator, AliasChoices, BaseModel, ConfigDict, Field, field_validator, model_validator
 
-from browser_use.browser.cloud.views import CloudBrowserParams
-from browser_use.config import CONFIG
-from browser_use.utils import _log_pretty_path, logger
+from lz_browser_agent.browser.cloud.views import CloudBrowserParams
+from lz_browser_agent.config import CONFIG
+from lz_browser_agent.utils import _log_pretty_path, logger
 
 
 def _get_enable_default_extensions_default() -> bool:
@@ -287,7 +287,7 @@ class BrowserChannel(str, Enum):
 	MSEDGE_CANARY = 'msedge-canary'
 
 
-# Using constants from central location in browser_use.config
+# Using constants from central location in lz_browser_agent.config
 BROWSERUSE_DEFAULT_CHANNEL = BrowserChannel.CHROMIUM
 
 
@@ -596,7 +596,7 @@ class BrowserProfile(BrowserConnectArgs, BrowserLaunchPersistentContextArgs, Bro
 	# New consolidated proxy config (typed)
 	proxy: ProxySettings | None = Field(
 		default=None,
-		description='Proxy settings. Use browser_use.browser.profile.ProxySettings(server, bypass, username, password)',
+		description='Proxy settings. Use lz_browser_agent.browser.profile.ProxySettings(server, bypass, username, password)',
 	)
 	enable_default_extensions: bool = Field(
 		default_factory=_get_enable_default_extensions_default,

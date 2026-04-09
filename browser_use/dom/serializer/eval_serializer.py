@@ -1,8 +1,8 @@
 # @file purpose: Concise evaluation serializer for DOM trees - optimized for LLM query writing
 
 
-from browser_use.dom.utils import cap_text_length
-from browser_use.dom.views import (
+from lz_browser_agent.dom.utils import cap_text_length
+from lz_browser_agent.dom.views import (
 	EnhancedDOMTreeNode,
 	NodeType,
 	SimplifiedNode,

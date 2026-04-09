@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-from browser_use import Agent, ChatOpenAI
+from lz_browser_agent import Agent, ChatOpenAI
 
 extend_system_message = (
 	'REMEMBER the most important RULE: ALWAYS open first a new tab and go first to url wikipedia.com no matter the task!!!'

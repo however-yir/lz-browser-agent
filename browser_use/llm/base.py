@@ -8,8 +8,8 @@ from typing import Any, Protocol, TypeVar, overload, runtime_checkable
 
 from pydantic import BaseModel
 
-from browser_use.llm.messages import BaseMessage
-from browser_use.llm.views import ChatInvokeCompletion
+from lz_browser_agent.llm.messages import BaseMessage
+from lz_browser_agent.llm.views import ChatInvokeCompletion
 
 T = TypeVar('T', bound=BaseModel)
 

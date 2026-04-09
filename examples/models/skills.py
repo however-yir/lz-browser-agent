@@ -6,7 +6,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(
 
 from dotenv import load_dotenv
 
-from browser_use import Agent
+from lz_browser_agent import Agent
 
 load_dotenv()
 

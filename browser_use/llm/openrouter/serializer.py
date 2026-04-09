@@ -1,7 +1,7 @@
 from openai.types.chat import ChatCompletionMessageParam
 
-from browser_use.llm.messages import BaseMessage
-from browser_use.llm.openai.serializer import OpenAIMessageSerializer
+from lz_browser_agent.llm.messages import BaseMessage
+from lz_browser_agent.llm.openai.serializer import OpenAIMessageSerializer
 
 
 class OpenRouterMessageSerializer:
@@ -14,10 +14,10 @@ class OpenRouterMessageSerializer:
 	@staticmethod
 	def serialize_messages(messages: list[BaseMessage]) -> list[ChatCompletionMessageParam]:
 		"""
-		Serialize a list of browser_use messages to OpenRouter-compatible messages.
+		Serialize a list of lz_browser_agent messages to OpenRouter-compatible messages.
 
 		Args:
-		    messages: List of browser_use messages
+		    messages: List of lz_browser_agent messages
 
 		Returns:
 		    List of OpenRouter-compatible messages (identical to OpenAI format)

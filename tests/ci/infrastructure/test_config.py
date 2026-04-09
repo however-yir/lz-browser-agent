@@ -2,7 +2,7 @@
 
 import os
 
-from browser_use.config import CONFIG
+from lz_browser_agent.config import CONFIG
 
 
 class TestLazyConfig:

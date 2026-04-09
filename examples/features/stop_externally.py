@@ -3,7 +3,7 @@ import os
 import random
 import sys
 
-from browser_use.llm.google.chat import ChatGoogle
+from lz_browser_agent.llm.google.chat import ChatGoogle
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use import Agent
+from lz_browser_agent import Agent
 
 llm = ChatGoogle(model='gemini-flash-latest', temperature=1.0)
 

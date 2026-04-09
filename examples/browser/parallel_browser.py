@@ -1,6 +1,6 @@
 import asyncio
 
-from browser_use import Agent, Browser, ChatOpenAI
+from lz_browser_agent import Agent, Browser, ChatOpenAI
 
 # NOTE: This is still experimental, and agents might conflict each other.
 

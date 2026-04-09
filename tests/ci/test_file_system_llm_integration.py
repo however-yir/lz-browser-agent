@@ -7,13 +7,13 @@ from pathlib import Path
 import pytest
 from PIL import Image
 
-from browser_use.agent.message_manager.service import MessageManager
-from browser_use.agent.prompts import AgentMessagePrompt
-from browser_use.agent.views import ActionResult, AgentStepInfo
-from browser_use.browser.views import BrowserStateSummary, TabInfo
-from browser_use.dom.views import SerializedDOMState
-from browser_use.filesystem.file_system import FileSystem
-from browser_use.llm.messages import ContentPartImageParam, ContentPartTextParam, SystemMessage
+from lz_browser_agent.agent.message_manager.service import MessageManager
+from lz_browser_agent.agent.prompts import AgentMessagePrompt
+from lz_browser_agent.agent.views import ActionResult, AgentStepInfo
+from lz_browser_agent.browser.views import BrowserStateSummary, TabInfo
+from lz_browser_agent.dom.views import SerializedDOMState
+from lz_browser_agent.filesystem.file_system import FileSystem
+from lz_browser_agent.llm.messages import ContentPartImageParam, ContentPartTextParam, SystemMessage
 
 
 class TestImageInLLMMessages:

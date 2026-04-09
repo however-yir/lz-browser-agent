@@ -1,0 +1,8 @@
+<svg width="720" height="220" viewBox="0 0 720 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="720" height="220" rx="24" fill="#0F172A"/>
+  <rect x="24" y="24" width="172" height="172" rx="20" fill="#1D4ED8"/>
+  <path d="M64 76H156V92H84V112H144V128H84V152H64V76Z" fill="#F8FAFC"/>
+  <path d="M108 76H128V152H108V76Z" fill="#93C5FD"/>
+  <text x="230" y="102" fill="#E2E8F0" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700">LZ Browser Agent</text>
+  <text x="230" y="145" fill="#93C5FD" font-family="Arial, Helvetica, sans-serif" font-size="24">Local-first Browser Automation Framework</text>
+</svg>

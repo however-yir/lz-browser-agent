@@ -7,40 +7,40 @@ For easier transition we have
 from typing import TYPE_CHECKING
 
 # Lightweight imports that are commonly used
-from browser_use.llm.base import BaseChatModel
-from browser_use.llm.messages import (
+from lz_browser_agent.llm.base import BaseChatModel
+from lz_browser_agent.llm.messages import (
 	AssistantMessage,
 	BaseMessage,
 	SystemMessage,
 	UserMessage,
 )
-from browser_use.llm.messages import (
+from lz_browser_agent.llm.messages import (
 	ContentPartImageParam as ContentImage,
 )
-from browser_use.llm.messages import (
+from lz_browser_agent.llm.messages import (
 	ContentPartRefusalParam as ContentRefusal,
 )
-from browser_use.llm.messages import (
+from lz_browser_agent.llm.messages import (
 	ContentPartTextParam as ContentText,
 )
 
 # Type stubs for lazy imports
 if TYPE_CHECKING:
-	from browser_use.llm.anthropic.chat import ChatAnthropic
-	from browser_use.llm.aws.chat_anthropic import ChatAnthropicBedrock
-	from browser_use.llm.aws.chat_bedrock import ChatAWSBedrock
-	from browser_use.llm.azure.chat import ChatAzureOpenAI
-	from browser_use.llm.browser_use.chat import ChatBrowserUse
-	from browser_use.llm.cerebras.chat import ChatCerebras
-	from browser_use.llm.deepseek.chat import ChatDeepSeek
-	from browser_use.llm.google.chat import ChatGoogle
-	from browser_use.llm.groq.chat import ChatGroq
-	from browser_use.llm.mistral.chat import ChatMistral
-	from browser_use.llm.oci_raw.chat import ChatOCIRaw
-	from browser_use.llm.ollama.chat import ChatOllama
-	from browser_use.llm.openai.chat import ChatOpenAI
-	from browser_use.llm.openrouter.chat import ChatOpenRouter
-	from browser_use.llm.vercel.chat import ChatVercel
+	from lz_browser_agent.llm.anthropic.chat import ChatAnthropic
+	from lz_browser_agent.llm.aws.chat_anthropic import ChatAnthropicBedrock
+	from lz_browser_agent.llm.aws.chat_bedrock import ChatAWSBedrock
+	from lz_browser_agent.llm.azure.chat import ChatAzureOpenAI
+	from lz_browser_agent.llm.lz_browser_agent.chat import ChatBrowserUse
+	from lz_browser_agent.llm.cerebras.chat import ChatCerebras
+	from lz_browser_agent.llm.deepseek.chat import ChatDeepSeek
+	from lz_browser_agent.llm.google.chat import ChatGoogle
+	from lz_browser_agent.llm.groq.chat import ChatGroq
+	from lz_browser_agent.llm.mistral.chat import ChatMistral
+	from lz_browser_agent.llm.oci_raw.chat import ChatOCIRaw
+	from lz_browser_agent.llm.ollama.chat import ChatOllama
+	from lz_browser_agent.llm.openai.chat import ChatOpenAI
+	from lz_browser_agent.llm.openrouter.chat import ChatOpenRouter
+	from lz_browser_agent.llm.vercel.chat import ChatVercel
 
 	# Type stubs for model instances - enables IDE autocomplete
 	openai_gpt_4o: ChatOpenAI
@@ -79,21 +79,21 @@ if TYPE_CHECKING:
 
 # Lazy imports mapping for heavy chat models
 _LAZY_IMPORTS = {
-	'ChatAnthropic': ('browser_use.llm.anthropic.chat', 'ChatAnthropic'),
-	'ChatAnthropicBedrock': ('browser_use.llm.aws.chat_anthropic', 'ChatAnthropicBedrock'),
-	'ChatAWSBedrock': ('browser_use.llm.aws.chat_bedrock', 'ChatAWSBedrock'),
-	'ChatAzureOpenAI': ('browser_use.llm.azure.chat', 'ChatAzureOpenAI'),
-	'ChatBrowserUse': ('browser_use.llm.browser_use.chat', 'ChatBrowserUse'),
-	'ChatCerebras': ('browser_use.llm.cerebras.chat', 'ChatCerebras'),
-	'ChatDeepSeek': ('browser_use.llm.deepseek.chat', 'ChatDeepSeek'),
-	'ChatGoogle': ('browser_use.llm.google.chat', 'ChatGoogle'),
-	'ChatGroq': ('browser_use.llm.groq.chat', 'ChatGroq'),
-	'ChatMistral': ('browser_use.llm.mistral.chat', 'ChatMistral'),
-	'ChatOCIRaw': ('browser_use.llm.oci_raw.chat', 'ChatOCIRaw'),
-	'ChatOllama': ('browser_use.llm.ollama.chat', 'ChatOllama'),
-	'ChatOpenAI': ('browser_use.llm.openai.chat', 'ChatOpenAI'),
-	'ChatOpenRouter': ('browser_use.llm.openrouter.chat', 'ChatOpenRouter'),
-	'ChatVercel': ('browser_use.llm.vercel.chat', 'ChatVercel'),
+	'ChatAnthropic': ('lz_browser_agent.llm.anthropic.chat', 'ChatAnthropic'),
+	'ChatAnthropicBedrock': ('lz_browser_agent.llm.aws.chat_anthropic', 'ChatAnthropicBedrock'),
+	'ChatAWSBedrock': ('lz_browser_agent.llm.aws.chat_bedrock', 'ChatAWSBedrock'),
+	'ChatAzureOpenAI': ('lz_browser_agent.llm.azure.chat', 'ChatAzureOpenAI'),
+	'ChatBrowserUse': ('lz_browser_agent.llm.lz_browser_agent.chat', 'ChatBrowserUse'),
+	'ChatCerebras': ('lz_browser_agent.llm.cerebras.chat', 'ChatCerebras'),
+	'ChatDeepSeek': ('lz_browser_agent.llm.deepseek.chat', 'ChatDeepSeek'),
+	'ChatGoogle': ('lz_browser_agent.llm.google.chat', 'ChatGoogle'),
+	'ChatGroq': ('lz_browser_agent.llm.groq.chat', 'ChatGroq'),
+	'ChatMistral': ('lz_browser_agent.llm.mistral.chat', 'ChatMistral'),
+	'ChatOCIRaw': ('lz_browser_agent.llm.oci_raw.chat', 'ChatOCIRaw'),
+	'ChatOllama': ('lz_browser_agent.llm.ollama.chat', 'ChatOllama'),
+	'ChatOpenAI': ('lz_browser_agent.llm.openai.chat', 'ChatOpenAI'),
+	'ChatOpenRouter': ('lz_browser_agent.llm.openrouter.chat', 'ChatOpenRouter'),
+	'ChatVercel': ('lz_browser_agent.llm.vercel.chat', 'ChatVercel'),
 }
 
 # Cache for model instances - only created when accessed
@@ -119,7 +119,7 @@ def __getattr__(name: str):
 
 	# Try to get model instances from models module on-demand
 	try:
-		from browser_use.llm.models import __getattr__ as models_getattr
+		from lz_browser_agent.llm.models import __getattr__ as models_getattr
 
 		attr = models_getattr(name)
 		# Cache in our clean cache dict

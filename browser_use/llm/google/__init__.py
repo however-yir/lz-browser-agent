@@ -1,3 +1,3 @@
-from browser_use.llm.google.chat import ChatGoogle
+from lz_browser_agent.llm.google.chat import ChatGoogle
 
 __all__ = ['ChatGoogle']

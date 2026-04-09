@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use import ActionResult, Agent, ChatOpenAI, Tools
+from lz_browser_agent import ActionResult, Agent, ChatOpenAI, Tools
 
 tools = Tools()
 

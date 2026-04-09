@@ -34,7 +34,7 @@ Custom LLM Usage:
 	results = await agent.load_and_rerun(history_file)
 
 	# Option 2: Use custom LLMs for AI steps and summary
-	from browser_use.llm import ChatOpenAI
+	from lz_browser_agent.llm import ChatOpenAI
 	custom_llm = ChatOpenAI(model='gpt-4.1-mini')
 	results = await agent.load_and_rerun(
 		history_file,
@@ -51,8 +51,8 @@ The AI summary will be the last item in results and will have:
 import asyncio
 from pathlib import Path
 
-from browser_use import Agent
-from browser_use.llm import ChatBrowserUse
+from lz_browser_agent import Agent
+from lz_browser_agent.llm import ChatBrowserUse
 
 
 async def main():
@@ -63,7 +63,7 @@ async def main():
 
 	# Optional: Use custom LLMs for AI features during rerun
 	# Uncomment to use a custom LLM:
-	# from browser_use.llm import ChatOpenAI
+	# from lz_browser_agent.llm import ChatOpenAI
 	# custom_llm = ChatOpenAI(model='gpt-4.1-mini')
 	# ai_step_llm = custom_llm   # For re-evaluating extract actions
 	# summary_llm = custom_llm   # For final summary

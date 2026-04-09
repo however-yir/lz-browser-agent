@@ -31,7 +31,7 @@ _URL_PATTERN = re.compile(r'(https://\S+\.trycloudflare\.com)')
 
 def _tunnels_dir() -> Path:
 	"""Get tunnel metadata directory (lazy to respect BROWSER_USE_HOME)."""
-	from browser_use.skill_cli.utils import get_tunnel_dir
+	from lz_browser_agent.skill_cli.utils import get_tunnel_dir
 
 	return get_tunnel_dir()
 
@@ -146,7 +146,7 @@ def _delete_tunnel_info(port: int) -> None:
 
 def _is_process_alive(pid: int) -> bool:
 	"""Check if a process is still running."""
-	from browser_use.skill_cli.utils import is_process_alive
+	from lz_browser_agent.skill_cli.utils import is_process_alive
 
 	return is_process_alive(pid)
 

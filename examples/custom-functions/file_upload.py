@@ -17,11 +17,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use import ChatOpenAI
-from browser_use.agent.service import Agent, Tools
-from browser_use.agent.views import ActionResult
-from browser_use.browser import BrowserSession
-from browser_use.browser.events import UploadFileEvent
+from lz_browser_agent import ChatOpenAI
+from lz_browser_agent.agent.service import Agent, Tools
+from lz_browser_agent.agent.views import ActionResult
+from lz_browser_agent.browser import BrowserSession
+from lz_browser_agent.browser.events import UploadFileEvent
 
 logger = logging.getLogger(__name__)
 

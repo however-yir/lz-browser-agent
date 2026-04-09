@@ -5,9 +5,9 @@ optimizes the schemas for agent actions without losing information.
 
 from pydantic import BaseModel
 
-from browser_use.agent.views import AgentOutput
-from browser_use.llm.schema import SchemaOptimizer
-from browser_use.tools.service import Tools
+from lz_browser_agent.agent.views import AgentOutput
+from lz_browser_agent.llm.schema import SchemaOptimizer
+from lz_browser_agent.tools.service import Tools
 
 
 class ProductInfo(BaseModel):

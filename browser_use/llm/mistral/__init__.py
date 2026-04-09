@@ -1,5 +1,5 @@
 """Mistral chat model integration."""
 
-from browser_use.llm.mistral.chat import ChatMistral
+from lz_browser_agent.llm.mistral.chat import ChatMistral
 
 __all__ = ['ChatMistral']

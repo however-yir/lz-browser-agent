@@ -3,7 +3,7 @@ from typing import Any, TypeVar
 
 from pydantic import BaseModel, Field
 
-from browser_use.llm.views import ChatInvokeUsage
+from lz_browser_agent.llm.views import ChatInvokeUsage
 
 T = TypeVar('T', bound=BaseModel)
 

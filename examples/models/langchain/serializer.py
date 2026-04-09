@@ -11,7 +11,7 @@ from langchain_core.messages import (  # pyright: ignore
 )
 from langchain_core.messages.base import BaseMessage as LangChainBaseMessage  # pyright: ignore
 
-from browser_use.llm.messages import (
+from lz_browser_agent.llm.messages import (
 	AssistantMessage,
 	BaseMessage,
 	ContentPartImageParam,
@@ -20,7 +20,7 @@ from browser_use.llm.messages import (
 	ToolCall,
 	UserMessage,
 )
-from browser_use.llm.messages import (
+from lz_browser_agent.llm.messages import (
 	SystemMessage as BrowserUseSystemMessage,
 )
 

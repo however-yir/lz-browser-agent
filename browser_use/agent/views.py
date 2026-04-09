@@ -13,20 +13,20 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError, create_model
 from typing_extensions import TypeVar
 from uuid_extensions import uuid7str
 
-from browser_use.agent.message_manager.views import MessageManagerState
-from browser_use.browser.views import BrowserStateHistory
-from browser_use.dom.views import DEFAULT_INCLUDE_ATTRIBUTES, DOMInteractedElement, DOMSelectorMap
+from lz_browser_agent.agent.message_manager.views import MessageManagerState
+from lz_browser_agent.browser.views import BrowserStateHistory
+from lz_browser_agent.dom.views import DEFAULT_INCLUDE_ATTRIBUTES, DOMInteractedElement, DOMSelectorMap
 
-# from browser_use.dom.history_tree_processor.service import (
+# from lz_browser_agent.dom.history_tree_processor.service import (
 # 	DOMElementNode,
 # 	DOMHistoryElement,
 # 	HistoryTreeProcessor,
 # )
-# from browser_use.dom.views import SelectorMap
-from browser_use.filesystem.file_system import FileSystemState
-from browser_use.llm.base import BaseChatModel
-from browser_use.tokens.views import UsageSummary
-from browser_use.tools.registry.views import ActionModel
+# from lz_browser_agent.dom.views import SelectorMap
+from lz_browser_agent.filesystem.file_system import FileSystemState
+from lz_browser_agent.llm.base import BaseChatModel
+from lz_browser_agent.tokens.views import UsageSummary
+from lz_browser_agent.tools.registry.views import ActionModel
 
 logger = logging.getLogger(__name__)
 
@@ -667,7 +667,7 @@ class AgentHistoryList(BaseModel, Generic[AgentStructuredOutput]):
 	# 		browser_config: Configuration of the original Browser instance.
 	# 		context_config: Configuration of the original BrowserContext instance.
 	# 	"""
-	# 	from browser_use.agent.playwright_script_generator import PlaywrightScriptGenerator
+	# 	from lz_browser_agent.agent.playwright_script_generator import PlaywrightScriptGenerator
 
 	# 	try:
 	# 		serialized_history = self.model_dump()['history']

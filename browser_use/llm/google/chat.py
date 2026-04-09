@@ -12,12 +12,12 @@ from google.genai import types
 from google.genai.types import MediaModality
 from pydantic import BaseModel
 
-from browser_use.llm.base import BaseChatModel
-from browser_use.llm.exceptions import ModelProviderError
-from browser_use.llm.google.serializer import GoogleMessageSerializer
-from browser_use.llm.messages import BaseMessage
-from browser_use.llm.schema import SchemaOptimizer
-from browser_use.llm.views import ChatInvokeCompletion, ChatInvokeUsage
+from lz_browser_agent.llm.base import BaseChatModel
+from lz_browser_agent.llm.exceptions import ModelProviderError
+from lz_browser_agent.llm.google.serializer import GoogleMessageSerializer
+from lz_browser_agent.llm.messages import BaseMessage
+from lz_browser_agent.llm.schema import SchemaOptimizer
+from lz_browser_agent.llm.views import ChatInvokeCompletion, ChatInvokeUsage
 
 T = TypeVar('T', bound=BaseModel)
 
@@ -120,7 +120,7 @@ class ChatGoogle(BaseChatModel):
 	@property
 	def logger(self) -> logging.Logger:
 		"""Get logger for this chat instance"""
-		return logging.getLogger(f'browser_use.llm.google.{self.model}')
+		return logging.getLogger(f'lz_browser_agent.llm.google.{self.model}')
 
 	def _get_client_params(self) -> dict[str, Any]:
 		"""Prepare client parameters dictionary."""

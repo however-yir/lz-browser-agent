@@ -14,7 +14,7 @@ def run_cli(*args: str, env_override: dict | None = None) -> subprocess.Complete
 		env.update(env_override)
 
 	return subprocess.run(
-		[sys.executable, '-m', 'browser_use.skill_cli.main', *args],
+		[sys.executable, '-m', 'lz_browser_agent.skill_cli.main', *args],
 		capture_output=True,
 		text=True,
 		env=env,

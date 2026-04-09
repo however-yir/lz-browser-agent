@@ -5,10 +5,10 @@ from typing import TYPE_CHECKING, Any, ClassVar
 from bubus import BaseEvent
 from cdp_use.cdp.page import CaptureScreenshotParameters
 
-from browser_use.browser.events import ScreenshotEvent
-from browser_use.browser.views import BrowserError
-from browser_use.browser.watchdog_base import BaseWatchdog
-from browser_use.observability import observe_debug
+from lz_browser_agent.browser.events import ScreenshotEvent
+from lz_browser_agent.browser.views import BrowserError
+from lz_browser_agent.browser.watchdog_base import BaseWatchdog
+from lz_browser_agent.observability import observe_debug
 
 if TYPE_CHECKING:
 	pass

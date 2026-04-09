@@ -2,15 +2,15 @@ import importlib.resources
 from datetime import datetime
 from typing import TYPE_CHECKING, Literal, Optional
 
-from browser_use.dom.views import NodeType, SimplifiedNode
-from browser_use.llm.messages import ContentPartImageParam, ContentPartTextParam, ImageURL, SystemMessage, UserMessage
-from browser_use.observability import observe_debug
-from browser_use.utils import is_new_tab_page, sanitize_surrogates
+from lz_browser_agent.dom.views import NodeType, SimplifiedNode
+from lz_browser_agent.llm.messages import ContentPartImageParam, ContentPartTextParam, ImageURL, SystemMessage, UserMessage
+from lz_browser_agent.observability import observe_debug
+from lz_browser_agent.utils import is_new_tab_page, sanitize_surrogates
 
 if TYPE_CHECKING:
-	from browser_use.agent.views import AgentStepInfo
-	from browser_use.browser.views import BrowserStateSummary
-	from browser_use.filesystem.file_system import FileSystem
+	from lz_browser_agent.agent.views import AgentStepInfo
+	from lz_browser_agent.browser.views import BrowserStateSummary
+	from lz_browser_agent.filesystem.file_system import FileSystem
 
 
 def _is_anthropic_4_5_model(model_name: str | None) -> bool:
@@ -82,7 +82,7 @@ class SystemPrompt:
 
 			# This works both in development and when installed as a package
 			with (
-				importlib.resources.files('browser_use.agent.system_prompts')
+				importlib.resources.files('lz_browser_agent.agent.system_prompts')
 				.joinpath(template_filename)
 				.open('r', encoding='utf-8') as f
 			):

@@ -10,12 +10,12 @@ from typing import Any, TypeVar, cast, overload
 import httpx
 from pydantic import BaseModel
 
-from browser_use.llm.base import BaseChatModel
-from browser_use.llm.exceptions import ModelProviderError, ModelRateLimitError
-from browser_use.llm.messages import BaseMessage
-from browser_use.llm.mistral.schema import MistralSchemaOptimizer
-from browser_use.llm.openai.serializer import OpenAIMessageSerializer
-from browser_use.llm.views import ChatInvokeCompletion, ChatInvokeUsage
+from lz_browser_agent.llm.base import BaseChatModel
+from lz_browser_agent.llm.exceptions import ModelProviderError, ModelRateLimitError
+from lz_browser_agent.llm.messages import BaseMessage
+from lz_browser_agent.llm.mistral.schema import MistralSchemaOptimizer
+from lz_browser_agent.llm.openai.serializer import OpenAIMessageSerializer
+from lz_browser_agent.llm.views import ChatInvokeCompletion, ChatInvokeUsage
 
 logger = logging.getLogger(__name__)
 T = TypeVar('T', bound=BaseModel)

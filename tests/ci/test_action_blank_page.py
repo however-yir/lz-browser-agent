@@ -12,9 +12,9 @@ import tempfile
 import pytest
 from pytest_httpserver import HTTPServer
 
-from browser_use.agent.views import ActionResult
-from browser_use.browser import BrowserProfile, BrowserSession
-from browser_use.tools.service import Tools
+from lz_browser_agent.agent.views import ActionResult
+from lz_browser_agent.browser import BrowserProfile, BrowserSession
+from lz_browser_agent.tools.service import Tools
 
 # ---------------------------------------------------------------------------
 # Fixtures
@@ -97,8 +97,8 @@ async def _navigate(tools, browser_session, url):
 
 def _make_prompt(state):
 	"""Build an AgentMessagePrompt from a BrowserStateSummary using a temp dir for FileSystem."""
-	from browser_use.agent.prompts import AgentMessagePrompt
-	from browser_use.filesystem.file_system import FileSystem
+	from lz_browser_agent.agent.prompts import AgentMessagePrompt
+	from lz_browser_agent.filesystem.file_system import FileSystem
 
 	tmp_dir = tempfile.mkdtemp(prefix='browseruse_test_')
 	file_system = FileSystem(base_dir=tmp_dir, create_default_files=False)

@@ -10,9 +10,9 @@ load_dotenv()
 import discord  # type: ignore
 from discord.ext import commands  # type: ignore
 
-from browser_use.agent.service import Agent
-from browser_use.browser import BrowserProfile, BrowserSession
-from browser_use.llm import BaseChatModel
+from lz_browser_agent.agent.service import Agent
+from lz_browser_agent.browser import BrowserProfile, BrowserSession
+from lz_browser_agent.llm import BaseChatModel
 
 
 class DiscordBot(commands.Bot):
@@ -31,7 +31,7 @@ class DiscordBot(commands.Bot):
 
 	Usage:
 	    ```python
-	    from browser_use import ChatOpenAI
+	    from lz_browser_agent import ChatOpenAI
 
 	    llm = ChatOpenAI()
 	    bot = DiscordBot(llm=llm, prefix='$bu', ack=True)

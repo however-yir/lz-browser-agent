@@ -2,13 +2,13 @@ from typing import TYPE_CHECKING
 
 # Type stubs for lazy imports
 if TYPE_CHECKING:
-	from browser_use.llm.aws.chat_anthropic import ChatAnthropicBedrock
-	from browser_use.llm.aws.chat_bedrock import ChatAWSBedrock
+	from lz_browser_agent.llm.aws.chat_anthropic import ChatAnthropicBedrock
+	from lz_browser_agent.llm.aws.chat_bedrock import ChatAWSBedrock
 
 # Lazy imports mapping for AWS chat models
 _LAZY_IMPORTS = {
-	'ChatAnthropicBedrock': ('browser_use.llm.aws.chat_anthropic', 'ChatAnthropicBedrock'),
-	'ChatAWSBedrock': ('browser_use.llm.aws.chat_bedrock', 'ChatAWSBedrock'),
+	'ChatAnthropicBedrock': ('lz_browser_agent.llm.aws.chat_anthropic', 'ChatAnthropicBedrock'),
+	'ChatAWSBedrock': ('lz_browser_agent.llm.aws.chat_bedrock', 'ChatAWSBedrock'),
 }
 
 

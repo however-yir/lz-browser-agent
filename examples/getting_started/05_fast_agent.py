@@ -2,7 +2,7 @@ import asyncio
 import os
 import sys
 
-# Add the parent directory to the path so we can import browser_use
+# Add the parent directory to the path so we can import lz_browser_agent
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 from dotenv import load_dotenv
@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-from browser_use import Agent, BrowserProfile
+from lz_browser_agent import Agent, BrowserProfile
 
 # Speed optimization instructions for the model
 SPEED_OPTIMIZATION_PROMPT = """
@@ -23,13 +23,13 @@ Speed optimization instructions:
 
 async def main():
 	# 1. Use fast LLM - Llama 4 on Groq for ultra-fast inference
-	from browser_use import ChatGroq
+	from lz_browser_agent import ChatGroq
 
 	llm = ChatGroq(
 		model='meta-llama/llama-4-maverick-17b-128e-instruct',
 		temperature=0.0,
 	)
-	# from browser_use import ChatGoogle
+	# from lz_browser_agent import ChatGoogle
 
 	# llm = ChatGoogle(model='gemini-flash-lite-latest')
 

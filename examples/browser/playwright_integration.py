@@ -24,8 +24,8 @@ except ImportError as e:
 	print('Also run: playwright install chromium')
 	sys.exit(1)
 
-from browser_use import Agent, BrowserSession, ChatOpenAI, Tools
-from browser_use.agent.views import ActionResult
+from lz_browser_agent import Agent, BrowserSession, ChatOpenAI, Tools
+from lz_browser_agent.agent.views import ActionResult
 
 # Global Playwright browser instance - shared between custom actions
 playwright_browser: Browser | None = None

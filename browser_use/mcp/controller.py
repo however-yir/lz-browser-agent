@@ -10,8 +10,8 @@ from typing import Any
 
 from pydantic import Field, create_model
 
-from browser_use.agent.views import ActionResult
-from browser_use.tools.registry.service import Registry
+from lz_browser_agent.agent.views import ActionResult
+from lz_browser_agent.tools.registry.service import Registry
 
 logger = logging.getLogger(__name__)
 
@@ -248,8 +248,8 @@ async def register_mcp_tools(registry: Registry, mcp_command: str, mcp_args: lis
 
 	Example:
 		```python
-	        from browser_use import Tools
-	        from browser_use.mcp.tools import register_mcp_tools
+	        from lz_browser_agent import Tools
+	        from lz_browser_agent.mcp.tools import register_mcp_tools
 
 	        tools = Tools()
 

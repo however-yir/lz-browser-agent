@@ -10,7 +10,7 @@ except ImportError:
 	print('Traceloop is not installed')
 	exit(1)
 
-from browser_use import Agent
+from lz_browser_agent import Agent
 
 load_dotenv()
 api_key = os.getenv('TRACELOOP_API_KEY')

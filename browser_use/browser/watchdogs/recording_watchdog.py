@@ -9,11 +9,11 @@ from cdp_use.cdp.page.events import ScreencastFrameEvent
 from pydantic import PrivateAttr
 from uuid_extensions import uuid7str
 
-from browser_use.browser.events import AgentFocusChangedEvent, BrowserConnectedEvent, BrowserStopEvent
-from browser_use.browser.profile import ViewportSize
-from browser_use.browser.video_recorder import VideoRecorderService
-from browser_use.browser.watchdog_base import BaseWatchdog
-from browser_use.utils import create_task_with_error_handling
+from lz_browser_agent.browser.events import AgentFocusChangedEvent, BrowserConnectedEvent, BrowserStopEvent
+from lz_browser_agent.browser.profile import ViewportSize
+from lz_browser_agent.browser.video_recorder import VideoRecorderService
+from lz_browser_agent.browser.watchdog_base import BaseWatchdog
+from lz_browser_agent.utils import create_task_with_error_handling
 
 
 class RecordingWatchdog(BaseWatchdog):

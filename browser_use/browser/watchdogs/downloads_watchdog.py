@@ -16,7 +16,7 @@ from cdp_use.cdp.network import ResponseReceivedEvent
 from cdp_use.cdp.target import SessionID, TargetID
 from pydantic import PrivateAttr
 
-from browser_use.browser.events import (
+from lz_browser_agent.browser.events import (
 	BrowserLaunchEvent,
 	BrowserStateRequestEvent,
 	BrowserStoppedEvent,
@@ -27,8 +27,8 @@ from browser_use.browser.events import (
 	TabClosedEvent,
 	TabCreatedEvent,
 )
-from browser_use.browser.watchdog_base import BaseWatchdog
-from browser_use.utils import create_task_with_error_handling
+from lz_browser_agent.browser.watchdog_base import BaseWatchdog
+from lz_browser_agent.utils import create_task_with_error_handling
 
 if TYPE_CHECKING:
 	pass
@@ -310,7 +310,7 @@ class DownloadsWatchdog(BaseWatchdog):
 					self.logger.debug(f'[DownloadsWatchdog] Error in download progress callback: {e}')
 
 			# Emit progress event for all states so listeners can track progress
-			from browser_use.browser.events import DownloadProgressEvent as DownloadProgressEventInternal
+			from lz_browser_agent.browser.events import DownloadProgressEvent as DownloadProgressEventInternal
 
 			self.event_bus.dispatch(
 				DownloadProgressEventInternal(
@@ -823,7 +823,7 @@ class DownloadsWatchdog(BaseWatchdog):
 						self.logger.debug(f'[DownloadsWatchdog] Error in download complete callback: {e}')
 
 				# Dispatch download event
-				from browser_use.browser.events import FileDownloadedEvent
+				from lz_browser_agent.browser.events import FileDownloadedEvent
 
 				self.event_bus.dispatch(
 					FileDownloadedEvent(

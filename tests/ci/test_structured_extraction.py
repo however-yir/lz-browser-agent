@@ -9,14 +9,14 @@ import pytest
 from pydantic import ValidationError
 from pytest_httpserver import HTTPServer
 
-from browser_use.agent.views import ActionResult
-from browser_use.browser import BrowserProfile, BrowserSession
-from browser_use.filesystem.file_system import FileSystem
-from browser_use.llm.base import BaseChatModel
-from browser_use.llm.views import ChatInvokeCompletion
-from browser_use.tools.extraction.schema_utils import schema_dict_to_pydantic_model
-from browser_use.tools.extraction.views import ExtractionResult
-from browser_use.tools.service import Tools
+from lz_browser_agent.agent.views import ActionResult
+from lz_browser_agent.browser import BrowserProfile, BrowserSession
+from lz_browser_agent.filesystem.file_system import FileSystem
+from lz_browser_agent.llm.base import BaseChatModel
+from lz_browser_agent.llm.views import ChatInvokeCompletion
+from lz_browser_agent.tools.extraction.schema_utils import schema_dict_to_pydantic_model
+from lz_browser_agent.tools.extraction.views import ExtractionResult
+from lz_browser_agent.tools.service import Tools
 
 # ---------------------------------------------------------------------------
 # Unit tests: schema_dict_to_pydantic_model

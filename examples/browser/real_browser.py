@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use import Agent, Browser, ChatGoogle
+from lz_browser_agent import Agent, Browser, ChatGoogle
 
 
 def select_chrome_profile() -> str | None:

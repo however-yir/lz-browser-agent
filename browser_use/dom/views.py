@@ -11,8 +11,8 @@ from cdp_use.cdp.domsnapshot.commands import CaptureSnapshotReturns
 from cdp_use.cdp.target.types import SessionID, TargetID, TargetInfo
 from uuid_extensions import uuid7str
 
-from browser_use.dom.utils import cap_text_length
-from browser_use.observability import observe_debug
+from lz_browser_agent.dom.utils import cap_text_length
+from lz_browser_agent.observability import observe_debug
 
 # Serializer types
 DEFAULT_INCLUDE_ATTRIBUTES = [
@@ -939,7 +939,7 @@ class SerializedDOMState:
 		include_attributes: list[str] | None = None,
 	) -> str:
 		"""Kinda ugly, but leaving this as an internal method because include_attributes are a parameter on the agent, so we need to leave it as a 2 step process"""
-		from browser_use.dom.serializer.serializer import DOMTreeSerializer
+		from lz_browser_agent.dom.serializer.serializer import DOMTreeSerializer
 
 		if not self._root:
 			return 'Empty DOM tree (you might have to wait for the page to load)'
@@ -962,7 +962,7 @@ class SerializedDOMState:
 		- More attribute information is helpful
 		- Text content is important for understanding page structure
 		"""
-		from browser_use.dom.serializer.eval_serializer import DOMEvalSerializer
+		from lz_browser_agent.dom.serializer.eval_serializer import DOMEvalSerializer
 
 		if not self._root:
 			return 'Empty DOM tree (you might have to wait for the page to load)'

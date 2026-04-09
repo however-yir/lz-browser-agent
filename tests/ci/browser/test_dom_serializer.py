@@ -14,9 +14,9 @@ Usage:
 import pytest
 from pytest_httpserver import HTTPServer
 
-from browser_use.agent.service import Agent
-from browser_use.browser import BrowserSession
-from browser_use.browser.profile import BrowserProfile, ViewportSize
+from lz_browser_agent.agent.service import Agent
+from lz_browser_agent.browser import BrowserSession
+from lz_browser_agent.browser.profile import BrowserProfile, ViewportSize
 from tests.ci.conftest import create_mock_llm
 
 
@@ -88,7 +88,7 @@ class TestDOMSerializer:
 		- Iframe tags: 2 elements (the iframe elements themselves)
 		Total: ~10 interactive elements
 		"""
-		from browser_use.tools.service import Tools
+		from lz_browser_agent.tools.service import Tools
 
 		tools = Tools()
 
@@ -354,7 +354,7 @@ class TestDOMSerializer:
 		4. Cross-origin iframe placeholder with about:blank (no external dependencies)
 		5. Truly nested structure: Open Shadow → Closed Shadow → Iframe
 		"""
-		from browser_use.tools.service import Tools
+		from lz_browser_agent.tools.service import Tools
 
 		tools = Tools()
 
@@ -555,8 +555,8 @@ if __name__ == '__main__':
 		print(f'\n🌐 HTTP Server running at {base_url}')
 
 		# Set up browser session
-		from browser_use.browser import BrowserSession
-		from browser_use.browser.profile import BrowserProfile
+		from lz_browser_agent.browser import BrowserSession
+		from lz_browser_agent.browser.profile import BrowserProfile
 
 		session = BrowserSession(
 			browser_profile=BrowserProfile(

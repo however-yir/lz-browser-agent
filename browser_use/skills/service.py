@@ -8,7 +8,7 @@ from browser_use_sdk import AsyncBrowserUse, ExecuteSkillResponse, SkillListResp
 from cdp_use.cdp.network import Cookie
 from pydantic import BaseModel, ValidationError
 
-from browser_use.skills.views import (
+from lz_browser_agent.skills.views import (
 	MissingCookieException,
 	Skill,
 )

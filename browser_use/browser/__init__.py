@@ -22,7 +22,7 @@ def __getattr__(name: str):
 			from importlib import import_module
 
 			# Use relative import for current package
-			full_module_path = f'browser_use.browser{module_path}'
+			full_module_path = f'lz_browser_agent.browser{module_path}'
 			module = import_module(full_module_path)
 			attr = getattr(module, attr_name)
 			# Cache the imported attribute in the module's globals

@@ -8,13 +8,13 @@ from cdp_use.cdp.accessibility.types import AXNode
 from cdp_use.cdp.dom.types import Node
 from cdp_use.cdp.target import TargetID
 
-from browser_use.dom.enhanced_snapshot import (
+from lz_browser_agent.dom.enhanced_snapshot import (
 	REQUIRED_COMPUTED_STYLES,
 	build_snapshot_lookup,
 )
-from browser_use.dom.serializer.clickable_elements import ClickableElementDetector
-from browser_use.dom.serializer.serializer import DOMTreeSerializer
-from browser_use.dom.views import (
+from lz_browser_agent.dom.serializer.clickable_elements import ClickableElementDetector
+from lz_browser_agent.dom.serializer.serializer import DOMTreeSerializer
+from lz_browser_agent.dom.views import (
 	DOMRect,
 	EnhancedAXNode,
 	EnhancedAXProperty,
@@ -23,11 +23,11 @@ from browser_use.dom.views import (
 	SerializedDOMState,
 	TargetAllTrees,
 )
-from browser_use.observability import observe_debug
-from browser_use.utils import create_task_with_error_handling
+from lz_browser_agent.observability import observe_debug
+from lz_browser_agent.utils import create_task_with_error_handling
 
 if TYPE_CHECKING:
-	from browser_use.browser.session import BrowserSession
+	from lz_browser_agent.browser.session import BrowserSession
 
 # Note: iframe limits are now configurable via BrowserProfile.max_iframes and BrowserProfile.max_iframe_depth
 

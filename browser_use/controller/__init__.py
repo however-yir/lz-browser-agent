@@ -1,3 +1,3 @@
-from browser_use.tools.service import Controller
+from lz_browser_agent.tools.service import Controller
 
 __all__ = ['Controller']

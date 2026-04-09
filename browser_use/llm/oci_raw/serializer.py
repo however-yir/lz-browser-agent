@@ -7,7 +7,7 @@ and the OCI Raw API message format using proper OCI SDK models.
 
 from oci.generative_ai_inference.models import ImageContent, ImageUrl, Message, TextContent
 
-from browser_use.llm.messages import (
+from lz_browser_agent.llm.messages import (
 	AssistantMessage,
 	BaseMessage,
 	ContentPartImageParam,

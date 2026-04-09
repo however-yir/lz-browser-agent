@@ -9,9 +9,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use import ChatOpenAI
-from browser_use.agent.service import Agent
-from browser_use.browser import BrowserProfile, BrowserSession
+from lz_browser_agent import ChatOpenAI
+from lz_browser_agent.agent.service import Agent
+from lz_browser_agent.browser import BrowserProfile, BrowserSession
 
 browser_session = BrowserSession(
 	browser_profile=BrowserProfile(

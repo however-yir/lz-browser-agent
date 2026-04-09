@@ -12,9 +12,9 @@ import os
 
 from PIL import Image, ImageDraw, ImageFont
 
-from browser_use.dom.views import DOMSelectorMap, EnhancedDOMTreeNode
-from browser_use.observability import observe_debug
-from browser_use.utils import time_execution_async
+from lz_browser_agent.dom.views import DOMSelectorMap, EnhancedDOMTreeNode
+from lz_browser_agent.observability import observe_debug
+from lz_browser_agent.utils import time_execution_async
 
 logger = logging.getLogger(__name__)
 

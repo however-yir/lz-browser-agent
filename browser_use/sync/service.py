@@ -7,8 +7,8 @@ import logging
 import httpx
 from bubus import BaseEvent
 
-from browser_use.config import CONFIG
-from browser_use.sync.auth import TEMP_USER_ID, DeviceAuthClient
+from lz_browser_agent.config import CONFIG
+from lz_browser_agent.sync.auth import TEMP_USER_ID, DeviceAuthClient
 
 logger = logging.getLogger(__name__)
 

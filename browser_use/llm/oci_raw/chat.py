@@ -21,11 +21,11 @@ from oci.generative_ai_inference.models import (
 )
 from pydantic import BaseModel
 
-from browser_use.llm.base import BaseChatModel
-from browser_use.llm.exceptions import ModelProviderError, ModelRateLimitError
-from browser_use.llm.messages import BaseMessage
-from browser_use.llm.schema import SchemaOptimizer
-from browser_use.llm.views import ChatInvokeCompletion, ChatInvokeUsage
+from lz_browser_agent.llm.base import BaseChatModel
+from lz_browser_agent.llm.exceptions import ModelProviderError, ModelRateLimitError
+from lz_browser_agent.llm.messages import BaseMessage
+from lz_browser_agent.llm.schema import SchemaOptimizer
+from lz_browser_agent.llm.views import ChatInvokeCompletion, ChatInvokeUsage
 
 from .serializer import OCIRawMessageSerializer
 
@@ -374,7 +374,7 @@ IMPORTANT:
 				modified_messages = messages.copy()
 
 				# Add or modify system message
-				from browser_use.llm.messages import SystemMessage
+				from lz_browser_agent.llm.messages import SystemMessage
 
 				if modified_messages and hasattr(modified_messages[0], 'role') and modified_messages[0].role == 'system':
 					# Modify existing system message

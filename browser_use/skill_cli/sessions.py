@@ -6,12 +6,12 @@ import logging
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
-from browser_use.skill_cli.browser import CLIBrowserSession
-from browser_use.skill_cli.python_session import PythonSession
+from lz_browser_agent.skill_cli.browser import CLIBrowserSession
+from lz_browser_agent.skill_cli.python_session import PythonSession
 
 if TYPE_CHECKING:
-	from browser_use.browser.session import BrowserSession
-	from browser_use.skill_cli.actions import ActionHandler
+	from lz_browser_agent.browser.session import BrowserSession
+	from lz_browser_agent.skill_cli.actions import ActionHandler
 
 logger = logging.getLogger(__name__)
 
@@ -62,7 +62,7 @@ async def create_browser_session(
 	if profile is None:
 		return CLIBrowserSession(headless=not headed)  # type: ignore[call-arg]
 
-	from browser_use.skill_cli.utils import find_chrome_executable, get_chrome_profile_path, list_chrome_profiles
+	from lz_browser_agent.skill_cli.utils import find_chrome_executable, get_chrome_profile_path, list_chrome_profiles
 
 	chrome_path = find_chrome_executable()
 	if not chrome_path:

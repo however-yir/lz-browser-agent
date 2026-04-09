@@ -2,8 +2,8 @@
 
 from unittest.mock import AsyncMock
 
-from browser_use.agent.service import Agent
-from browser_use.agent.views import ActionResult
+from lz_browser_agent.agent.service import Agent
+from lz_browser_agent.agent.views import ActionResult
 from tests.ci.conftest import create_mock_llm
 
 
@@ -12,7 +12,7 @@ async def test_execute_ai_step_basic():
 
 	# Create mock LLM that returns text response
 	async def custom_ainvoke(*args, **kwargs):
-		from browser_use.llm.views import ChatInvokeCompletion
+		from lz_browser_agent.llm.views import ChatInvokeCompletion
 
 		return ChatInvokeCompletion(completion='Extracted: Test content from page', usage=None)
 
@@ -48,7 +48,7 @@ async def test_execute_ai_step_with_screenshot():
 
 	# Create mock LLM
 	async def custom_ainvoke(*args, **kwargs):
-		from browser_use.llm.views import ChatInvokeCompletion
+		from lz_browser_agent.llm.views import ChatInvokeCompletion
 
 		# Verify that we received a message with image content
 		messages = args[0] if args else []

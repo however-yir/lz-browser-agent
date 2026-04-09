@@ -5,8 +5,8 @@ import os
 
 from dotenv import load_dotenv
 
-from browser_use import Agent, Browser, ChatOpenAI, Tools
-from browser_use.tools.views import UploadFileAction
+from lz_browser_agent import Agent, Browser, ChatOpenAI, Tools
+from lz_browser_agent.tools.views import UploadFileAction
 
 load_dotenv()
 

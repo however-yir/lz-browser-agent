@@ -8,8 +8,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use import Agent, ChatOpenAI
-from browser_use.browser import BrowserProfile, BrowserSession
+from lz_browser_agent import Agent, ChatOpenAI
+from lz_browser_agent.browser import BrowserProfile, BrowserSession
 
 llm = ChatOpenAI(model='gpt-4o-mini')
 

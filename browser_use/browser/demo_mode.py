@@ -8,7 +8,7 @@ import logging
 from datetime import datetime, timezone
 from typing import Any
 
-from browser_use.browser.session import BrowserSession
+from lz_browser_agent.browser.session import BrowserSession
 
 # Embedded JavaScript for demo panel (injected into browser pages)
 _DEMO_PANEL_SCRIPT = r"""(function () {

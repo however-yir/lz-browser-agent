@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-from browser_use import Agent, Browser, ChatGoogle
+from lz_browser_agent import Agent, Browser, ChatGoogle
 
 api_key = os.getenv('GOOGLE_API_KEY')
 if not api_key:

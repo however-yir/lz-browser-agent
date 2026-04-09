@@ -2,7 +2,7 @@
 
 import tempfile
 
-from browser_use.browser.profile import BrowserProfile
+from lz_browser_agent.browser.profile import BrowserProfile
 
 
 class TestBrowserProfileDisableSecurity:

@@ -17,7 +17,7 @@ __all__ = ['main']
 def __getattr__(name: str):
 	"""Lazy import to avoid runpy warnings when running as module."""
 	if name == 'main':
-		from browser_use.skill_cli.main import main
+		from lz_browser_agent.skill_cli.main import main
 
 		return main
 	raise AttributeError(f'module {__name__!r} has no attribute {name!r}')

@@ -8,8 +8,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-from browser_use.browser import BrowserProfile
-from browser_use.llm import ChatGoogle
+from lz_browser_agent.browser import BrowserProfile
+from lz_browser_agent.llm import ChatGoogle
 from examples.integrations.slack.slack_api import SlackBot, app
 
 # load credentials from environment variables

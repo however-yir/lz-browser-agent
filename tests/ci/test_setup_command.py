@@ -6,7 +6,7 @@ Verifies the setup command runs and returns expected structure.
 import tempfile
 from pathlib import Path
 
-from browser_use.skill_cli.commands import setup
+from lz_browser_agent.skill_cli.commands import setup
 
 
 def test_setup_returns_valid_structure(monkeypatch):

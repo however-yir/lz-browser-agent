@@ -9,10 +9,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use import Agent, ChatOpenAI
-from browser_use.agent.views import AgentHistoryList
-from browser_use.browser import BrowserProfile, BrowserSession
-from browser_use.browser.profile import ViewportSize
+from lz_browser_agent import Agent, ChatOpenAI
+from lz_browser_agent.agent.views import AgentHistoryList
+from lz_browser_agent.browser import BrowserProfile, BrowserSession
+from lz_browser_agent.browser.profile import ViewportSize
 
 llm = ChatOpenAI(model='gpt-4.1-mini')
 

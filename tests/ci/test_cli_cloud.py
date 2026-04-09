@@ -40,7 +40,7 @@ def run_cli(*args: str, env_override: dict | None = None, api_key: str | None = 
 		config_path.write_text(json.dumps(existing))
 
 	return subprocess.run(
-		[sys.executable, '-m', 'browser_use.skill_cli.main', 'cloud', *args],
+		[sys.executable, '-m', 'lz_browser_agent.skill_cli.main', 'cloud', *args],
 		capture_output=True,
 		text=True,
 		env=env,

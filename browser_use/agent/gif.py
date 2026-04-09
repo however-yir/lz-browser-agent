@@ -7,9 +7,9 @@ import os
 import platform
 from typing import TYPE_CHECKING
 
-from browser_use.agent.views import AgentHistoryList
-from browser_use.browser.views import PLACEHOLDER_4PX_SCREENSHOT
-from browser_use.config import CONFIG
+from lz_browser_agent.agent.views import AgentHistoryList
+from lz_browser_agent.browser.views import PLACEHOLDER_4PX_SCREENSHOT
+from lz_browser_agent.config import CONFIG
 
 if TYPE_CHECKING:
 	from PIL import Image, ImageFont
@@ -168,7 +168,7 @@ def create_history_gif(
 			continue
 
 		# Skip screenshots from new tab pages
-		from browser_use.utils import is_new_tab_page
+		from lz_browser_agent.utils import is_new_tab_page
 
 		if is_new_tab_page(item.state.url):
 			logger.debug(f'Skipping screenshot from new tab page ({item.state.url}) at step {i}')

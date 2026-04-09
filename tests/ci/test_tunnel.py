@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 import pytest
 
-from browser_use.skill_cli.tunnel import TunnelManager, get_tunnel_manager
+from lz_browser_agent.skill_cli.tunnel import TunnelManager, get_tunnel_manager
 
 
 @pytest.fixture
@@ -59,7 +59,7 @@ def test_tunnel_manager_status_not_installed(tunnel_manager):
 def test_get_tunnel_manager_singleton():
 	"""Test that get_tunnel_manager returns a singleton."""
 	# Reset the global singleton
-	import browser_use.skill_cli.tunnel as tunnel_module
+	import lz_browser_agent.skill_cli.tunnel as tunnel_module
 
 	tunnel_module._tunnel_manager = None
 

@@ -23,9 +23,9 @@ import time
 import pytest
 from pytest_httpserver import HTTPServer
 
-from browser_use.agent.service import Agent
-from browser_use.browser import BrowserSession
-from browser_use.browser.profile import BrowserProfile
+from lz_browser_agent.agent.service import Agent
+from lz_browser_agent.browser import BrowserSession
+from lz_browser_agent.browser.profile import BrowserProfile
 from tests.ci.conftest import create_mock_llm
 
 

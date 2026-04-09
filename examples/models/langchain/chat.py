@@ -3,10 +3,10 @@ from typing import TYPE_CHECKING, TypeVar, overload
 
 from pydantic import BaseModel
 
-from browser_use.llm.base import BaseChatModel
-from browser_use.llm.exceptions import ModelProviderError
-from browser_use.llm.messages import BaseMessage
-from browser_use.llm.views import ChatInvokeCompletion, ChatInvokeUsage
+from lz_browser_agent.llm.base import BaseChatModel
+from lz_browser_agent.llm.exceptions import ModelProviderError
+from lz_browser_agent.llm.messages import BaseMessage
+from lz_browser_agent.llm.views import ChatInvokeCompletion, ChatInvokeUsage
 from examples.models.langchain.serializer import LangChainMessageSerializer
 
 if TYPE_CHECKING:

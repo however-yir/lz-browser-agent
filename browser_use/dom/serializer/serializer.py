@@ -2,10 +2,10 @@
 
 from typing import Any
 
-from browser_use.dom.serializer.clickable_elements import ClickableElementDetector
-from browser_use.dom.serializer.paint_order import PaintOrderRemover
-from browser_use.dom.utils import cap_text_length
-from browser_use.dom.views import (
+from lz_browser_agent.dom.serializer.clickable_elements import ClickableElementDetector
+from lz_browser_agent.dom.serializer.paint_order import PaintOrderRemover
+from lz_browser_agent.dom.utils import cap_text_length
+from lz_browser_agent.dom.views import (
 	DOMRect,
 	DOMSelectorMap,
 	EnhancedDOMTreeNode,
@@ -630,7 +630,7 @@ class DOMTreeSerializer:
 			if is_interactive_assign and not node.original_node.snapshot_node:
 				import logging
 
-				logger = logging.getLogger('browser_use.dom.serializer')
+				logger = logging.getLogger('lz_browser_agent.dom.serializer')
 				attrs = node.original_node.attributes or {}
 				attr_str = f'name={attrs.get("name", "")} id={attrs.get("id", "")} type={attrs.get("type", "")}'
 				in_shadow = self._is_inside_shadow_dom(node)

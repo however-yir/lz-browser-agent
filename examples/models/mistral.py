@@ -8,8 +8,8 @@ import asyncio
 
 from dotenv import load_dotenv
 
-from browser_use import Agent
-from browser_use.llm.mistral import ChatMistral
+from lz_browser_agent import Agent
+from lz_browser_agent.llm.mistral import ChatMistral
 
 load_dotenv()
 

@@ -9,13 +9,13 @@ import asyncio
 import sys
 from pathlib import Path
 
-# Add parent directory to path to import browser_use modules
+# Add parent directory to path to import lz_browser_agent modules
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from browser_use.agent.service import Agent
-from browser_use.agent.views import ActionModel
-from browser_use.browser import BrowserProfile, BrowserSession
-from browser_use.browser.events import BrowserStateRequestEvent
+from lz_browser_agent.agent.service import Agent
+from lz_browser_agent.agent.views import ActionModel
+from lz_browser_agent.browser import BrowserProfile, BrowserSession
+from lz_browser_agent.browser.events import BrowserStateRequestEvent
 
 # Import the mock LLM helper from conftest
 from tests.ci.conftest import create_mock_llm
@@ -171,7 +171,7 @@ async def debug_iframe_scrolling():
 		print('=' * 80)
 
 		# Navigate to the page first
-		from browser_use.tools.service import Tools
+		from lz_browser_agent.tools.service import Tools
 
 		tools = Tools()
 

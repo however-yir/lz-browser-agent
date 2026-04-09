@@ -13,8 +13,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use import Agent
-from browser_use.llm import ChatAnthropic
+from lz_browser_agent import Agent
+from lz_browser_agent.llm import ChatAnthropic
 
 llm = ChatAnthropic(model='claude-sonnet-4-0', temperature=0.0)
 

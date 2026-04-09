@@ -1,0 +1,29 @@
+name: LZ Namespace Guard
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  namespace-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Enforce namespace migration in Python imports
+        run: |
+          violations="$(git grep -nE '^[[:space:]]*(from|import)[[:space:]]+browser_use(\.|[[:space:]]|$)' -- '*.py' ':!lz_browser_agent/__init__.py' || true)"
+          if [ -n "$violations" ]; then
+            echo "Found legacy browser_use imports outside compatibility shim:"
+            echo "$violations"
+            exit 1
+          fi
+      - name: Block personal markers from source tree
+        run: |
+          markers="$(git grep -nEi 'liuzhuoran|刘卓然|\\blzr\\b' -- . ':!**/package-lock.json' ':!**/bun.lock' ':!**/uv.lock' || true)"
+          if [ -n "$markers" ]; then
+            echo "Found personal markers:"
+            echo "$markers"
+            exit 1
+          fi

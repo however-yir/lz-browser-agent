@@ -8,8 +8,8 @@ import logging
 
 from pydantic import BaseModel, Field
 
-from browser_use.agent.views import ActionResult
-from browser_use.tools.service import Tools
+from lz_browser_agent.agent.views import ActionResult
+from lz_browser_agent.tools.service import Tools
 
 from .service import GmailService
 

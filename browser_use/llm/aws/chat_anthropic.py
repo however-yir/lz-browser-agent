@@ -15,11 +15,11 @@ from anthropic.types.text_block import TextBlock
 from anthropic.types.tool_choice_tool_param import ToolChoiceToolParam
 from pydantic import BaseModel
 
-from browser_use.llm.anthropic.serializer import AnthropicMessageSerializer
-from browser_use.llm.aws.chat_bedrock import ChatAWSBedrock
-from browser_use.llm.exceptions import ModelProviderError, ModelRateLimitError
-from browser_use.llm.messages import BaseMessage
-from browser_use.llm.views import ChatInvokeCompletion, ChatInvokeUsage
+from lz_browser_agent.llm.anthropic.serializer import AnthropicMessageSerializer
+from lz_browser_agent.llm.aws.chat_bedrock import ChatAWSBedrock
+from lz_browser_agent.llm.exceptions import ModelProviderError, ModelRateLimitError
+from lz_browser_agent.llm.messages import BaseMessage
+from lz_browser_agent.llm.views import ChatInvokeCompletion, ChatInvokeUsage
 
 if TYPE_CHECKING:
 	from boto3.session import Session  # pyright: ignore

@@ -2,8 +2,8 @@
 
 from types import SimpleNamespace
 
-from browser_use.agent.service import Agent
-from browser_use.dom.views import DOMInteractedElement, NodeType
+from lz_browser_agent.agent.service import Agent
+from lz_browser_agent.dom.views import DOMInteractedElement, NodeType
 
 
 def create_test_element(attributes: dict[str, str] | None = None) -> DOMInteractedElement:

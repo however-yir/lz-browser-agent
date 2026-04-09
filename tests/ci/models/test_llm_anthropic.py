@@ -1,6 +1,6 @@
 """Test Anthropic model button click."""
 
-from browser_use.llm.anthropic.chat import ChatAnthropic
+from lz_browser_agent.llm.anthropic.chat import ChatAnthropic
 from tests.ci.models.model_test_helper import run_model_button_click_test
 
 

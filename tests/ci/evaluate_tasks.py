@@ -19,9 +19,9 @@ from dotenv import load_dotenv
 from pydantic import BaseModel
 
 load_dotenv()
-from browser_use import Agent, AgentHistoryList, BrowserProfile, BrowserSession, ChatBrowserUse
-from browser_use.llm.google.chat import ChatGoogle
-from browser_use.llm.messages import UserMessage
+from lz_browser_agent import Agent, AgentHistoryList, BrowserProfile, BrowserSession, ChatBrowserUse
+from lz_browser_agent.llm.google.chat import ChatGoogle
+from lz_browser_agent.llm.messages import UserMessage
 
 # --- CONFIG ---
 MAX_PARALLEL = 10
@@ -45,7 +45,7 @@ async def run_single_task(task_file):
 
 		# Suppress all logging in subprocess to avoid interfering with JSON output
 		logging.getLogger().setLevel(logging.CRITICAL)
-		for logger_name in ['browser_use', 'telemetry', 'message_manager']:
+		for logger_name in ['lz_browser_agent', 'telemetry', 'message_manager']:
 			logging.getLogger(logger_name).setLevel(logging.CRITICAL)
 		warnings.filterwarnings('ignore')
 
@@ -95,7 +95,7 @@ async def run_single_task(task_file):
 		# Test if browser is working
 		try:
 			await session.start()
-			from browser_use.browser.events import NavigateToUrlEvent
+			from lz_browser_agent.browser.events import NavigateToUrlEvent
 
 			event = session.event_bus.dispatch(NavigateToUrlEvent(url='https://httpbin.org/get', new_tab=True))
 			await event

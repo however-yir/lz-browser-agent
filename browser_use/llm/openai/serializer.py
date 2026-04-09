@@ -13,7 +13,7 @@ from openai.types.chat import (
 from openai.types.chat.chat_completion_content_part_image_param import ImageURL
 from openai.types.chat.chat_completion_message_function_tool_call_param import Function
 
-from browser_use.llm.messages import (
+from lz_browser_agent.llm.messages import (
 	AssistantMessage,
 	BaseMessage,
 	ContentPartImageParam,

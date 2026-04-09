@@ -7,7 +7,7 @@ from typing import Any
 
 import anyio
 
-from browser_use.llm.messages import BaseMessage
+from lz_browser_agent.llm.messages import BaseMessage
 
 logger = logging.getLogger(__name__)
 

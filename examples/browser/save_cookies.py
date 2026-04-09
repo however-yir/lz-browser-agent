@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use import Browser
+from lz_browser_agent import Browser
 
 
 def select_chrome_profile() -> str | None:

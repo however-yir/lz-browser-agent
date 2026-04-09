@@ -1,6 +1,6 @@
 """Utility functions for browser tools."""
 
-from browser_use.dom.service import EnhancedDOMTreeNode
+from lz_browser_agent.dom.service import EnhancedDOMTreeNode
 
 
 def get_click_description(node: EnhancedDOMTreeNode) -> str:

@@ -12,8 +12,8 @@ To run this example:
 import asyncio
 import os
 
-from browser_use import Browser, ChatBrowserUse, sandbox
-from browser_use.agent.service import Agent
+from lz_browser_agent import Browser, ChatBrowserUse, sandbox
+from lz_browser_agent.agent.service import Agent
 
 
 # Example with event callbacks to monitor execution

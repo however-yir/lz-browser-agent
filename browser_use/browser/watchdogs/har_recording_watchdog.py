@@ -25,8 +25,8 @@ from cdp_use.cdp.network.events import (
 )
 from cdp_use.cdp.page.events import FrameNavigatedEvent, LifecycleEventEvent
 
-from browser_use.browser.events import BrowserConnectedEvent, BrowserStopEvent
-from browser_use.browser.watchdog_base import BaseWatchdog
+from lz_browser_agent.browser.events import BrowserConnectedEvent, BrowserStopEvent
+from lz_browser_agent.browser.watchdog_base import BaseWatchdog
 
 
 @dataclass

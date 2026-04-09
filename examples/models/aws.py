@@ -14,8 +14,8 @@ Requirements:
 
 import asyncio
 
-from browser_use import Agent
-from browser_use.llm import ChatAnthropicBedrock, ChatAWSBedrock
+from lz_browser_agent import Agent
+from lz_browser_agent.llm import ChatAnthropicBedrock, ChatAWSBedrock
 
 
 async def example_anthropic_bedrock():

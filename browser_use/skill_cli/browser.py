@@ -12,9 +12,9 @@ import logging
 
 import psutil
 
-from browser_use.browser.session import BrowserSession
+from lz_browser_agent.browser.session import BrowserSession
 
-logger = logging.getLogger('browser_use.skill_cli.browser')
+logger = logging.getLogger('lz_browser_agent.skill_cli.browser')
 
 
 class CLIBrowserSession(BrowserSession):
@@ -101,7 +101,7 @@ class CLIBrowserSession(BrowserSession):
 		"""Launch Chromium using LocalBrowserWatchdog's launch logic."""
 		from bubus import EventBus
 
-		from browser_use.browser.watchdogs.local_browser_watchdog import LocalBrowserWatchdog
+		from lz_browser_agent.browser.watchdogs.local_browser_watchdog import LocalBrowserWatchdog
 
 		# Instantiate watchdog as plain object — NOT registered on event bus
 		launcher = LocalBrowserWatchdog(event_bus=EventBus(), browser_session=self)
@@ -114,7 +114,7 @@ class CLIBrowserSession(BrowserSession):
 		"""Provision a cloud browser and set the CDP URL."""
 		import os
 
-		from browser_use.browser.cloud.views import CreateBrowserRequest
+		from lz_browser_agent.browser.cloud.views import CreateBrowserRequest
 
 		# Override cloud API base URL if set (CLI injects this into daemon env).
 		# CloudBrowserClient expects the host URL (it appends /api/v2/... internally).
@@ -123,10 +123,10 @@ class CLIBrowserSession(BrowserSession):
 			self._cloud_browser_client.api_base_url = cloud_base.rstrip('/')
 
 		# Ensure CLI has an API key from config.json before proceeding.
-		from browser_use.skill_cli.config import get_config_value
+		from lz_browser_agent.skill_cli.config import get_config_value
 
 		if not get_config_value('api_key'):
-			from browser_use.browser.cloud.views import CloudBrowserAuthError
+			from lz_browser_agent.browser.cloud.views import CloudBrowserAuthError
 
 			raise CloudBrowserAuthError(
 				'No API key configured. Run `browser-use cloud login <key>` or `browser-use cloud signup`.'
@@ -134,7 +134,7 @@ class CLIBrowserSession(BrowserSession):
 
 		cloud_params = self.browser_profile.cloud_browser_params or CreateBrowserRequest()
 		# Set recording from CLI config (defaults to True)
-		from browser_use.skill_cli.config import get_config_value
+		from lz_browser_agent.skill_cli.config import get_config_value
 
 		cloud_params.enable_recording = bool(get_config_value('cloud_connect_recording'))
 
@@ -144,7 +144,7 @@ class CLIBrowserSession(BrowserSession):
 			# If profile is invalid, create a new one and retry once
 			if 'profile' in str(e).lower() or '422' in str(e):
 				logger.info('Cloud profile invalid, creating new one and retrying')
-				from browser_use.skill_cli.commands.cloud import _create_cloud_profile_inner
+				from lz_browser_agent.skill_cli.commands.cloud import _create_cloud_profile_inner
 
 				api_key = get_config_value('api_key')
 				if not api_key:

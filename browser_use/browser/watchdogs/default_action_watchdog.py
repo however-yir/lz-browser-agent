@@ -6,8 +6,8 @@ import os
 
 from cdp_use.cdp.input.commands import DispatchKeyEventParameters
 
-from browser_use.actor.utils import get_key_info
-from browser_use.browser.events import (
+from lz_browser_agent.actor.utils import get_key_info
+from lz_browser_agent.browser.events import (
 	ClickCoordinateEvent,
 	ClickElementEvent,
 	GetDropdownOptionsEvent,
@@ -22,10 +22,10 @@ from browser_use.browser.events import (
 	UploadFileEvent,
 	WaitEvent,
 )
-from browser_use.browser.views import BrowserError, URLNotAllowedError
-from browser_use.browser.watchdog_base import BaseWatchdog
-from browser_use.dom.service import EnhancedDOMTreeNode
-from browser_use.observability import observe_debug
+from lz_browser_agent.browser.views import BrowserError, URLNotAllowedError
+from lz_browser_agent.browser.watchdog_base import BaseWatchdog
+from lz_browser_agent.dom.service import EnhancedDOMTreeNode
+from lz_browser_agent.observability import observe_debug
 
 # Import EnhancedDOMTreeNode and rebuild event models that have forward references to it
 # This must be done after all imports are complete
@@ -309,7 +309,7 @@ class DefaultActionWatchdog(BaseWatchdog):
 			self.logger.info(f'✅ Generated PDF via CDP: {final_path} ({file_size:,} bytes)')
 
 			# Dispatch FileDownloadedEvent
-			from browser_use.browser.events import FileDownloadedEvent
+			from lz_browser_agent.browser.events import FileDownloadedEvent
 
 			page_url = await self.browser_session.get_current_page_url()
 			self.browser_session.event_bus.dispatch(

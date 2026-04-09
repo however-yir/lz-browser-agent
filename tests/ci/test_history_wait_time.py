@@ -1,4 +1,4 @@
-from browser_use.agent.views import StepMetadata
+from lz_browser_agent.agent.views import StepMetadata
 
 
 def test_step_metadata_has_step_interval_field():

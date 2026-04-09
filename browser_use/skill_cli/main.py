@@ -35,7 +35,7 @@ if '--mcp' in sys.argv:
 
 	import asyncio
 
-	from browser_use.mcp.server import main as mcp_main
+	from lz_browser_agent.mcp.server import main as mcp_main
 
 	asyncio.run(mcp_main())
 	sys.exit(0)
@@ -77,7 +77,7 @@ if _get_subcommand() == 'install':
 # Uses _get_subcommand() to check if 'init' is the actual subcommand,
 # not just anywhere in argv (prevents hijacking: browser-use run "init something")
 if _get_subcommand() == 'init':
-	from browser_use.init_cmd import main as init_main
+	from lz_browser_agent.init_cmd import main as init_main
 
 	# Check if --template or -t flag is present without a value
 	# If so, just remove it and let init_main handle interactive mode
@@ -103,7 +103,7 @@ if _get_subcommand() == 'init':
 # Handle --template flag directly (without 'init' subcommand)
 # Delegate to init_main() which handles full template logic (directories, manifests, etc.)
 if '--template' in sys.argv:
-	from browser_use.init_cmd import main as init_main
+	from lz_browser_agent.init_cmd import main as init_main
 
 	# Build clean argv for init_main: keep only init-relevant flags
 	new_argv = [sys.argv[0]]  # program name
@@ -139,7 +139,7 @@ if '--template' in sys.argv:
 if _get_subcommand() == 'cloud':
 	cloud_idx = sys.argv.index('cloud')
 	if cloud_idx + 1 < len(sys.argv) and sys.argv[cloud_idx + 1] in ('--help', '-h'):
-		from browser_use.skill_cli.commands.cloud import handle_cloud_command
+		from lz_browser_agent.skill_cli.commands.cloud import handle_cloud_command
 
 		sys.exit(handle_cloud_command(['--help']))
 
@@ -237,7 +237,7 @@ def _is_pid_alive(pid: int) -> bool:
 
 def _is_daemon_process(pid: int) -> bool:
 	"""Check if the process at PID is a browser-use daemon. Cross-platform."""
-	_marker = 'browser_use.skill_cli.daemon'
+	_marker = 'lz_browser_agent.skill_cli.daemon'
 	try:
 		if sys.platform == 'linux':
 			cmdline = Path(f'/proc/{pid}/cmdline').read_bytes().decode(errors='replace')
@@ -500,7 +500,7 @@ def ensure_daemon(
 	cmd = [
 		sys.executable,
 		'-m',
-		'browser_use.skill_cli.daemon',
+		'lz_browser_agent.skill_cli.daemon',
 		'--session',
 		session,
 	]
@@ -526,7 +526,7 @@ def ensure_daemon(
 	# The library's CloudBrowserClient reads BROWSER_USE_API_KEY env var directly,
 	# so we inject it to prevent fallback to ~/.config/browseruse/cloud_auth.json.
 	if use_cloud:
-		from browser_use.skill_cli.config import get_config_value
+		from lz_browser_agent.skill_cli.config import get_config_value
 
 		cli_api_key = get_config_value('api_key')
 		if cli_api_key:
@@ -931,7 +931,7 @@ def _handle_cloud_connect(cloud_args: list[str], args: argparse.Namespace, sessi
 		return 1
 
 	# Validate API key exists before spawning daemon (shows our CLI error, not library's)
-	from browser_use.skill_cli.commands.cloud import (
+	from lz_browser_agent.skill_cli.commands.cloud import (
 		_get_api_key,
 		_get_cloud_connect_proxy,
 		_get_cloud_connect_timeout,
@@ -1125,7 +1125,7 @@ def _handle_close_all(args: argparse.Namespace) -> int:
 def _migrate_legacy_files() -> None:
 	"""One-time cleanup of old daemon files and config migration."""
 	# Migrate config from old XDG location
-	from browser_use.skill_cli.utils import migrate_legacy_paths
+	from lz_browser_agent.skill_cli.utils import migrate_legacy_paths
 
 	migrate_legacy_paths()
 
@@ -1194,20 +1194,20 @@ def main() -> int:
 			return _handle_cloud_connect(cloud_args[1:], args, session)
 
 		# All other cloud subcommands are stateless REST passthroughs
-		from browser_use.skill_cli.commands.cloud import handle_cloud_command
+		from lz_browser_agent.skill_cli.commands.cloud import handle_cloud_command
 
 		return handle_cloud_command(cloud_args)
 
 	# Handle profile subcommand — passthrough to profile-use Go binary
 	if args.command == 'profile':
-		from browser_use.skill_cli.profile_use import run_profile_use
+		from lz_browser_agent.skill_cli.profile_use import run_profile_use
 
 		profile_argv = getattr(args, 'profile_args', [])
 		return run_profile_use(profile_argv)
 
 	# Handle setup command
 	if args.command == 'setup':
-		from browser_use.skill_cli.commands import setup
+		from lz_browser_agent.skill_cli.commands import setup
 
 		result = setup.handle(yes=getattr(args, 'yes', False))
 
@@ -1220,7 +1220,7 @@ def main() -> int:
 
 	# Handle doctor command
 	if args.command == 'doctor':
-		from browser_use.skill_cli.commands import doctor
+		from lz_browser_agent.skill_cli.commands import doctor
 
 		loop = asyncio.get_event_loop()
 		result = loop.run_until_complete(doctor.handle())
@@ -1259,7 +1259,7 @@ def main() -> int:
 				print(f'⚠ {result.get("summary", "Some checks need attention")}')
 
 			# Show config state
-			from browser_use.skill_cli.config import CLI_DOCS_URL, get_config_display
+			from lz_browser_agent.skill_cli.config import CLI_DOCS_URL, get_config_display
 
 			entries = get_config_display()
 			print(f'\nConfig ({_get_home_dir() / "config.json"}):\n')
@@ -1277,7 +1277,7 @@ def main() -> int:
 
 	# Handle config command
 	if args.command == 'config':
-		from browser_use.skill_cli.config import (
+		from lz_browser_agent.skill_cli.config import (
 			CLI_DOCS_URL,
 			get_config_display,
 			get_config_value,
@@ -1327,7 +1327,7 @@ def main() -> int:
 
 	# Handle tunnel command - runs independently of browser session
 	if args.command == 'tunnel':
-		from browser_use.skill_cli import tunnel
+		from lz_browser_agent.skill_cli import tunnel
 
 		pos = getattr(args, 'port_or_subcommand', None)
 
@@ -1408,7 +1408,7 @@ def main() -> int:
 
 	# Handle connect command (discover local Chrome, start daemon)
 	if args.command == 'connect':
-		from browser_use.skill_cli.utils import discover_chrome_cdp_url
+		from lz_browser_agent.skill_cli.utils import discover_chrome_cdp_url
 
 		try:
 			cdp_url = discover_chrome_cdp_url()

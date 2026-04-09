@@ -28,8 +28,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use import Agent
-from browser_use.llm import ChatAnthropic, ChatOpenAI
+from lz_browser_agent import Agent
+from lz_browser_agent.llm import ChatAnthropic, ChatOpenAI
 
 llm = ChatAnthropic(model='claude-sonnet-4-0')
 fallback_llm = ChatOpenAI(model='gpt-4o')

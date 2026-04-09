@@ -12,7 +12,7 @@ import sys
 def test_install_command_help():
 	"""Test that the install command is documented in help."""
 	result = subprocess.run(
-		[sys.executable, '-m', 'browser_use.skill_cli.main', '--help'],
+		[sys.executable, '-m', 'lz_browser_agent.skill_cli.main', '--help'],
 		capture_output=True,
 		text=True,
 	)
@@ -24,7 +24,7 @@ def test_install_command_help():
 def test_init_command_help():
 	"""Test that the init command is documented in help."""
 	result = subprocess.run(
-		[sys.executable, '-m', 'browser_use.skill_cli.main', '--help'],
+		[sys.executable, '-m', 'lz_browser_agent.skill_cli.main', '--help'],
 		capture_output=True,
 		text=True,
 	)
@@ -36,7 +36,7 @@ def test_init_command_help():
 def test_init_subcommand_help():
 	"""Test that the init subcommand has its own help."""
 	result = subprocess.run(
-		[sys.executable, '-m', 'browser_use.skill_cli.main', 'init', '--help'],
+		[sys.executable, '-m', 'lz_browser_agent.skill_cli.main', 'init', '--help'],
 		capture_output=True,
 		text=True,
 	)
@@ -48,7 +48,7 @@ def test_init_subcommand_help():
 def test_init_list_templates():
 	"""Test that init --list shows available templates."""
 	result = subprocess.run(
-		[sys.executable, '-m', 'browser_use.skill_cli.main', 'init', '--list'],
+		[sys.executable, '-m', 'lz_browser_agent.skill_cli.main', 'init', '--list'],
 		capture_output=True,
 		text=True,
 	)
@@ -60,7 +60,7 @@ def test_init_list_templates():
 def test_mcp_flag_help():
 	"""Test that the --mcp flag is documented in help."""
 	result = subprocess.run(
-		[sys.executable, '-m', 'browser_use.skill_cli.main', '--help'],
+		[sys.executable, '-m', 'lz_browser_agent.skill_cli.main', '--help'],
 		capture_output=True,
 		text=True,
 	)
@@ -72,7 +72,7 @@ def test_mcp_flag_help():
 def test_template_flag_help():
 	"""Test that the --template flag is documented in help."""
 	result = subprocess.run(
-		[sys.executable, '-m', 'browser_use.skill_cli.main', '--help'],
+		[sys.executable, '-m', 'lz_browser_agent.skill_cli.main', '--help'],
 		capture_output=True,
 		text=True,
 	)

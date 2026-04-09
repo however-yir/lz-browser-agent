@@ -9,9 +9,9 @@ from typing import Any
 
 from dotenv import load_dotenv
 
-from browser_use import Agent
-from browser_use.llm import ChatOpenAI
-from browser_use.llm.messages import ContentPartImageParam, ContentPartTextParam, ImageURL
+from lz_browser_agent import Agent
+from lz_browser_agent.llm import ChatOpenAI
+from lz_browser_agent.llm.messages import ContentPartImageParam, ContentPartTextParam, ImageURL
 
 # Load environment variables
 load_dotenv()

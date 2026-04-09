@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-	from browser_use.skill_cli.sessions import SessionInfo
+	from lz_browser_agent.skill_cli.sessions import SessionInfo
 
 # Configure logging before imports
 logging.basicConfig(
@@ -25,7 +25,7 @@ logging.basicConfig(
 	format='%(asctime)s [%(levelname)s] %(name)s: %(message)s',
 	handlers=[logging.StreamHandler()],
 )
-logger = logging.getLogger('browser_use.skill_cli.daemon')
+logger = logging.getLogger('lz_browser_agent.skill_cli.daemon')
 
 
 class Daemon:
@@ -42,7 +42,7 @@ class Daemon:
 		cloud_timeout: int | None = None,
 		session: str = 'default',
 	) -> None:
-		from browser_use.skill_cli.utils import validate_session_name
+		from lz_browser_agent.skill_cli.utils import validate_session_name
 
 		validate_session_name(session)
 		self.session = session
@@ -70,7 +70,7 @@ class Daemon:
 		"""Atomically write session state file for CLI observability."""
 		import time
 
-		from browser_use.skill_cli.utils import get_home_dir
+		from lz_browser_agent.skill_cli.utils import get_home_dir
 
 		state = {
 			'phase': phase,
@@ -111,7 +111,7 @@ class Daemon:
 			if self._session is not None:
 				return self._session
 
-			from browser_use.skill_cli.sessions import SessionInfo, create_browser_session
+			from lz_browser_agent.skill_cli.sessions import SessionInfo, create_browser_session
 
 			logger.info(
 				f'Creating session (headed={self.headed}, profile={self.profile}, cdp_url={self.cdp_url}, use_cloud={self.use_cloud})'
@@ -140,7 +140,7 @@ class Daemon:
 					pass
 
 				# Create action handler for direct command execution (no event bus)
-				from browser_use.skill_cli.actions import ActionHandler
+				from lz_browser_agent.skill_cli.actions import ActionHandler
 
 				actions = ActionHandler(bs)
 
@@ -306,7 +306,7 @@ class Daemon:
 					result_data['live_url'] = f'https://live.browser-use.com/?wss={quote(bs.cdp_url, safe="")}'
 				return {'id': req_id, 'success': True, 'data': result_data}
 
-			from browser_use.skill_cli.commands import browser, python_exec
+			from lz_browser_agent.skill_cli.commands import browser, python_exec
 
 			# Get or create the single session
 			session = await self._get_or_create_session()
@@ -336,7 +336,7 @@ class Daemon:
 		"""
 		import secrets
 
-		from browser_use.skill_cli.utils import get_auth_token_path, get_pid_path, get_socket_path
+		from lz_browser_agent.skill_cli.utils import get_auth_token_path, get_pid_path, get_socket_path
 
 		self._write_state('initializing')
 
@@ -465,7 +465,7 @@ class Daemon:
 		# Delete PID and auth token files last, right before exit.
 		import os
 
-		from browser_use.skill_cli.utils import get_auth_token_path, get_pid_path
+		from lz_browser_agent.skill_cli.utils import get_auth_token_path, get_pid_path
 
 		pid_path = get_pid_path(self.session)
 		try:

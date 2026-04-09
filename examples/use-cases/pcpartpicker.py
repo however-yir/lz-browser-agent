@@ -1,6 +1,6 @@
 import asyncio
 
-from browser_use import Agent, Browser, ChatBrowserUse, Tools
+from lz_browser_agent import Agent, Browser, ChatBrowserUse, Tools
 
 
 async def main():

@@ -2,7 +2,7 @@ import base64
 
 from google.genai.types import Content, ContentListUnion, Part
 
-from browser_use.llm.messages import (
+from lz_browser_agent.llm.messages import (
 	AssistantMessage,
 	BaseMessage,
 	SystemMessage,

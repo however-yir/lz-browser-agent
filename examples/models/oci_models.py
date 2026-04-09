@@ -23,8 +23,8 @@ from pydantic import BaseModel
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
-from browser_use import Agent
-from browser_use.llm import ChatOCIRaw
+from lz_browser_agent import Agent
+from lz_browser_agent.llm import ChatOCIRaw
 
 
 class SearchSummary(BaseModel):

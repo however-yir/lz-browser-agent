@@ -1,6 +1,6 @@
 """Command handlers for browser-use CLI."""
 
-from browser_use.skill_cli.commands import (
+from lz_browser_agent.skill_cli.commands import (
 	browser,
 	doctor,
 	python_exec,

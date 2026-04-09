@@ -6,8 +6,8 @@ from typing import ClassVar
 from bubus import BaseEvent
 from pydantic import PrivateAttr
 
-from browser_use.browser.events import TabCreatedEvent
-from browser_use.browser.watchdog_base import BaseWatchdog
+from lz_browser_agent.browser.events import TabCreatedEvent
+from lz_browser_agent.browser.watchdog_base import BaseWatchdog
 
 
 class PopupsWatchdog(BaseWatchdog):

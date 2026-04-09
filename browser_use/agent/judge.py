@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Literal
 
-from browser_use.llm.messages import (
+from lz_browser_agent.llm.messages import (
 	BaseMessage,
 	ContentPartImageParam,
 	ContentPartTextParam,

@@ -3,7 +3,7 @@ import json
 import re
 from typing import Any, overload
 
-from browser_use.llm.messages import (
+from lz_browser_agent.llm.messages import (
 	AssistantMessage,
 	BaseMessage,
 	ContentPartImageParam,

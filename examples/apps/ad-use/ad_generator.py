@@ -7,7 +7,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-from browser_use.utils import create_task_with_error_handling
+from lz_browser_agent.utils import create_task_with_error_handling
 
 
 def setup_environment(debug: bool):
@@ -38,8 +38,8 @@ import aiofiles
 from google import genai
 from PIL import Image
 
-from browser_use import Agent, BrowserSession
-from browser_use.llm.google import ChatGoogle
+from lz_browser_agent import Agent, BrowserSession
+from lz_browser_agent.llm.google import ChatGoogle
 
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 

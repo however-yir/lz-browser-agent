@@ -13,12 +13,12 @@ from openai.types.shared_params.response_format_json_schema import (
 )
 from pydantic import BaseModel
 
-from browser_use.llm.base import BaseChatModel
-from browser_use.llm.exceptions import ModelProviderError, ModelRateLimitError
-from browser_use.llm.messages import BaseMessage, ContentPartTextParam, SystemMessage
-from browser_use.llm.schema import SchemaOptimizer
-from browser_use.llm.vercel.serializer import VercelMessageSerializer
-from browser_use.llm.views import ChatInvokeCompletion, ChatInvokeUsage
+from lz_browser_agent.llm.base import BaseChatModel
+from lz_browser_agent.llm.exceptions import ModelProviderError, ModelRateLimitError
+from lz_browser_agent.llm.messages import BaseMessage, ContentPartTextParam, SystemMessage
+from lz_browser_agent.llm.schema import SchemaOptimizer
+from lz_browser_agent.llm.vercel.serializer import VercelMessageSerializer
+from lz_browser_agent.llm.views import ChatInvokeCompletion, ChatInvokeUsage
 
 T = TypeVar('T', bound=BaseModel)
 
@@ -274,7 +274,7 @@ class ChatVercel(BaseChatModel):
 
 	Examples:
 		```python
-	        from browser_use import Agent, ChatVercel
+	        from lz_browser_agent import Agent, ChatVercel
 
 	        llm = ChatVercel(model='openai/gpt-4o', api_key='your_vercel_api_key')
 

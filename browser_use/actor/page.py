@@ -4,11 +4,11 @@ from typing import TYPE_CHECKING, TypeVar
 
 from pydantic import BaseModel
 
-from browser_use import logger
-from browser_use.actor.utils import get_key_info
-from browser_use.dom.serializer.serializer import DOMTreeSerializer
-from browser_use.dom.service import DomService
-from browser_use.llm.messages import SystemMessage, UserMessage
+from lz_browser_agent import logger
+from lz_browser_agent.actor.utils import get_key_info
+from lz_browser_agent.dom.serializer.serializer import DOMTreeSerializer
+from lz_browser_agent.dom.service import DomService
+from lz_browser_agent.llm.messages import SystemMessage, UserMessage
 
 T = TypeVar('T', bound=BaseModel)
 
@@ -29,8 +29,8 @@ if TYPE_CHECKING:
 	)
 	from cdp_use.cdp.target.types import TargetInfo
 
-	from browser_use.browser.session import BrowserSession
-	from browser_use.llm.base import BaseChatModel
+	from lz_browser_agent.browser.session import BrowserSession
+	from lz_browser_agent.llm.base import BaseChatModel
 
 	from .element import Element
 	from .mouse import Mouse
@@ -558,7 +558,7 @@ You will be given a query and the markdown of a webpage that has been filtered t
 
 		Uses the shared markdown extractor for consistency with tools/service.py.
 		"""
-		from browser_use.dom.markdown_extractor import extract_clean_markdown
+		from lz_browser_agent.dom.markdown_extractor import extract_clean_markdown
 
 		dom_service = self.dom_service
 		return await extract_clean_markdown(dom_service=dom_service, target_id=self._target_id, extract_links=extract_links)

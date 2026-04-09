@@ -1,6 +1,6 @@
 """Test Browser Use model button click."""
 
-from browser_use.llm.browser_use.chat import ChatBrowserUse
+from lz_browser_agent.llm.lz_browser_agent.chat import ChatBrowserUse
 from tests.ci.models.model_test_helper import run_model_button_click_test
 
 

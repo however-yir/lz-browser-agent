@@ -13,7 +13,7 @@ import asyncio
 import json
 import logging
 
-from browser_use import Browser
+from lz_browser_agent import Browser
 
 # Configure logging to see what's happening
 logging.basicConfig(level=logging.INFO)

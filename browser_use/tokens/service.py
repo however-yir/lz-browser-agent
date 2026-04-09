@@ -15,11 +15,11 @@ import anyio
 import httpx
 from dotenv import load_dotenv
 
-from browser_use.llm.base import BaseChatModel
-from browser_use.llm.views import ChatInvokeUsage
-from browser_use.tokens.custom_pricing import CUSTOM_MODEL_PRICING
-from browser_use.tokens.mappings import MODEL_TO_LITELLM
-from browser_use.tokens.views import (
+from lz_browser_agent.llm.base import BaseChatModel
+from lz_browser_agent.llm.views import ChatInvokeUsage
+from lz_browser_agent.tokens.custom_pricing import CUSTOM_MODEL_PRICING
+from lz_browser_agent.tokens.mappings import MODEL_TO_LITELLM
+from lz_browser_agent.tokens.views import (
 	CachedPricingData,
 	ModelPricing,
 	ModelUsageStats,
@@ -28,11 +28,11 @@ from browser_use.tokens.views import (
 	TokenUsageEntry,
 	UsageSummary,
 )
-from browser_use.utils import create_task_with_error_handling
+from lz_browser_agent.utils import create_task_with_error_handling
 
 load_dotenv()
 
-from browser_use.config import CONFIG
+from lz_browser_agent.config import CONFIG
 
 logger = logging.getLogger(__name__)
 cost_logger = logging.getLogger('cost')
@@ -48,7 +48,7 @@ def xdg_cache_home() -> Path:
 class TokenCost:
 	"""Service for tracking token usage and calculating costs"""
 
-	CACHE_DIR_NAME = 'browser_use/token_cost'
+	CACHE_DIR_NAME = 'lz_browser_agent/token_cost'
 	CACHE_DURATION = timedelta(days=1)
 	DEFAULT_PRICING_URL = 'https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json'
 

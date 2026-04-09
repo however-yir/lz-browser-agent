@@ -1,7 +1,7 @@
 import asyncio
 from pathlib import Path
 
-from browser_use import Agent, Browser, ChatOpenAI
+from lz_browser_agent import Agent, Browser, ChatOpenAI
 
 # NOTE: To use this example, install imageio[ffmpeg], e.g. with uv pip install "browser-use[video]"
 

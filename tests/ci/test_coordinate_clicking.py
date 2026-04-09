@@ -6,8 +6,8 @@ to use coordinate-based clicking, while other models only get index-based clicki
 
 import pytest
 
-from browser_use.tools.service import Tools
-from browser_use.tools.views import ClickElementAction, ClickElementActionIndexOnly
+from lz_browser_agent.tools.service import Tools
+from lz_browser_agent.tools.views import ClickElementAction, ClickElementActionIndexOnly
 
 
 class TestCoordinateClickingTools:

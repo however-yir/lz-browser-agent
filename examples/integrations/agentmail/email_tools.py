@@ -10,7 +10,7 @@ from agentmail import AsyncAgentMail, Message, MessageReceivedEvent, Subscribe  
 from agentmail.inboxes.types.inbox import Inbox  # type: ignore
 from agentmail.inboxes.types.inbox_id import InboxId  # type: ignore
 
-from browser_use import Tools
+from lz_browser_agent import Tools
 
 # Configure basic logging if not already configured
 if not logging.getLogger().handlers:

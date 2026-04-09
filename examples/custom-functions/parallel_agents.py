@@ -17,8 +17,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use import Agent
-from browser_use.llm.google import ChatGoogle
+from lz_browser_agent import Agent
+from lz_browser_agent.llm.google import ChatGoogle
 
 # ============================================================================
 # 🔧 SIMPLE CONFIGURATION - CHANGE THIS TO YOUR DESIRED TASK
@@ -150,8 +150,8 @@ async def run_single_agent(task: str, llm, agent_id: int) -> tuple[int, str]:
 		# Create agent with its own browser session (separate browser instance)
 		import tempfile
 
-		from browser_use.browser import BrowserSession
-		from browser_use.browser.profile import BrowserProfile
+		from lz_browser_agent.browser import BrowserSession
+		from lz_browser_agent.browser.profile import BrowserProfile
 
 		# Create a unique temp directory for this agent's browser data
 		temp_dir = tempfile.mkdtemp(prefix=f'browser_agent_{agent_id}_')

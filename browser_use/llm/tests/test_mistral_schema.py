@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 
-from browser_use.llm.mistral.schema import MistralSchemaOptimizer
+from lz_browser_agent.llm.mistral.schema import MistralSchemaOptimizer
 
 
 class NestedExample(BaseModel):

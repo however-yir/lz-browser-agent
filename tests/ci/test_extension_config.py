@@ -14,7 +14,7 @@ class TestDisableExtensionsEnvVar:
 		original = os.environ.pop('BROWSER_USE_DISABLE_EXTENSIONS', None)
 		try:
 			# Import fresh to get the default
-			from browser_use.browser.profile import _get_enable_default_extensions_default
+			from lz_browser_agent.browser.profile import _get_enable_default_extensions_default
 
 			assert _get_enable_default_extensions_default() is True
 		finally:
@@ -46,7 +46,7 @@ class TestDisableExtensionsEnvVar:
 		original = os.environ.get('BROWSER_USE_DISABLE_EXTENSIONS')
 		try:
 			os.environ['BROWSER_USE_DISABLE_EXTENSIONS'] = env_value
-			from browser_use.browser.profile import _get_enable_default_extensions_default
+			from lz_browser_agent.browser.profile import _get_enable_default_extensions_default
 
 			result = _get_enable_default_extensions_default()
 			assert result is expected_enabled, (
@@ -65,7 +65,7 @@ class TestDisableExtensionsEnvVar:
 			# Test with env var set to true (disable extensions)
 			os.environ['BROWSER_USE_DISABLE_EXTENSIONS'] = 'true'
 
-			from browser_use.browser.profile import BrowserProfile
+			from lz_browser_agent.browser.profile import BrowserProfile
 
 			profile = BrowserProfile(headless=True)
 			assert profile.enable_default_extensions is False, (
@@ -91,7 +91,7 @@ class TestDisableExtensionsEnvVar:
 		try:
 			os.environ['BROWSER_USE_DISABLE_EXTENSIONS'] = 'true'
 
-			from browser_use.browser.profile import BrowserProfile
+			from lz_browser_agent.browser.profile import BrowserProfile
 
 			# Explicitly set to True should override env var
 			profile = BrowserProfile(headless=True, enable_default_extensions=True)
@@ -109,7 +109,7 @@ class TestDisableExtensionsEnvVar:
 		try:
 			os.environ['BROWSER_USE_DISABLE_EXTENSIONS'] = '1'
 
-			from browser_use.browser import BrowserSession
+			from lz_browser_agent.browser import BrowserSession
 
 			session = BrowserSession(headless=True)
 			assert session.browser_profile.enable_default_extensions is False, (

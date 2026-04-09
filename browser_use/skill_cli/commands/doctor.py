@@ -42,9 +42,9 @@ async def handle() -> dict[str, Any]:
 def _check_package() -> dict[str, Any]:
 	"""Check if browser-use is installed."""
 	try:
-		import browser_use
+		import lz_browser_agent
 
-		version = getattr(browser_use, '__version__', 'unknown')
+		version = getattr(lz_browser_agent, '__version__', 'unknown')
 		return {
 			'status': 'ok',
 			'message': f'browser-use {version}',
@@ -60,7 +60,7 @@ def _check_package() -> dict[str, Any]:
 def _check_browser() -> dict[str, Any]:
 	"""Check if browser is available."""
 	try:
-		from browser_use.browser.profile import BrowserProfile
+		from lz_browser_agent.browser.profile import BrowserProfile
 
 		BrowserProfile(headless=True)  # verify import + constructor work
 		return {
@@ -100,7 +100,7 @@ async def _check_network() -> dict[str, Any]:
 
 def _check_cloudflared() -> dict[str, Any]:
 	"""Check if cloudflared is available (needed for browser-use tunnel)."""
-	from browser_use.skill_cli.tunnel import get_tunnel_manager
+	from lz_browser_agent.skill_cli.tunnel import get_tunnel_manager
 
 	status = get_tunnel_manager().get_status()
 	if status['available']:
@@ -117,7 +117,7 @@ def _check_cloudflared() -> dict[str, Any]:
 
 def _check_profile_use() -> dict[str, Any]:
 	"""Check if profile-use binary is available (needed for browser-use profile)."""
-	from browser_use.skill_cli.profile_use import get_profile_use_binary
+	from lz_browser_agent.skill_cli.profile_use import get_profile_use_binary
 
 	binary = get_profile_use_binary()
 	if binary:

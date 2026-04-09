@@ -2,10 +2,10 @@
 
 from unittest.mock import AsyncMock
 
-from browser_use.agent.service import Agent
-from browser_use.agent.views import ActionResult, AgentHistory, AgentHistoryList, RerunSummaryAction, StepMetadata
-from browser_use.browser.views import BrowserStateHistory
-from browser_use.dom.views import DOMRect, NodeType
+from lz_browser_agent.agent.service import Agent
+from lz_browser_agent.agent.views import ActionResult, AgentHistory, AgentHistoryList, RerunSummaryAction, StepMetadata
+from lz_browser_agent.browser.views import BrowserStateHistory
+from lz_browser_agent.dom.views import DOMRect, NodeType
 from tests.ci.conftest import create_mock_llm
 
 
@@ -22,7 +22,7 @@ async def test_generate_rerun_summary_success():
 		# Get output_format from second positional arg or kwargs
 		output_format = args[1] if len(args) > 1 else kwargs.get('output_format')
 		assert output_format is RerunSummaryAction
-		from browser_use.llm.views import ChatInvokeCompletion
+		from lz_browser_agent.llm.views import ChatInvokeCompletion
 
 		return ChatInvokeCompletion(completion=summary_action, usage=None)
 
@@ -66,7 +66,7 @@ async def test_generate_rerun_summary_with_errors():
 	async def custom_ainvoke(*args, **kwargs):
 		output_format = args[1] if len(args) > 1 else kwargs.get('output_format')
 		assert output_format is RerunSummaryAction
-		from browser_use.llm.views import ChatInvokeCompletion
+		from lz_browser_agent.llm.views import ChatInvokeCompletion
 
 		return ChatInvokeCompletion(completion=summary_action, usage=None)
 
@@ -138,7 +138,7 @@ async def test_generate_rerun_summary_statistics():
 	async def custom_ainvoke(*args, **kwargs):
 		output_format = args[1] if len(args) > 1 else kwargs.get('output_format')
 		assert output_format is RerunSummaryAction
-		from browser_use.llm.views import ChatInvokeCompletion
+		from lz_browser_agent.llm.views import ChatInvokeCompletion
 
 		return ChatInvokeCompletion(completion=summary_action, usage=None)
 
@@ -184,7 +184,7 @@ async def test_rerun_skips_steps_with_original_errors():
 	async def custom_ainvoke(*args, **kwargs):
 		output_format = args[1] if len(args) > 1 else kwargs.get('output_format')
 		if output_format is RerunSummaryAction:
-			from browser_use.llm.views import ChatInvokeCompletion
+			from lz_browser_agent.llm.views import ChatInvokeCompletion
 
 			return ChatInvokeCompletion(completion=summary_action, usage=None)
 		raise ValueError('Unexpected output_format')
@@ -266,7 +266,7 @@ async def test_rerun_does_not_skip_originally_failed_when_skip_failures_false():
 	async def custom_ainvoke(*args, **kwargs):
 		output_format = args[1] if len(args) > 1 else kwargs.get('output_format')
 		if output_format is RerunSummaryAction:
-			from browser_use.llm.views import ChatInvokeCompletion
+			from lz_browser_agent.llm.views import ChatInvokeCompletion
 
 			return ChatInvokeCompletion(completion=summary_action, usage=None)
 		raise ValueError('Unexpected output_format')
@@ -338,7 +338,7 @@ async def test_rerun_cleanup_on_failure(httpserver):
 	This test verifies the try/finally cleanup logic by creating a step that will fail
 	(element matching fails) and checking that the browser session is properly closed afterward.
 	"""
-	from browser_use.dom.views import DOMInteractedElement
+	from lz_browser_agent.dom.views import DOMInteractedElement
 
 	# Set up a test page with a button that has DIFFERENT attributes than our historical element
 	test_html = """<!DOCTYPE html>
@@ -444,7 +444,7 @@ async def test_rerun_records_errors_when_skip_failures_true(httpserver):
 	and a step failed after all retries, no error result was appended, causing the AI summary
 	to incorrectly report success=True even with multiple failures.
 	"""
-	from browser_use.dom.views import DOMInteractedElement
+	from lz_browser_agent.dom.views import DOMInteractedElement
 
 	# Set up a test page with a button that has DIFFERENT attributes than our historical element
 	# This ensures element matching will fail (the historical element won't be found)
@@ -467,7 +467,7 @@ async def test_rerun_records_errors_when_skip_failures_true(httpserver):
 	async def custom_ainvoke(*args, **kwargs):
 		output_format = args[1] if len(args) > 1 else kwargs.get('output_format')
 		if output_format is RerunSummaryAction:
-			from browser_use.llm.views import ChatInvokeCompletion
+			from lz_browser_agent.llm.views import ChatInvokeCompletion
 
 			return ChatInvokeCompletion(completion=summary_action, usage=None)
 		raise ValueError('Unexpected output_format')
@@ -584,7 +584,7 @@ async def test_rerun_skips_redundant_retry_steps(httpserver):
 	When consecutive steps target the same element with the same action, the second step
 	should be skipped as a redundant retry.
 	"""
-	from browser_use.dom.views import DOMInteractedElement
+	from lz_browser_agent.dom.views import DOMInteractedElement
 
 	# Set up a test page with a button
 	test_html = """<!DOCTYPE html>
@@ -606,7 +606,7 @@ async def test_rerun_skips_redundant_retry_steps(httpserver):
 	async def custom_ainvoke(*args, **kwargs):
 		output_format = args[1] if len(args) > 1 else kwargs.get('output_format')
 		if output_format is RerunSummaryAction:
-			from browser_use.llm.views import ChatInvokeCompletion
+			from lz_browser_agent.llm.views import ChatInvokeCompletion
 
 			return ChatInvokeCompletion(completion=summary_action, usage=None)
 		raise ValueError('Unexpected output_format')
@@ -737,7 +737,7 @@ async def test_rerun_skips_redundant_retry_steps(httpserver):
 
 async def test_is_redundant_retry_step_detection():
 	"""Test the _is_redundant_retry_step method directly."""
-	from browser_use.dom.views import DOMInteractedElement
+	from lz_browser_agent.dom.views import DOMInteractedElement
 
 	llm = create_mock_llm(actions=None)
 	agent = Agent(task='Test task', llm=llm)
@@ -1026,7 +1026,7 @@ async def test_wait_for_minimum_elements(httpserver):
 		await agent.browser_session.start()
 
 		# Navigate to the test page first
-		from browser_use.browser.events import NavigateToUrlEvent
+		from lz_browser_agent.browser.events import NavigateToUrlEvent
 
 		await agent.browser_session.event_bus.dispatch(NavigateToUrlEvent(url=test_url, new_tab=False))
 
@@ -1060,7 +1060,7 @@ async def test_rerun_waits_for_elements_before_matching(httpserver):
 	This test verifies that for actions needing element matching (like click),
 	the rerun logic waits for the page to have enough elements before proceeding.
 	"""
-	from browser_use.dom.views import DOMInteractedElement
+	from lz_browser_agent.dom.views import DOMInteractedElement
 
 	# Set up a test page with elements
 	test_html = """<!DOCTYPE html>
@@ -1082,7 +1082,7 @@ async def test_rerun_waits_for_elements_before_matching(httpserver):
 	async def custom_ainvoke(*args, **kwargs):
 		output_format = args[1] if len(args) > 1 else kwargs.get('output_format')
 		if output_format is RerunSummaryAction:
-			from browser_use.llm.views import ChatInvokeCompletion
+			from lz_browser_agent.llm.views import ChatInvokeCompletion
 
 			return ChatInvokeCompletion(completion=summary_action, usage=None)
 		raise ValueError('Unexpected output_format')
@@ -1182,7 +1182,7 @@ async def test_rerun_uses_exponential_backoff_retry_delays(httpserver):
 	"""Test that rerun uses exponential backoff delays between retries (5s, 10s, 20s, capped at 30s)."""
 	import time
 
-	from browser_use.dom.views import DOMInteractedElement
+	from lz_browser_agent.dom.views import DOMInteractedElement
 
 	# Set up a test page with a button that won't match
 	test_html = """<!DOCTYPE html>

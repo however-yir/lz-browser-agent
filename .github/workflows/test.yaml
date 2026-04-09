@@ -154,7 +154,7 @@ jobs:
         with:
           path: |
             ~/.config/browseruse/extensions
-          key: ${{ runner.os }}-browseruse-extensions-${{ hashFiles('browser_use/browser/profile.py') }}
+          key: ${{ runner.os }}-browseruse-extensions-${{ hashFiles('browser_use/browser/profile.py', 'lz_browser_agent/__init__.py') }}
           restore-keys: |
             ${{ runner.os }}-browseruse-extensions-
 
@@ -238,7 +238,7 @@ jobs:
         with:
           path: |
             ~/.config/browseruse/extensions
-          key: ${{ runner.os }}-browseruse-extensions-${{ hashFiles('browser_use/browser/profile.py') }}
+          key: ${{ runner.os }}-browseruse-extensions-${{ hashFiles('browser_use/browser/profile.py', 'lz_browser_agent/__init__.py') }}
           restore-keys: |
             ${{ runner.os }}-browseruse-extensions-
 

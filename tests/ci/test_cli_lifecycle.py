@@ -38,7 +38,7 @@ def _start_daemon(home_dir: Path, session: str = 'default', timeout: float = 10.
 	log_path = home_dir / f'{session}.test.log'
 	log_file = open(log_path, 'w')
 	proc = subprocess.Popen(
-		[sys.executable, '-m', 'browser_use.skill_cli.daemon', '--session', session],
+		[sys.executable, '-m', 'lz_browser_agent.skill_cli.daemon', '--session', session],
 		env=env,
 		stdout=log_file,
 		stderr=log_file,
@@ -99,7 +99,7 @@ def _run_cli(*args: str, home_dir: Path) -> subprocess.CompletedProcess:
 	env = os.environ.copy()
 	env['BROWSER_USE_HOME'] = str(home_dir)
 	return subprocess.run(
-		[sys.executable, '-m', 'browser_use.skill_cli.main', *args],
+		[sys.executable, '-m', 'lz_browser_agent.skill_cli.main', *args],
 		capture_output=True,
 		text=True,
 		env=env,
@@ -163,7 +163,7 @@ def test_daemon_pid_file_and_state_agree(home_dir):
 
 def test_probe_session_running_daemon(home_dir):
 	"""Probe should see pid_alive=True, socket_reachable=True for a live daemon."""
-	from browser_use.skill_cli.main import _probe_session
+	from lz_browser_agent.skill_cli.main import _probe_session
 
 	pid = _start_daemon(home_dir)
 	try:
@@ -187,7 +187,7 @@ def test_probe_session_running_daemon(home_dir):
 
 def test_probe_session_dead_pid(home_dir):
 	"""Probe should see pid_alive=False for stale files with dead PID."""
-	from browser_use.skill_cli.main import _probe_session
+	from lz_browser_agent.skill_cli.main import _probe_session
 
 	# Write stale state + PID files
 	(home_dir / 'ghost.state.json').write_text(
@@ -219,7 +219,7 @@ def test_probe_session_dead_pid(home_dir):
 
 def test_probe_session_no_files(home_dir):
 	"""Probe should return empty for a session with no files."""
-	from browser_use.skill_cli.main import _probe_session
+	from lz_browser_agent.skill_cli.main import _probe_session
 
 	old_env = os.environ.get('BROWSER_USE_HOME')
 	os.environ['BROWSER_USE_HOME'] = str(home_dir)
@@ -238,7 +238,7 @@ def test_probe_session_no_files(home_dir):
 
 def test_probe_session_corrupt_state_file(home_dir):
 	"""Probe should handle corrupt state file gracefully."""
-	from browser_use.skill_cli.main import _probe_session
+	from lz_browser_agent.skill_cli.main import _probe_session
 
 	(home_dir / 'corrupt.state.json').write_text('not json{{{')
 

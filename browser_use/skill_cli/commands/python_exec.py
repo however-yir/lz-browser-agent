@@ -5,7 +5,7 @@ import logging
 from pathlib import Path
 from typing import Any
 
-from browser_use.skill_cli.sessions import SessionInfo
+from lz_browser_agent.skill_cli.sessions import SessionInfo
 
 logger = logging.getLogger(__name__)
 

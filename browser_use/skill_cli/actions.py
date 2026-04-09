@@ -12,22 +12,22 @@ from typing import TYPE_CHECKING, Any
 
 from bubus import EventBus
 
-from browser_use.browser.events import (
+from lz_browser_agent.browser.events import (
 	GoBackEvent,
 	SelectDropdownOptionEvent,
 	SendKeysEvent,
 	TypeTextEvent,
 	UploadFileEvent,
 )
-from browser_use.browser.watchdogs.default_action_watchdog import DefaultActionWatchdog
-from browser_use.dom.service import DomService
-from browser_use.dom.views import EnhancedDOMTreeNode, SerializedDOMState
+from lz_browser_agent.browser.watchdogs.default_action_watchdog import DefaultActionWatchdog
+from lz_browser_agent.dom.service import DomService
+from lz_browser_agent.dom.views import EnhancedDOMTreeNode, SerializedDOMState
 
 if TYPE_CHECKING:
-	from browser_use.browser.session import BrowserSession
-	from browser_use.browser.views import BrowserStateSummary, PageInfo
+	from lz_browser_agent.browser.session import BrowserSession
+	from lz_browser_agent.browser.views import BrowserStateSummary, PageInfo
 
-logger = logging.getLogger('browser_use.skill_cli.actions')
+logger = logging.getLogger('lz_browser_agent.skill_cli.actions')
 
 
 class ActionHandler:
@@ -57,7 +57,7 @@ class ActionHandler:
 
 	async def click_coordinate(self, x: int, y: int) -> dict[str, Any] | None:
 		"""Click at coordinates."""
-		from browser_use.browser.events import ClickCoordinateEvent
+		from lz_browser_agent.browser.events import ClickCoordinateEvent
 
 		event = ClickCoordinateEvent(coordinate_x=x, coordinate_y=y)
 		return await self._watchdog.on_ClickCoordinateEvent(event)
@@ -102,7 +102,7 @@ class ActionHandler:
 
 	async def get_state(self) -> BrowserStateSummary:
 		"""Build DOM via DomService directly (no DOMWatchdog, no event bus)."""
-		from browser_use.browser.views import BrowserStateSummary, PageInfo
+		from lz_browser_agent.browser.views import BrowserStateSummary, PageInfo
 
 		if self._dom_service is None:
 			self._dom_service = DomService(browser_session=self.bs)

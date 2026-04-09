@@ -4,8 +4,8 @@ import os
 
 import pytest
 
-from browser_use.llm.azure.chat import RESPONSES_API_ONLY_MODELS, ChatAzureOpenAI
-from browser_use.llm.messages import (
+from lz_browser_agent.llm.azure.chat import RESPONSES_API_ONLY_MODELS, ChatAzureOpenAI
+from lz_browser_agent.llm.messages import (
 	AssistantMessage,
 	ContentPartImageParam,
 	ContentPartTextParam,
@@ -15,7 +15,7 @@ from browser_use.llm.messages import (
 	ToolCall,
 	UserMessage,
 )
-from browser_use.llm.openai.responses_serializer import ResponsesAPIMessageSerializer
+from lz_browser_agent.llm.openai.responses_serializer import ResponsesAPIMessageSerializer
 
 
 class TestResponsesAPIMessageSerializer:

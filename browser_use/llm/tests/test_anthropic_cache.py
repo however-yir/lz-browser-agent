@@ -1,10 +1,10 @@
 import logging
 from typing import cast
 
-from browser_use.agent.service import Agent
-from browser_use.llm.anthropic.chat import ChatAnthropic
-from browser_use.llm.anthropic.serializer import AnthropicMessageSerializer, NonSystemMessage
-from browser_use.llm.messages import (
+from lz_browser_agent.agent.service import Agent
+from lz_browser_agent.llm.anthropic.chat import ChatAnthropic
+from lz_browser_agent.llm.anthropic.serializer import AnthropicMessageSerializer, NonSystemMessage
+from lz_browser_agent.llm.messages import (
 	AssistantMessage,
 	BaseMessage,
 	ContentPartImageParam,

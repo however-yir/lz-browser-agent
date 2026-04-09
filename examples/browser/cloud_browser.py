@@ -10,7 +10,7 @@ import asyncio
 
 from dotenv import load_dotenv
 
-from browser_use import Agent, Browser, ChatBrowserUse
+from lz_browser_agent import Agent, Browser, ChatBrowserUse
 
 load_dotenv()
 

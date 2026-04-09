@@ -26,7 +26,7 @@ def _prompt(message: str, yes: bool) -> bool:
 
 def handle(yes: bool = False) -> dict:
 	"""Run interactive setup."""
-	from browser_use.skill_cli.utils import get_home_dir
+	from lz_browser_agent.skill_cli.utils import get_home_dir
 
 	home_dir = get_home_dir()
 	results: dict = {}
@@ -84,7 +84,7 @@ def handle(yes: bool = False) -> dict:
 	# Step 4: Profile-use binary
 	step += 1
 	print(f'\nStep {step}/{total}: Profile-use binary')
-	from browser_use.skill_cli.profile_use import get_profile_use_binary
+	from lz_browser_agent.skill_cli.profile_use import get_profile_use_binary
 
 	if get_profile_use_binary():
 		print('  ✓ profile-use already installed')
@@ -124,7 +124,7 @@ def handle(yes: bool = False) -> dict:
 	# Step 6: Validation
 	step += 1
 	print(f'\nStep {step}/{total}: Validation')
-	from browser_use.skill_cli.config import CLI_DOCS_URL, get_config_display
+	from lz_browser_agent.skill_cli.config import CLI_DOCS_URL, get_config_display
 
 	# Quick checks
 	checks = {
@@ -160,9 +160,9 @@ def handle(yes: bool = False) -> dict:
 def _check_package() -> str:
 	"""Check if browser-use package is importable."""
 	try:
-		import browser_use
+		import lz_browser_agent
 
-		version = getattr(browser_use, '__version__', 'unknown')
+		version = getattr(lz_browser_agent, '__version__', 'unknown')
 		return f'browser-use {version}'
 	except ImportError:
 		return 'not installed'
@@ -171,7 +171,7 @@ def _check_package() -> str:
 def _check_chromium() -> bool:
 	"""Check if playwright chromium is installed."""
 	try:
-		from browser_use.browser.profile import BrowserProfile
+		from lz_browser_agent.browser.profile import BrowserProfile
 
 		BrowserProfile(headless=True)
 		return True
@@ -194,7 +194,7 @@ def _install_chromium() -> bool:
 def _install_profile_use() -> bool:
 	"""Download profile-use binary."""
 	try:
-		from browser_use.skill_cli.profile_use import download_profile_use
+		from lz_browser_agent.skill_cli.profile_use import download_profile_use
 
 		download_profile_use()
 		return True

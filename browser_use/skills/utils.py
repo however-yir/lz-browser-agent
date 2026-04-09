@@ -4,7 +4,7 @@ from typing import Any
 
 from pydantic import BaseModel, Field, create_model
 
-from browser_use.skills.views import ParameterSchema
+from lz_browser_agent.skills.views import ParameterSchema
 
 
 def convert_parameters_to_pydantic(parameters: list[ParameterSchema], model_name: str = 'SkillParameters') -> type[BaseModel]:

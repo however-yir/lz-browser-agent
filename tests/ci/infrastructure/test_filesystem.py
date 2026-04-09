@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from browser_use.filesystem.file_system import (
+from lz_browser_agent.filesystem.file_system import (
 	DEFAULT_FILE_SYSTEM_PATH,
 	CsvFile,
 	FileSystem,

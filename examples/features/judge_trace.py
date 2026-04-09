@@ -8,15 +8,15 @@ import asyncio
 import os
 import sys
 
-# Add the parent directory to the path so we can import browser_use
+# Add the parent directory to the path so we can import lz_browser_agent
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use import Agent
-from browser_use.llm.browser_use.chat import ChatBrowserUse
+from lz_browser_agent import Agent
+from lz_browser_agent.llm.lz_browser_agent.chat import ChatBrowserUse
 
 # task from GAIA
 task = """

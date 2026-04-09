@@ -9,7 +9,7 @@ from openai.types.responses.response_input_message_content_list_param import (
 )
 from openai.types.responses.response_input_text_param import ResponseInputTextParam
 
-from browser_use.llm.messages import (
+from lz_browser_agent.llm.messages import (
 	AssistantMessage,
 	BaseMessage,
 	ContentPartImageParam,

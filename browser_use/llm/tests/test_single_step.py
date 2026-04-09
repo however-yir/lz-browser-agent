@@ -4,26 +4,26 @@ import tempfile
 
 import pytest
 
-from browser_use.agent.prompts import AgentMessagePrompt
-from browser_use.agent.service import Agent
-from browser_use.browser.views import BrowserStateSummary, TabInfo
-from browser_use.dom.views import DOMSelectorMap, EnhancedDOMTreeNode, NodeType, SerializedDOMState, SimplifiedNode
-from browser_use.filesystem.file_system import FileSystem
-from browser_use.llm.anthropic.chat import ChatAnthropic
-from browser_use.llm.azure.chat import ChatAzureOpenAI
-from browser_use.llm.base import BaseChatModel
-from browser_use.llm.google.chat import ChatGoogle
-from browser_use.llm.groq.chat import ChatGroq
+from lz_browser_agent.agent.prompts import AgentMessagePrompt
+from lz_browser_agent.agent.service import Agent
+from lz_browser_agent.browser.views import BrowserStateSummary, TabInfo
+from lz_browser_agent.dom.views import DOMSelectorMap, EnhancedDOMTreeNode, NodeType, SerializedDOMState, SimplifiedNode
+from lz_browser_agent.filesystem.file_system import FileSystem
+from lz_browser_agent.llm.anthropic.chat import ChatAnthropic
+from lz_browser_agent.llm.azure.chat import ChatAzureOpenAI
+from lz_browser_agent.llm.base import BaseChatModel
+from lz_browser_agent.llm.google.chat import ChatGoogle
+from lz_browser_agent.llm.groq.chat import ChatGroq
 
 # Optional OCI import
 try:
-	from browser_use.llm.oci_raw.chat import ChatOCIRaw
+	from lz_browser_agent.llm.oci_raw.chat import ChatOCIRaw
 
 	OCI_AVAILABLE = True
 except ImportError:
 	ChatOCIRaw = None
 	OCI_AVAILABLE = False
-from browser_use.llm.openai.chat import ChatOpenAI
+from lz_browser_agent.llm.openai.chat import ChatOpenAI
 
 # Set logging level to INFO for this module
 logger = logging.getLogger(__name__)

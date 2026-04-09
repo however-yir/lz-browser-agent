@@ -15,10 +15,10 @@ import logging
 import pytest
 from pydantic import Field
 
-from browser_use.agent.views import ActionResult
-from browser_use.browser import BrowserSession
-from browser_use.tools.registry.service import Registry
-from browser_use.tools.registry.views import ActionModel as BaseActionModel
+from lz_browser_agent.agent.views import ActionResult
+from lz_browser_agent.browser import BrowserSession
+from lz_browser_agent.tools.registry.service import Registry
+from lz_browser_agent.tools.registry.views import ActionModel as BaseActionModel
 from tests.ci.conftest import create_mock_llm
 
 # Configure logging
@@ -64,7 +64,7 @@ class TestType1Pattern:
 			goal: str
 			include_links: bool = False
 
-		from browser_use.llm.base import BaseChatModel
+		from lz_browser_agent.llm.base import BaseChatModel
 
 		@registry.action('Extract content', param_model=ExtractAction)
 		async def extract_content(params: ExtractAction, browser_session: BrowserSession, page_extraction_llm: BaseChatModel):
@@ -299,7 +299,7 @@ class TestParameterOrdering:
 	def test_mixed_param_ordering(self):
 		"""Should handle any ordering of action params and special params"""
 		registry = Registry()
-		from browser_use.llm.base import BaseChatModel
+		from lz_browser_agent.llm.base import BaseChatModel
 
 		# Special params mixed throughout
 		@registry.action('Mixed params')
@@ -388,8 +388,8 @@ class TestParamsModelArgsAndKwargs:
 		This test confirms that this approach works.
 		"""
 
-		from browser_use.tools.registry.service import Registry
-		from browser_use.tools.registry.views import ActionModel
+		from lz_browser_agent.tools.registry.service import Registry
+		from lz_browser_agent.tools.registry.views import ActionModel
 
 		# Simple context for testing
 		class TestContext:

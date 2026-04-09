@@ -1,6 +1,6 @@
 """Tests for doctor command."""
 
-from browser_use.skill_cli.commands import doctor
+from lz_browser_agent.skill_cli.commands import doctor
 
 
 async def test_doctor_handle_returns_valid_structure():

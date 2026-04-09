@@ -1,6 +1,6 @@
 """Test Google model button click."""
 
-from browser_use.llm.google.chat import ChatGoogle
+from lz_browser_agent.llm.google.chat import ChatGoogle
 from tests.ci.models.model_test_helper import run_model_button_click_test
 
 

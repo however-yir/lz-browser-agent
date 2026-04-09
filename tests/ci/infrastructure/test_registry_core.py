@@ -17,13 +17,13 @@ from pydantic import Field
 from pytest_httpserver import HTTPServer
 from pytest_httpserver.httpserver import HandlerType
 
-from browser_use.agent.views import ActionResult
-from browser_use.browser import BrowserSession
-from browser_use.browser.profile import BrowserProfile
-from browser_use.llm.messages import UserMessage
-from browser_use.tools.registry.service import Registry
-from browser_use.tools.registry.views import ActionModel as BaseActionModel
-from browser_use.tools.views import (
+from lz_browser_agent.agent.views import ActionResult
+from lz_browser_agent.browser import BrowserSession
+from lz_browser_agent.browser.profile import BrowserProfile
+from lz_browser_agent.llm.messages import UserMessage
+from lz_browser_agent.tools.registry.service import Registry
+from lz_browser_agent.tools.registry.views import ActionModel as BaseActionModel
+from lz_browser_agent.tools.views import (
 	ClickElementAction,
 	InputTextAction,
 	NoParamsAction,
@@ -104,7 +104,7 @@ async def browser_session(base_url):
 		)
 	)
 	await browser_session.start()
-	from browser_use.browser.events import NavigateToUrlEvent
+	from lz_browser_agent.browser.events import NavigateToUrlEvent
 
 	browser_session.event_bus.dispatch(NavigateToUrlEvent(url=f'{base_url}/test'))
 	await asyncio.sleep(0.5)  # Wait for navigation
@@ -138,7 +138,7 @@ class TestActionRegistryParameterPatterns:
 			return ActionResult(extracted_content=f'Text: {text}, URL: {url}')
 
 		# Navigate to test page first
-		from browser_use.browser.events import NavigateToUrlEvent
+		from lz_browser_agent.browser.events import NavigateToUrlEvent
 
 		event = browser_session.event_bus.dispatch(NavigateToUrlEvent(url=f'{base_url}/test', new_tab=True))
 		await event
@@ -162,7 +162,7 @@ class TestActionRegistryParameterPatterns:
 			)
 
 		# Navigate to test page first
-		from browser_use.browser.events import NavigateToUrlEvent
+		from lz_browser_agent.browser.events import NavigateToUrlEvent
 
 		event = browser_session.event_bus.dispatch(NavigateToUrlEvent(url=f'{base_url}/test', new_tab=True))
 		await event
@@ -180,7 +180,7 @@ class TestActionRegistryParameterPatterns:
 	async def test_mixed_special_parameters(self, registry, browser_session, base_url, mock_llm):
 		"""Test action with multiple special injected parameters"""
 
-		from browser_use.llm.base import BaseChatModel
+		from lz_browser_agent.llm.base import BaseChatModel
 
 		@registry.action('Action with multiple special params')
 		async def multi_special_action(
@@ -198,7 +198,7 @@ class TestActionRegistryParameterPatterns:
 			)
 
 		# Navigate to test page first
-		from browser_use.browser.events import NavigateToUrlEvent
+		from lz_browser_agent.browser.events import NavigateToUrlEvent
 
 		event = browser_session.event_bus.dispatch(NavigateToUrlEvent(url=f'{base_url}/test', new_tab=True))
 		await event
@@ -398,7 +398,7 @@ class TestRegistryEdgeCases:
 	async def test_missing_required_llm(self, registry, browser_session):
 		"""Test that actions requiring page_extraction_llm fail appropriately when not provided"""
 
-		from browser_use.llm.base import BaseChatModel
+		from lz_browser_agent.llm.base import BaseChatModel
 
 		@registry.action('Requires LLM')
 		async def requires_llm(text: str, browser_session: BrowserSession, page_extraction_llm: BaseChatModel):

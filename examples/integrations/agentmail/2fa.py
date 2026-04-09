@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use import Agent, Browser, ChatBrowserUse
+from lz_browser_agent import Agent, Browser, ChatBrowserUse
 from examples.integrations.agentmail.email_tools import EmailTools
 
 TASK = """

@@ -3,8 +3,8 @@ import os
 import pytest
 from pydantic import BaseModel
 
-from browser_use.llm import ChatAnthropic, ChatGoogle, ChatGroq, ChatOpenAI, ChatOpenRouter
-from browser_use.llm.messages import ContentPartTextParam
+from lz_browser_agent.llm import ChatAnthropic, ChatGoogle, ChatGroq, ChatOpenAI, ChatOpenRouter
+from lz_browser_agent.llm.messages import ContentPartTextParam
 
 # Optional OCI import
 try:
@@ -24,7 +24,7 @@ class CapitalResponse(BaseModel):
 
 
 class TestChatModels:
-	from browser_use.llm.messages import (
+	from lz_browser_agent.llm.messages import (
 		AssistantMessage,
 		BaseMessage,
 		SystemMessage,

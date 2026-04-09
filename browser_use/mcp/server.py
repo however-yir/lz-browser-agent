@@ -26,7 +26,7 @@ Or as an MCP server in Claude Desktop or other MCP clients:
 import os
 import sys
 
-# Set environment variables BEFORE any browser_use imports to prevent early logging
+# Set environment variables BEFORE any lz_browser_agent imports to prevent early logging
 os.environ['BROWSER_USE_LOGGING_LEVEL'] = 'critical'
 os.environ['BROWSER_USE_SETUP_LOGGING'] = 'false'
 
@@ -37,7 +37,7 @@ import time
 from pathlib import Path
 from typing import Any
 
-from browser_use.llm import ChatAWSBedrock
+from lz_browser_agent.llm import ChatAWSBedrock
 
 # Configure logging for MCP mode - redirect to stderr but preserve critical diagnostics
 logging.basicConfig(
@@ -55,7 +55,7 @@ except ImportError:
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 # Import and configure logging to use stderr before other imports
-from browser_use.logging_config import setup_logging
+from lz_browser_agent.logging_config import setup_logging
 
 
 def _configure_mcp_server_logging():
@@ -83,19 +83,19 @@ def _configure_mcp_server_logging():
 		logger_obj.propagate = False
 
 
-# Configure MCP server logging before any browser_use imports to capture early log lines
+# Configure MCP server logging before any lz_browser_agent imports to capture early log lines
 _configure_mcp_server_logging()
 
 # Additional suppression - disable all logging completely for MCP mode
 logging.disable(logging.CRITICAL)
 
-# Import browser_use modules
-from browser_use import ActionModel, Agent
-from browser_use.browser import BrowserProfile, BrowserSession
-from browser_use.config import get_default_llm, get_default_profile, load_browser_use_config
-from browser_use.filesystem.file_system import FileSystem
-from browser_use.llm.openai.chat import ChatOpenAI
-from browser_use.tools.service import Tools
+# Import lz_browser_agent modules
+from lz_browser_agent import ActionModel, Agent
+from lz_browser_agent.browser import BrowserProfile, BrowserSession
+from lz_browser_agent.config import get_default_llm, get_default_profile, load_browser_use_config
+from lz_browser_agent.filesystem.file_system import FileSystem
+from lz_browser_agent.llm.openai.chat import ChatOpenAI
+from lz_browser_agent.tools.service import Tools
 
 logger = logging.getLogger(__name__)
 
@@ -149,8 +149,8 @@ except ImportError:
 	logger.error('MCP SDK not installed. Install with: pip install mcp')
 	sys.exit(1)
 
-from browser_use.telemetry import MCPServerTelemetryEvent, ProductTelemetry
-from browser_use.utils import create_task_with_error_handling, get_browser_use_version
+from lz_browser_agent.telemetry import MCPServerTelemetryEvent, ProductTelemetry
+from lz_browser_agent.utils import create_task_with_error_handling, get_browser_use_version
 
 
 def get_parent_process_cmdline() -> str | None:
@@ -736,7 +736,7 @@ class BrowserUseServer:
 		# Update session activity
 		self._update_session_activity(self.browser_session.id)
 
-		from browser_use.browser.events import NavigateToUrlEvent
+		from lz_browser_agent.browser.events import NavigateToUrlEvent
 
 		if new_tab:
 			event = self.browser_session.event_bus.dispatch(NavigateToUrlEvent(url=url, new_tab=True))
@@ -763,7 +763,7 @@ class BrowserUseServer:
 
 		# Coordinate-based clicking
 		if coordinate_x is not None and coordinate_y is not None:
-			from browser_use.browser.events import ClickCoordinateEvent
+			from lz_browser_agent.browser.events import ClickCoordinateEvent
 
 			event = self.browser_session.event_bus.dispatch(
 				ClickCoordinateEvent(coordinate_x=coordinate_x, coordinate_y=coordinate_y)
@@ -797,21 +797,21 @@ class BrowserUseServer:
 					full_url = href
 
 				# Open link in new tab
-				from browser_use.browser.events import NavigateToUrlEvent
+				from lz_browser_agent.browser.events import NavigateToUrlEvent
 
 				event = self.browser_session.event_bus.dispatch(NavigateToUrlEvent(url=full_url, new_tab=True))
 				await event
 				return f'Clicked element {index} and opened in new tab {full_url[:20]}...'
 			else:
 				# For non-link elements, just do a normal click
-				from browser_use.browser.events import ClickElementEvent
+				from lz_browser_agent.browser.events import ClickElementEvent
 
 				event = self.browser_session.event_bus.dispatch(ClickElementEvent(node=element))
 				await event
 				return f'Clicked element {index} (new tab not supported for non-link elements)'
 		else:
 			# Normal click
-			from browser_use.browser.events import ClickElementEvent
+			from lz_browser_agent.browser.events import ClickElementEvent
 
 			event = self.browser_session.event_bus.dispatch(ClickElementEvent(node=element))
 			await event
@@ -826,7 +826,7 @@ class BrowserUseServer:
 		if not element:
 			return f'Element with index {index} not found'
 
-		from browser_use.browser.events import TypeTextEvent
+		from lz_browser_agent.browser.events import TypeTextEvent
 
 		# Conservative heuristic to detect potentially sensitive data
 		# Only flag very obvious patterns to minimize false positives
@@ -1017,7 +1017,7 @@ class BrowserUseServer:
 		if not self.browser_session:
 			return 'Error: No browser session active'
 
-		from browser_use.browser.events import ScrollEvent
+		from lz_browser_agent.browser.events import ScrollEvent
 
 		# Scroll by a standard amount (500 pixels)
 		event = self.browser_session.event_bus.dispatch(
@@ -1034,7 +1034,7 @@ class BrowserUseServer:
 		if not self.browser_session:
 			return 'Error: No browser session active'
 
-		from browser_use.browser.events import GoBackEvent
+		from lz_browser_agent.browser.events import GoBackEvent
 
 		event = self.browser_session.event_bus.dispatch(GoBackEvent())
 		await event
@@ -1043,7 +1043,7 @@ class BrowserUseServer:
 	async def _close_browser(self) -> str:
 		"""Close the browser session."""
 		if self.browser_session:
-			from browser_use.browser.events import BrowserStopEvent
+			from lz_browser_agent.browser.events import BrowserStopEvent
 
 			event = self.browser_session.event_bus.dispatch(BrowserStopEvent())
 			await event
@@ -1068,7 +1068,7 @@ class BrowserUseServer:
 		if not self.browser_session:
 			return 'Error: No browser session active'
 
-		from browser_use.browser.events import SwitchTabEvent
+		from lz_browser_agent.browser.events import SwitchTabEvent
 
 		target_id = await self.browser_session.get_target_id_from_tab_id(tab_id)
 		event = self.browser_session.event_bus.dispatch(SwitchTabEvent(target_id=target_id))
@@ -1081,7 +1081,7 @@ class BrowserUseServer:
 		if not self.browser_session:
 			return 'Error: No browser session active'
 
-		from browser_use.browser.events import CloseTabEvent
+		from lz_browser_agent.browser.events import CloseTabEvent
 
 		target_id = await self.browser_session.get_target_id_from_tab_id(tab_id)
 		event = self.browser_session.event_bus.dispatch(CloseTabEvent(target_id=target_id))

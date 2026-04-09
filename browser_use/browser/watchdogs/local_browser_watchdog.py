@@ -13,17 +13,17 @@ import psutil
 from bubus import BaseEvent
 from pydantic import PrivateAttr
 
-from browser_use.browser.events import (
+from lz_browser_agent.browser.events import (
 	BrowserKillEvent,
 	BrowserLaunchEvent,
 	BrowserLaunchResult,
 	BrowserStopEvent,
 )
-from browser_use.browser.watchdog_base import BaseWatchdog
-from browser_use.observability import observe_debug
+from lz_browser_agent.browser.watchdog_base import BaseWatchdog
+from lz_browser_agent.observability import observe_debug
 
 if TYPE_CHECKING:
-	from browser_use.browser.profile import BrowserChannel
+	from lz_browser_agent.browser.profile import BrowserChannel
 
 
 class LocalBrowserWatchdog(BaseWatchdog):
@@ -237,7 +237,7 @@ class LocalBrowserWatchdog(BaseWatchdog):
 		import platform
 		from pathlib import Path
 
-		from browser_use.browser.profile import BROWSERUSE_DEFAULT_CHANNEL, BrowserChannel
+		from lz_browser_agent.browser.profile import BROWSERUSE_DEFAULT_CHANNEL, BrowserChannel
 
 		system = platform.system()
 

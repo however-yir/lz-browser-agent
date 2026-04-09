@@ -1,304 +1,227 @@
-<picture>
-  <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/2ccdb752-22fb-41c7-8948-857fc1ad7e24"">
-  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/774a46d5-27a0-490c-b7d0-e65fcbbfa358">
-  <img alt="Shows a black Browser Use Logo in light color mode and a white one in dark color mode." src="https://github.com/user-attachments/assets/2ccdb752-22fb-41c7-8948-857fc1ad7e24"  width="full">
-</picture>
+# 本地浏览器智能体框架｜LZ Browser Agent
 
-<div align="center">
-    <picture>
-    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/9955dda9-ede3-4971-8ee0-91cbc3850125"">
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/6797d09b-8ac3-4cb9-ba07-b289e080765a">
-    <img alt="The AI browser agent." src="https://github.com/user-attachments/assets/9955dda9-ede3-4971-8ee0-91cbc3850125"  width="400">
-    </picture>
-</div>
+<p align="center">
+  <img src="static/lz-browser-agent-logo.svg" alt="LZ Browser Agent" width="100%" />
+</p>
 
-<div align="center">
-<a href="https://cloud.browser-use.com?utm_source=github&utm_medium=readme"><img src="https://media.browser-use.tools/badges/package" height="48" alt="Browser-Use Package Download Statistics"></a>
-</div>
+🔥 面向本地与私有化场景的浏览器自动化智能体框架（Local-first Browser Automation Agent）。  
+🚀 支持 `OpenAI Compatible API`、`Ollama`、多模型切换、可扩展工具调用与自动化任务编排。  
+⭐ 适合作为“可二开、可部署、可工程化”的浏览器智能体项目基座。
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.11%2B-3776AB" alt="Python" />
+  <img src="https://img.shields.io/badge/Automation-Browser%20Agent-0F766E" alt="Browser Agent" />
+  <img src="https://img.shields.io/badge/LLM-Ollama%20%7C%20OpenAI%20Compatible-2563EB" alt="LLM" />
+  <img src="https://img.shields.io/badge/Mode-Local%20First-1D4ED8" alt="Local First" />
+</p>
 
 ---
 
-<div align="center">
-<a href="#demos"><img src="https://media.browser-use.tools/badges/demos" alt="Demos"></a>
-<img width="16" height="1" alt="">
-<a href="https://docs.browser-use.com"><img src="https://media.browser-use.tools/badges/docs" alt="Docs"></a>
-<img width="16" height="1" alt="">
-<a href="https://browser-use.com/posts"><img src="https://media.browser-use.tools/badges/blog" alt="Blog"></a>
-<img width="16" height="1" alt="">
-<a href="https://browsermerch.com"><img src="https://media.browser-use.tools/badges/merch" alt="Merch"></a>
-<img width="100" height="1" alt="">
-<a href="https://github.com/browser-use/browser-use"><img src="https://media.browser-use.tools/badges/github" alt="Github Stars"></a>
-<img width="4" height="1" alt="">
-<a href="https://x.com/intent/user?screen_name=browser_use"><img src="https://media.browser-use.tools/badges/twitter" alt="Twitter"></a>
-<img width="4 height="1" alt="">
-<a href="https://link.browser-use.com/discord"><img src="https://media.browser-use.tools/badges/discord" alt="Discord"></a>
-<img width="4" height="1" alt="">
-<a href="https://cloud.browser-use.com?utm_source=github&utm_medium=readme"><img src="https://media.browser-use.tools/badges/cloud" height="48" alt="Browser-Use Cloud"></a>
-</div>
+## 目录
 
-</br>
+- [1. 项目定位](#1-项目定位)
+- [2. 核心能力](#2-核心能力)
+- [3. 架构概览](#3-架构概览)
+- [4. 快速开始](#4-快速开始)
+- [5. 本地配置说明](#5-本地配置说明)
+- [6. 项目结构](#6-项目结构)
+- [7. 与原版的差异](#7-与原版的差异)
+- [8. 部署方式](#8-部署方式)
+- [9. 常见问题](#9-常见问题)
+- [10. 许可证与合规说明](#10-许可证与合规说明)
 
-🌤️ Want to skip the setup? Use our <b>[cloud](https://cloud.browser-use.com?utm_source=github&utm_medium=readme)</b> for faster, scalable, stealth-enabled browser automation!
+---
 
-# 🤖 LLM Quickstart
+## 1. 项目定位
 
-1. Direct your favorite coding agent (Cursor, Claude Code, etc) to [Agents.md](https://docs.browser-use.com/llms-full.txt)
-2. Prompt away!
+`LZ Browser Agent` 是在 `browser-use` 基础上的工程化二次开发版本，目标是：
 
-<br/>
+1. 更适合中文开发环境与本地部署。
+2. 更适合接入私有 API 网关、Ollama、本地 Redis/数据库扩展。
+3. 更强调“仓库可接管、可换名、可长期维护”的项目落地能力。
 
-# 👋 Human Quickstart
+该仓库面向以下场景：
 
-**1. Create environment and install Browser-Use with [uv](https://docs.astral.sh/uv/) (Python>=3.11):**
-```bash
-uv init && uv add browser-use && uv sync
-# uvx browser-use install  # Run if you don't have Chromium installed
+- 个人开发者构建浏览器自动化助手
+- 团队内部的流程自动化（抓取、填报、校验、数据提取）
+- 课程设计、毕业设计、工程实践项目的二开底座
+
+---
+
+## 2. 核心能力
+
+### 2.1 浏览器自动化 Agent
+
+- 基于自然语言任务驱动浏览器行为
+- 支持多步任务执行、页面元素交互、信息提取
+- 支持从脚本调用到 CLI 调用的统一能力
+
+### 2.2 多模型支持（Multi-LLM）
+
+- `ChatOllama`：本地模型推理
+- `OpenAI Compatible`：可接 OneAPI / vLLM / SiliconFlow 等兼容接口
+- 可按任务类型扩展 Anthropic / Google / Azure 等提供方
+
+### 2.3 本地优先配置（Local-first）
+
+- 提供统一 `.env` 模板
+- 支持本地 `DATABASE_URL` / `REDIS_URL` 预留配置
+- 支持 `BROWSER_USE_OLLAMA_HOST` 与 `BROWSER_USE_OLLAMA_MODEL`
+
+### 2.4 示例配置抽离（已改造）
+
+- 新增 `examples/common/local_runtime.py`
+- `examples/models/ollama.py` 已改为从环境变量加载默认任务、模型与 Host
+
+---
+
+## 3. 架构概览
+
+```mermaid
+flowchart LR
+  U[任务输入 Task] --> A[Agent Orchestrator]
+  A --> B[Browser Runtime]
+  A --> M[LLM Adapter]
+  M --> O[Ollama]
+  M --> C[OpenAI Compatible API]
+  A --> T[Tools / Actions]
+  A --> S[(Optional Redis / DB)]
 ```
 
-**2. [Optional] Get your API key from [Browser Use Cloud](https://cloud.browser-use.com/new-api-key?utm_source=github&utm_medium=readme):**
-```
-# .env
-BROWSER_USE_API_KEY=your-key
-# GOOGLE_API_KEY=your-key
-# ANTHROPIC_API_KEY=your-key
-```
+---
 
-**3. Run your first agent:**
-```python
-from browser_use import Agent, Browser, ChatBrowserUse
-# from browser_use import ChatGoogle  # ChatGoogle(model='gemini-3-flash-preview')
-# from browser_use import ChatAnthropic  # ChatAnthropic(model='claude-sonnet-4-6')
-import asyncio
+## 4. 快速开始
 
-async def main():
-    browser = Browser(
-        # use_cloud=True,  # Use a stealth browser on Browser Use Cloud
-    )
+### 4.1 环境要求
 
-    agent = Agent(
-        task="Find the number of stars of the browser-use repo",
-        llm=ChatBrowserUse(),
-        # llm=ChatGoogle(model='gemini-3-flash-preview'),
-        # llm=ChatAnthropic(model='claude-sonnet-4-6'),
-        browser=browser,
-    )
-    await agent.run()
+- Python `3.11+`
+- 推荐包管理器：`uv`
+- 已安装 Chromium/Chrome（或按项目提示安装）
 
-if __name__ == "__main__":
-    asyncio.run(main())
-```
-
-Check out the [library docs](https://docs.browser-use.com/open-source/introduction) and the [cloud docs](https://docs.cloud.browser-use.com?utm_source=github&utm_medium=readme) for more!
-
-<br/>
-
-# Open Source vs Cloud
-
-<picture>
-  <source media="(prefers-color-scheme: light)" srcset="static/accuracy_by_model_light.png">
-  <source media="(prefers-color-scheme: dark)" srcset="static/accuracy_by_model_dark.png">
-  <img alt="BU Bench V1 - LLM Success Rates" src="static/accuracy_by_model_light.png" width="100%">
-</picture>
-
-We benchmark Browser Use across 100 real-world browser tasks. Full benchmark is open source: **[browser-use/benchmark](https://github.com/browser-use/benchmark)**.
-
-**Use the Open-Source Agent**
-- You need [custom tools](https://docs.browser-use.com/customize/tools/basics) or deep code-level integration
-- We recommend pairing with our [cloud browsers](https://docs.browser-use.com/open-source/customize/browser/remote) for leading stealth, proxy rotation, and scaling
-- Or self-host the open-source agent fully on your own machines
-
-**Use the [Fully-Hosted Cloud Agent](https://cloud.browser-use.com?utm_source=github&utm_medium=readme) (recommended)**
-- Much more powerful agent for complex tasks (see plot above)
-- Easiest way to start and scale
-- Best stealth with proxy rotation and captcha solving
-- 1000+ integrations (Gmail, Slack, Notion, and more)
-- Persistent filesystem and memory
-
-<br/>
-
-# Demos
-
-
-### 📋 Form-Filling
-#### Task = "Fill in this job application with my resume and information."
-![Job Application Demo](https://github.com/user-attachments/assets/57865ee6-6004-49d5-b2c2-6dff39ec2ba9)
-[Example code ↗](https://github.com/browser-use/browser-use/blob/main/examples/use-cases/apply_to_job.py)
-
-
-### 🍎 Grocery-Shopping
-#### Task = "Put this list of items into my instacart."
-
-https://github.com/user-attachments/assets/a6813fa7-4a7c-40a6-b4aa-382bf88b1850
-
-[Example code ↗](https://github.com/browser-use/browser-use/blob/main/examples/use-cases/buy_groceries.py)
-
-
-### 💻 Personal-Assistant.
-#### Task = "Help me find parts for a custom PC."
-
-https://github.com/user-attachments/assets/ac34f75c-057a-43ef-ad06-5b2c9d42bf06
-
-[Example code ↗](https://github.com/browser-use/browser-use/blob/main/examples/use-cases/pcpartpicker.py)
-
-
-### 💡See [more examples here ↗](https://docs.browser-use.com/examples) and give us a star!
-
-<br/>
-
-# 🚀 Template Quickstart
-
-**Want to get started even faster?** Generate a ready-to-run template:
+### 4.2 安装
 
 ```bash
-uvx browser-use init --template default
+uv init
+uv sync
 ```
 
-This creates a `browser_use_default.py` file with a working example. Available templates:
-- `default` - Minimal setup to get started quickly
-- `advanced` - All configuration options with detailed comments
-- `tools` - Examples of custom tools and extending the agent
-
-You can also specify a custom output path:
-```bash
-uvx browser-use init --template default --output my_agent.py
-```
-
-<br/>
-
-# 💻 CLI
-
-Fast, persistent browser automation from the command line:
+### 4.3 初始化环境变量
 
 ```bash
-browser-use open https://example.com    # Navigate to URL
-browser-use state                       # See clickable elements
-browser-use click 5                     # Click element by index
-browser-use type "Hello"                # Type text
-browser-use screenshot page.png         # Take screenshot
-browser-use close                       # Close browser
+cp .env.example .env
 ```
 
-The CLI keeps the browser running between commands for fast iteration. See [CLI docs](browser_use/skill_cli/README.md) for all commands.
+至少配置以下项：
 
-### Claude Code Skill
+- `OPENAI_API_KEY`（若使用 OpenAI 兼容接口）
+- `OPENAI_BASE_URL`（可接本地/私有网关）
+- 或 `BROWSER_USE_OLLAMA_HOST` + `BROWSER_USE_OLLAMA_MODEL`
 
-For [Claude Code](https://claude.ai/code), install the skill to enable AI-assisted browser automation:
+### 4.4 运行 Ollama 示例
 
 ```bash
-mkdir -p ~/.claude/skills/browser-use
-curl -o ~/.claude/skills/browser-use/SKILL.md \
-  https://raw.githubusercontent.com/browser-use/browser-use/main/skills/browser-use/SKILL.md
+python examples/models/ollama.py
 ```
 
-<br/>
+---
 
-## Integrations, hosting, custom tools, MCP, and more on our [Docs ↗](https://docs.browser-use.com)
+## 5. 本地配置说明
 
-<br/>
+`.env.example` 已按本地私有化场景改写，重点变量如下：
 
-# FAQ
+| 变量 | 作用 | 示例 |
+|---|---|---|
+| `OPENAI_BASE_URL` | OpenAI 兼容网关地址 | `http://127.0.0.1:8000/v1` |
+| `BROWSER_USE_OLLAMA_HOST` | Ollama 服务地址 | `http://127.0.0.1:11434` |
+| `BROWSER_USE_OLLAMA_MODEL` | 默认 Ollama 模型 | `qwen2.5:7b-instruct` |
+| `DATABASE_URL` | 业务扩展数据库连接 | `postgresql://...` |
+| `REDIS_URL` | 缓存/会话存储扩展连接 | `redis://127.0.0.1:6379/0` |
+| `ANONYMIZED_TELEMETRY` | 匿名统计开关 | `false` |
 
-<details>
-<summary><b>What's the best model to use?</b></summary>
+---
 
-We optimized **ChatBrowserUse()** specifically for browser automation tasks. On avg it completes tasks 3-5x faster than other models with SOTA accuracy.
+## 6. 项目结构
 
-**Pricing (per 1M tokens):**
-- Input tokens: $0.20
-- Cached input tokens: $0.02
-- Output tokens: $2.00
-
-For other LLM providers, see our [supported models documentation](https://docs.browser-use.com/supported-models).
-</details>
-
-<details>
-<summary><b>Should I use the Browser Use system prompt with the open-source preview model?</b></summary>
-
-Yes. If you use `ChatBrowserUse(model='browser-use/bu-30b-a3b-preview')` with a normal `Agent(...)`, Browser Use still sends its default agent system prompt for you.
-
-You do **not** need to add a separate custom "Browser Use system message" just because you switched to the open-source preview model. Only use `extend_system_message` or `override_system_message` when you intentionally want to customize the default behavior for your task.
-
-If you want the best default speed/accuracy, we still recommend the newer hosted `bu-*` models. If you want the open-source preview model, the setup stays the same apart from the `model=` value.
-</details>
-
-<details>
-<summary><b>Can I use custom tools with the agent?</b></summary>
-
-Yes! You can add custom tools to extend the agent's capabilities:
-
-```python
-from browser_use import Tools
-
-tools = Tools()
-
-@tools.action(description='Description of what this tool does.')
-def custom_tool(param: str) -> str:
-    return f"Result: {param}"
-
-agent = Agent(
-    task="Your task",
-    llm=llm,
-    browser=browser,
-    tools=tools,
-)
+```text
+.
+├── browser_use/                 # 核心运行时与能力模块
+├── examples/
+│   ├── common/local_runtime.py  # 本地配置加载（新增）
+│   └── models/ollama.py         # Ollama 示例（已改造）
+├── static/lz-browser-agent-logo.svg
+├── docs/repository-profile.md
+├── .env.example
+├── pyproject.toml
+└── README.md
 ```
 
-</details>
+---
 
-<details>
-<summary><b>Can I use this for free?</b></summary>
+## 7. 与原版的差异
 
-Yes! Browser-Use is open source and free to use. You only need to choose an LLM provider (like OpenAI, Google, ChatBrowserUse, or run local models with Ollama).
-</details>
+当前版本重点做了工程接管层面的改造：
 
-<details>
-<summary><b>Terms of Service</b></summary>
+1. 项目元信息已切换为个人仓库可维护形式（`pyproject.toml`）。
+2. 新增 fork 友好的 CLI 命令别名：`lz-browser-agent`、`lzb`。
+3. `.env.example` 改为本地化模板，补齐数据库/Redis/Ollama 配置。
+4. 新增品牌 Logo 与仓库品牌文档（名称、描述、Topics 推荐）。
+5. 新增自定义许可证文件：`LICENSE-COMMUNITY.md`。
+6. 示例脚本完成一处配置抽离，降低重复硬编码。
 
-This open-source library is licensed under the MIT License. For Browser Use services & data policy, see our [Terms of Service](https://browser-use.com/legal/terms-of-service) and [Privacy Policy](https://browser-use.com/privacy/).
-</details>
+---
 
-<details>
-<summary><b>How do I handle authentication?</b></summary>
+## 8. 部署方式
 
-Check out our authentication examples:
-- [Using real browser profiles](https://github.com/browser-use/browser-use/blob/main/examples/browser/real_browser.py) - Reuse your existing Chrome profile with saved logins
-- If you want to use temporary accounts with inbox, choose AgentMail
-- To sync your auth profile with the remote browser, run `curl -fsSL https://browser-use.com/profile.sh | BROWSER_USE_API_KEY=XXXX sh` (replace XXXX with your API key)
+### 8.1 本地开发部署
 
-These examples show how to maintain sessions and handle authentication seamlessly.
-</details>
+- 适合功能验证、二次开发与调试
+- 直接使用 `uv` + `.env` 启动
 
-<details>
-<summary><b>How do I solve CAPTCHAs?</b></summary>
+### 8.2 私有服务器部署
 
-For CAPTCHA handling, you need better browser fingerprinting and proxies. Use [Browser Use Cloud](https://cloud.browser-use.com?utm_source=github&utm_medium=readme) which provides stealth browsers designed to avoid detection and CAPTCHA challenges.
-</details>
+- 通过 Docker 或进程守护工具运行
+- 将 `OPENAI_BASE_URL` 指向企业网关
+- 使用 `REDIS_URL`/`DATABASE_URL` 承接状态与业务扩展
 
-<details>
-<summary><b>How do I go into production?</b></summary>
+### 8.3 团队协作部署
 
-Chrome can consume a lot of memory, and running many agents in parallel can be tricky to manage.
+- 推荐将配置拆分为 `.env.dev` / `.env.staging` / `.env.prod`
+- 建议在 CI 中统一注入密钥，不在仓库提交真实凭据
 
-For production use cases, use our [Browser Use Cloud API](https://cloud.browser-use.com?utm_source=github&utm_medium=readme) which handles:
-- Scalable browser infrastructure
-- Memory management
-- Proxy rotation
-- Stealth browser fingerprinting
-- High-performance parallel execution
-</details>
+---
 
-<br/>
+## 9. 常见问题
 
-<div align="center">
+### 9.1 Ollama 无法连接
 
-**Tell your computer what to do, and it gets it done.**
+优先检查：
 
-<img src="https://github.com/user-attachments/assets/06fa3078-8461-4560-b434-445510c1766f" width="400"/>
+1. `ollama serve` 是否运行
+2. `BROWSER_USE_OLLAMA_HOST` 是否可访问
+3. 模型是否已 pull（如 `qwen2.5:7b-instruct`）
 
-[![Twitter Follow](https://img.shields.io/twitter/follow/Magnus?style=social)](https://x.com/intent/user?screen_name=mamagnus00)
-&emsp;&emsp;&emsp;
-[![Twitter Follow](https://img.shields.io/twitter/follow/Gregor?style=social)](https://x.com/intent/user?screen_name=gregpr07)
+### 9.2 页面操作不稳定
 
-</div>
+建议：
 
-<div align="center"> Made with ❤️ in Zurich and San Francisco </div>
+1. 优先使用更稳定的元素定位策略
+2. 在任务中增加等待与重试策略
+3. 对高风险步骤加入人工确认机制
+
+### 9.3 私有 API 报错
+
+建议确认：
+
+1. `OPENAI_BASE_URL` 是否带 `/v1`
+2. 鉴权头与 Key 格式是否符合网关要求
+3. 模型名称是否与网关配置一致
+
+---
+
+## 10. 许可证与合规说明
+
+- 本仓库保留上游项目的历史许可证文件：`LICENSE`
+- 新增自定义协议文件：`LICENSE-COMMUNITY.md`
+- 若你进行对外发布，请同时检查第三方依赖许可证条款
+
+在自动化场景下，请确保你的使用行为符合目标网站条款与当地法律法规。

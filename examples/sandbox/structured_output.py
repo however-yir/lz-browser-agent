@@ -10,8 +10,8 @@ import os
 
 from pydantic import BaseModel, Field
 
-from browser_use import Agent, Browser, ChatBrowserUse, sandbox
-from browser_use.agent.views import AgentHistoryList
+from lz_browser_agent import Agent, Browser, ChatBrowserUse, sandbox
+from lz_browser_agent.agent.views import AgentHistoryList
 
 
 class IPLocation(BaseModel):

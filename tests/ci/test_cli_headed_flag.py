@@ -1,6 +1,6 @@
 """Tests for CLI argument parsing, specifically the --headed flag behavior."""
 
-from browser_use.skill_cli.main import build_parser
+from lz_browser_agent.skill_cli.main import build_parser
 
 
 def test_headed_flag_before_open_subcommand():

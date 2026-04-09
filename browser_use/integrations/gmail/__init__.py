@@ -3,7 +3,7 @@ Gmail Integration for Browser Use
 Provides Gmail API integration for email reading and verification code extraction.
 This integration enables agents to read email content and extract verification codes themselves.
 Usage:
-    from browser_use.integrations.gmail import GmailService, register_gmail_actions
+    from lz_browser_agent.integrations.gmail import GmailService, register_gmail_actions
     # Option 1: Register Gmail actions with file-based authentication
     tools = Tools()
     register_gmail_actions(tools)

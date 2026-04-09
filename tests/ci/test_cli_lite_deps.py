@@ -3,7 +3,7 @@
 Creates a temp venv, installs browser-use with --no-deps, installs only the
 requirements-cli.txt deps, then verifies the CLI's critical import paths work.
 If this test fails, someone added a new import to the CLI path without updating
-browser_use/skill_cli/requirements-cli.txt.
+lz_browser_agent/skill_cli/requirements-cli.txt.
 """
 
 import subprocess
@@ -15,7 +15,7 @@ import pytest
 
 # Path to the repo root (two levels up from tests/ci/)
 REPO_ROOT = Path(__file__).parent.parent.parent
-REQUIREMENTS_CLI = REPO_ROOT / 'browser_use' / 'skill_cli' / 'requirements-cli.txt'
+REQUIREMENTS_CLI = REPO_ROOT / 'lz_browser_agent' / 'skill_cli' / 'requirements-cli.txt'
 
 
 @pytest.fixture(scope='module')
@@ -69,7 +69,7 @@ def _import_check(python: Path, import_stmt: str) -> subprocess.CompletedProcess
 def test_cli_entry_point(lite_venv):
 	"""The CLI entry point must run --help with only CLI deps."""
 	result = subprocess.run(
-		[str(lite_venv), '-m', 'browser_use.skill_cli.main', '--help'],
+		[str(lite_venv), '-m', 'lz_browser_agent.skill_cli.main', '--help'],
 		capture_output=True,
 		text=True,
 		timeout=30,
@@ -80,11 +80,11 @@ def test_cli_entry_point(lite_venv):
 
 def test_daemon_imports(lite_venv):
 	"""The daemon module must import with only CLI deps."""
-	result = _import_check(lite_venv, 'from browser_use.skill_cli.daemon import main')
+	result = _import_check(lite_venv, 'from lz_browser_agent.skill_cli.daemon import main')
 	assert result.returncode == 0, f'daemon import failed:\n{result.stderr}'
 
 
 def test_browser_session_imports(lite_venv):
 	"""BrowserSession must import with only CLI deps."""
-	result = _import_check(lite_venv, 'from browser_use.browser.session import BrowserSession')
+	result = _import_check(lite_venv, 'from lz_browser_agent.browser.session import BrowserSession')
 	assert result.returncode == 0, f'BrowserSession import failed:\n{result.stderr}'

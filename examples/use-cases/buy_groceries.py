@@ -2,7 +2,7 @@ import asyncio
 
 from pydantic import BaseModel, Field
 
-from browser_use import Agent, Browser, ChatBrowserUse
+from lz_browser_agent import Agent, Browser, ChatBrowserUse
 
 
 class GroceryItem(BaseModel):

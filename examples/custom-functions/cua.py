@@ -24,9 +24,9 @@ load_dotenv()
 from openai import AsyncOpenAI
 from pydantic import BaseModel, Field
 
-from browser_use import Agent, ChatOpenAI, Tools
-from browser_use.agent.views import ActionResult
-from browser_use.browser import BrowserSession
+from lz_browser_agent import Agent, ChatOpenAI, Tools
+from lz_browser_agent.agent.views import ActionResult
+from lz_browser_agent.browser import BrowserSession
 
 
 class OpenAICUAAction(BaseModel):

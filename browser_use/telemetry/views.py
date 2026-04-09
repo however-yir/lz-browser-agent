@@ -3,7 +3,7 @@ from collections.abc import Sequence
 from dataclasses import asdict, dataclass
 from typing import Any, Literal
 
-from browser_use.config import is_running_in_docker
+from lz_browser_agent.config import is_running_in_docker
 
 
 @dataclass

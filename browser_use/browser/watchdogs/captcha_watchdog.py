@@ -18,14 +18,14 @@ from cdp_use.cdp.browseruse.events import CaptchaSolverFinishedEvent as CDPCaptc
 from cdp_use.cdp.browseruse.events import CaptchaSolverStartedEvent as CDPCaptchaSolverStartedEvent
 from pydantic import PrivateAttr
 
-from browser_use.browser.events import (
+from lz_browser_agent.browser.events import (
 	BrowserConnectedEvent,
 	BrowserStoppedEvent,
 	CaptchaSolverFinishedEvent,
 	CaptchaSolverStartedEvent,
 	_get_timeout,
 )
-from browser_use.browser.watchdog_base import BaseWatchdog
+from lz_browser_agent.browser.watchdog_base import BaseWatchdog
 
 CaptchaResultType = Literal['success', 'failed', 'timeout', 'unknown']
 

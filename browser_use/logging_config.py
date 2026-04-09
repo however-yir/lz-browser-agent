@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use.config import CONFIG
+from lz_browser_agent.config import CONFIG
 
 
 def addLoggingLevel(levelName, levelNum, methodName=None):
@@ -81,7 +81,7 @@ def setup_logging(stream=None, log_level=None, force_setup=False, debug_log_file
 
 	# Check if handlers are already set up
 	if logging.getLogger().hasHandlers() and not force_setup:
-		return logging.getLogger('browser_use')
+		return logging.getLogger('lz_browser_agent')
 
 	# Clear existing handlers
 	root = logging.getLogger()
@@ -94,7 +94,7 @@ def setup_logging(stream=None, log_level=None, force_setup=False, debug_log_file
 
 		def format(self, record):
 			# Only clean up names in INFO mode, keep everything in DEBUG mode
-			if self.log_level > logging.DEBUG and isinstance(record.name, str) and record.name.startswith('browser_use.'):
+			if self.log_level > logging.DEBUG and isinstance(record.name, str) and record.name.startswith('lz_browser_agent.'):
 				# Extract clean component names from logger names
 				if 'Agent' in record.name:
 					record.name = 'Agent'
@@ -104,8 +104,8 @@ def setup_logging(stream=None, log_level=None, force_setup=False, debug_log_file
 					record.name = 'tools'
 				elif 'dom' in record.name:
 					record.name = 'dom'
-				elif record.name.startswith('browser_use.'):
-					# For other browser_use modules, use the last part
+				elif record.name.startswith('lz_browser_agent.'):
+					# For other lz_browser_agent modules, use the last part
 					parts = record.name.split('.')
 					if len(parts) >= 2:
 						record.name = parts[-1]
@@ -156,8 +156,8 @@ def setup_logging(stream=None, log_level=None, force_setup=False, debug_log_file
 	effective_log_level = logging.DEBUG if debug_log_file else log_level
 	root.setLevel(effective_log_level)
 
-	# Configure browser_use logger
-	browser_use_logger = logging.getLogger('browser_use')
+	# Configure lz_browser_agent logger
+	browser_use_logger = logging.getLogger('lz_browser_agent')
 	browser_use_logger.propagate = False  # Don't propagate to root logger
 	browser_use_logger.addHandler(console)
 	for handler in file_handlers:
@@ -202,7 +202,7 @@ def setup_logging(stream=None, log_level=None, force_setup=False, debug_log_file
 			cdp_logger.addHandler(console)
 			cdp_logger.propagate = False
 
-	logger = logging.getLogger('browser_use')
+	logger = logging.getLogger('lz_browser_agent')
 	# logger.debug('BrowserUse logging setup complete with level %s', log_type)
 
 	# Silence third-party loggers (but not CDP ones which we configured above)
@@ -301,7 +301,7 @@ def setup_log_pipes(session_id: str, base_dir: str | None = None):
 	agent_handler = FIFOHandler(str(pipe_dir / 'agent.pipe'))
 	agent_handler.setLevel(logging.DEBUG)
 	agent_handler.setFormatter(logging.Formatter('%(levelname)-8s [%(name)s] %(message)s'))
-	for name in ['browser_use.agent', 'browser_use.tools']:
+	for name in ['lz_browser_agent.agent', 'lz_browser_agent.tools']:
 		logger = logging.getLogger(name)
 		logger.addHandler(agent_handler)
 		logger.setLevel(logging.DEBUG)
@@ -321,7 +321,7 @@ def setup_log_pipes(session_id: str, base_dir: str | None = None):
 	event_handler = FIFOHandler(str(pipe_dir / 'events.pipe'))
 	event_handler.setLevel(logging.INFO)
 	event_handler.setFormatter(logging.Formatter('%(levelname)-8s [%(name)s] %(message)s'))
-	for name in ['bubus', 'browser_use.browser.session']:
+	for name in ['bubus', 'lz_browser_agent.browser.session']:
 		logger = logging.getLogger(name)
 		logger.addHandler(event_handler)
 		logger.setLevel(logging.INFO)  # Enable INFO for event bus

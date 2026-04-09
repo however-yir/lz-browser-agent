@@ -13,8 +13,8 @@ import asyncio
 import pytest
 from pytest_httpserver import HTTPServer
 
-from browser_use.browser import BrowserProfile, BrowserSession
-from browser_use.dom.markdown_extractor import extract_clean_markdown
+from lz_browser_agent.browser import BrowserProfile, BrowserSession
+from lz_browser_agent.dom.markdown_extractor import extract_clean_markdown
 
 # --- Fixtures ---
 
@@ -203,10 +203,10 @@ class TestExtractImagesAutoDetection:
 		"""Query containing 'image url' auto-enables extract_images: table-cell img URLs appear in LLM input."""
 		from unittest.mock import AsyncMock
 
-		from browser_use.filesystem.file_system import FileSystem
-		from browser_use.llm import BaseChatModel
-		from browser_use.llm.views import ChatInvokeCompletion
-		from browser_use.tools.service import Tools
+		from lz_browser_agent.filesystem.file_system import FileSystem
+		from lz_browser_agent.llm import BaseChatModel
+		from lz_browser_agent.llm.views import ChatInvokeCompletion
+		from lz_browser_agent.tools.service import Tools
 
 		await _navigate(browser_session, f'{base_url}/products-table')
 
@@ -251,10 +251,10 @@ class TestExtractImagesAutoDetection:
 		"""Query without image keywords does NOT auto-enable extract_images: table-cell img URLs absent."""
 		from unittest.mock import AsyncMock
 
-		from browser_use.filesystem.file_system import FileSystem
-		from browser_use.llm import BaseChatModel
-		from browser_use.llm.views import ChatInvokeCompletion
-		from browser_use.tools.service import Tools
+		from lz_browser_agent.filesystem.file_system import FileSystem
+		from lz_browser_agent.llm import BaseChatModel
+		from lz_browser_agent.llm.views import ChatInvokeCompletion
+		from lz_browser_agent.tools.service import Tools
 
 		await _navigate(browser_session, f'{base_url}/products-table')
 

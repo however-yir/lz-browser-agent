@@ -4,9 +4,9 @@ import os
 
 import pytest
 
-from browser_use.agent.service import Agent
-from browser_use.browser.profile import BrowserProfile
-from browser_use.browser.session import BrowserSession
+from lz_browser_agent.agent.service import Agent
+from lz_browser_agent.browser.profile import BrowserProfile
+from lz_browser_agent.browser.session import BrowserSession
 
 
 async def run_model_button_click_test(
@@ -33,7 +33,7 @@ async def run_model_button_click_test(
 		api_key = None
 
 	# Handle Azure-specific endpoint validation
-	from browser_use.llm.azure.chat import ChatAzureOpenAI
+	from lz_browser_agent.llm.azure.chat import ChatAzureOpenAI
 
 	if model_class is ChatAzureOpenAI:
 		azure_endpoint = os.getenv('AZURE_OPENAI_ENDPOINT')

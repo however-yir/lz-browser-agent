@@ -6,11 +6,11 @@ disabled planning, replan nudge, flash mode schema, and edge cases.
 
 import json
 
-from browser_use.agent.views import (
+from lz_browser_agent.agent.views import (
 	AgentOutput,
 	PlanItem,
 )
-from browser_use.tools.service import Tools
+from lz_browser_agent.tools.service import Tools
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -36,7 +36,7 @@ def _make_agent_output(**overrides) -> AgentOutput:
 
 def _make_agent(browser_session, mock_llm, **kwargs):
 	"""Create an Agent with defaults suitable for unit tests."""
-	from browser_use import Agent
+	from lz_browser_agent import Agent
 
 	return Agent(task='Test task', llm=mock_llm, browser_session=browser_session, **kwargs)
 

@@ -3,29 +3,29 @@ from __future__ import annotations
 import logging
 from typing import Literal
 
-from browser_use.agent.message_manager.views import (
+from lz_browser_agent.agent.message_manager.views import (
 	HistoryItem,
 )
-from browser_use.agent.prompts import AgentMessagePrompt
-from browser_use.agent.views import (
+from lz_browser_agent.agent.prompts import AgentMessagePrompt
+from lz_browser_agent.agent.views import (
 	ActionResult,
 	AgentOutput,
 	AgentStepInfo,
 	MessageCompactionSettings,
 	MessageManagerState,
 )
-from browser_use.browser.views import BrowserStateSummary
-from browser_use.filesystem.file_system import FileSystem
-from browser_use.llm.base import BaseChatModel
-from browser_use.llm.messages import (
+from lz_browser_agent.browser.views import BrowserStateSummary
+from lz_browser_agent.filesystem.file_system import FileSystem
+from lz_browser_agent.llm.base import BaseChatModel
+from lz_browser_agent.llm.messages import (
 	BaseMessage,
 	ContentPartImageParam,
 	ContentPartTextParam,
 	SystemMessage,
 	UserMessage,
 )
-from browser_use.observability import observe_debug
-from browser_use.utils import match_url_with_domain_pattern, time_execution_sync
+from lz_browser_agent.observability import observe_debug
+from lz_browser_agent.utils import match_url_with_domain_pattern, time_execution_sync
 
 logger = logging.getLogger(__name__)
 

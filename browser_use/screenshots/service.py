@@ -7,7 +7,7 @@ from pathlib import Path
 
 import anyio
 
-from browser_use.observability import observe_debug
+from lz_browser_agent.observability import observe_debug
 
 
 class ScreenshotService:

@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from typing import Any, overload
 
-from browser_use.llm.messages import (
+from lz_browser_agent.llm.messages import (
 	AssistantMessage,
 	BaseMessage,
 	ContentPartImageParam,

@@ -10,15 +10,15 @@ from cdp_use.cdp.target import SessionID, TargetID
 from cdp_use.cdp.target.events import TargetCrashedEvent
 from pydantic import Field, PrivateAttr
 
-from browser_use.browser.events import (
+from lz_browser_agent.browser.events import (
 	BrowserConnectedEvent,
 	BrowserErrorEvent,
 	BrowserStoppedEvent,
 	TabClosedEvent,
 	TabCreatedEvent,
 )
-from browser_use.browser.watchdog_base import BaseWatchdog
-from browser_use.utils import create_task_with_error_handling
+from lz_browser_agent.browser.watchdog_base import BaseWatchdog
+from lz_browser_agent.utils import create_task_with_error_handling
 
 if TYPE_CHECKING:
 	pass

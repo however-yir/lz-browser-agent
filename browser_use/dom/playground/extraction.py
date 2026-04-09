@@ -7,13 +7,13 @@ import anyio
 import pyperclip
 import tiktoken
 
-from browser_use.agent.prompts import AgentMessagePrompt
-from browser_use.browser import BrowserProfile, BrowserSession
-from browser_use.browser.events import ClickElementEvent, TypeTextEvent
-from browser_use.browser.profile import ViewportSize
-from browser_use.dom.service import DomService
-from browser_use.dom.views import DEFAULT_INCLUDE_ATTRIBUTES
-from browser_use.filesystem.file_system import FileSystem
+from lz_browser_agent.agent.prompts import AgentMessagePrompt
+from lz_browser_agent.browser import BrowserProfile, BrowserSession
+from lz_browser_agent.browser.events import ClickElementEvent, TypeTextEvent
+from lz_browser_agent.browser.profile import ViewportSize
+from lz_browser_agent.dom.service import DomService
+from lz_browser_agent.dom.views import DEFAULT_INCLUDE_ATTRIBUTES
+from lz_browser_agent.filesystem.file_system import FileSystem
 
 TIMEOUT = 60
 

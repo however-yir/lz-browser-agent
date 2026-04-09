@@ -1,8 +1,8 @@
 import asyncio
 
-from browser_use.llm import ContentText
-from browser_use.llm.groq.chat import ChatGroq
-from browser_use.llm.messages import SystemMessage, UserMessage
+from lz_browser_agent.llm import ContentText
+from lz_browser_agent.llm.groq.chat import ChatGroq
+from lz_browser_agent.llm.messages import SystemMessage, UserMessage
 
 llm = ChatGroq(
 	model='meta-llama/llama-4-maverick-17b-128e-instruct',
@@ -14,7 +14,7 @@ llm = ChatGroq(
 async def main():
 	from pydantic import BaseModel
 
-	from browser_use.tokens.service import TokenCost
+	from lz_browser_agent.tokens.service import TokenCost
 
 	tk = TokenCost().register_llm(llm)
 

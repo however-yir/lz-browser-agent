@@ -9,8 +9,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-from browser_use import Agent
-from browser_use.llm import ChatGroq
+from lz_browser_agent import Agent
+from lz_browser_agent.llm import ChatGroq
 
 groq_api_key = os.environ.get('GROQ_API_KEY')
 llm = ChatGroq(

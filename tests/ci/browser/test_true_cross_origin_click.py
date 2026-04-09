@@ -4,9 +4,9 @@ import asyncio
 
 import pytest
 
-from browser_use.browser.profile import BrowserProfile, ViewportSize
-from browser_use.browser.session import BrowserSession
-from browser_use.tools.service import Tools
+from lz_browser_agent.browser.profile import BrowserProfile, ViewportSize
+from lz_browser_agent.browser.session import BrowserSession
+from lz_browser_agent.tools.service import Tools
 
 
 @pytest.fixture

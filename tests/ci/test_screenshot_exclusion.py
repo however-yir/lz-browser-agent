@@ -2,10 +2,10 @@
 
 import pytest
 
-from browser_use.agent.service import Agent
-from browser_use.browser.profile import BrowserProfile
-from browser_use.browser.session import BrowserSession
-from browser_use.tools.service import Tools
+from lz_browser_agent.agent.service import Agent
+from lz_browser_agent.browser.profile import BrowserProfile
+from lz_browser_agent.browser.session import BrowserSession
+from lz_browser_agent.tools.service import Tools
 from tests.ci.conftest import create_mock_llm
 
 

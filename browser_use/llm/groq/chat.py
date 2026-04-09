@@ -19,13 +19,13 @@ from groq.types.chat.completion_create_params import (
 from httpx import URL
 from pydantic import BaseModel
 
-from browser_use.llm.base import BaseChatModel, ChatInvokeCompletion
-from browser_use.llm.exceptions import ModelProviderError, ModelRateLimitError
-from browser_use.llm.groq.parser import try_parse_groq_failed_generation
-from browser_use.llm.groq.serializer import GroqMessageSerializer
-from browser_use.llm.messages import BaseMessage
-from browser_use.llm.schema import SchemaOptimizer
-from browser_use.llm.views import ChatInvokeUsage
+from lz_browser_agent.llm.base import BaseChatModel, ChatInvokeCompletion
+from lz_browser_agent.llm.exceptions import ModelProviderError, ModelRateLimitError
+from lz_browser_agent.llm.groq.parser import try_parse_groq_failed_generation
+from lz_browser_agent.llm.groq.serializer import GroqMessageSerializer
+from lz_browser_agent.llm.messages import BaseMessage
+from lz_browser_agent.llm.schema import SchemaOptimizer
+from lz_browser_agent.llm.views import ChatInvokeUsage
 
 GroqVerifiedModels = Literal[
 	'meta-llama/llama-4-maverick-17b-128e-instruct',

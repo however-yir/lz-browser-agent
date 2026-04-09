@@ -19,12 +19,12 @@ from anthropic.types.tool_choice_tool_param import ToolChoiceToolParam
 from httpx import Timeout
 from pydantic import BaseModel
 
-from browser_use.llm.anthropic.serializer import AnthropicMessageSerializer
-from browser_use.llm.base import BaseChatModel
-from browser_use.llm.exceptions import ModelProviderError, ModelRateLimitError
-from browser_use.llm.messages import BaseMessage
-from browser_use.llm.schema import SchemaOptimizer
-from browser_use.llm.views import ChatInvokeCompletion, ChatInvokeUsage
+from lz_browser_agent.llm.anthropic.serializer import AnthropicMessageSerializer
+from lz_browser_agent.llm.base import BaseChatModel
+from lz_browser_agent.llm.exceptions import ModelProviderError, ModelRateLimitError
+from lz_browser_agent.llm.messages import BaseMessage
+from lz_browser_agent.llm.schema import SchemaOptimizer
+from lz_browser_agent.llm.views import ChatInvokeCompletion, ChatInvokeUsage
 
 T = TypeVar('T', bound=BaseModel)
 

@@ -38,7 +38,7 @@ args = parser.parse_args()
 
 setup_environment(args.debug)
 
-from browser_use import Agent, BrowserSession, ChatGoogle
+from lz_browser_agent import Agent, BrowserSession, ChatGoogle
 
 GEMINI_API_KEY = os.getenv('GOOGLE_API_KEY') or 'xxxx'
 

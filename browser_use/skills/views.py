@@ -51,7 +51,7 @@ class Skill(BaseModel):
 
 		exclude_cookies is very useful when dealing with LLMs that are not aware of cookies.
 		"""
-		from browser_use.skills.utils import convert_parameters_to_pydantic
+		from lz_browser_agent.skills.utils import convert_parameters_to_pydantic
 
 		parameters = list[ParameterSchema](self.parameters)
 
@@ -66,6 +66,6 @@ class Skill(BaseModel):
 		if not self.output_schema:
 			return None
 
-		from browser_use.skills.utils import convert_json_schema_to_pydantic
+		from lz_browser_agent.skills.utils import convert_json_schema_to_pydantic
 
 		return convert_json_schema_to_pydantic(self.output_schema, model_name=f'{self.title}Output')

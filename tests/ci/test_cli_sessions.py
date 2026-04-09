@@ -6,13 +6,13 @@ and path agreement between main.py (stdlib-only) and utils.py.
 
 import pytest
 
-from browser_use.skill_cli.main import (
+from lz_browser_agent.skill_cli.main import (
 	_get_home_dir,
 	_get_pid_path,
 	_get_socket_path,
 	build_parser,
 )
-from browser_use.skill_cli.utils import (
+from lz_browser_agent.skill_cli.utils import (
 	get_home_dir,
 	get_pid_path,
 	get_socket_path,

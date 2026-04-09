@@ -16,7 +16,7 @@ import os
 
 from dotenv import load_dotenv
 
-from browser_use import Agent, ChatVercel
+from lz_browser_agent import Agent, ChatVercel
 
 load_dotenv()
 

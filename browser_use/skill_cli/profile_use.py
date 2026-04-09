@@ -14,7 +14,7 @@ from pathlib import Path
 
 def get_profile_use_binary() -> Path | None:
 	"""Return path to managed profile-use binary, or None if not installed."""
-	from browser_use.skill_cli.utils import get_bin_dir
+	from lz_browser_agent.skill_cli.utils import get_bin_dir
 
 	binary = get_bin_dir() / ('profile-use.exe' if sys.platform == 'win32' else 'profile-use')
 	if binary.is_file() and os.access(str(binary), os.X_OK):
@@ -30,7 +30,7 @@ def download_profile_use() -> Path:
 
 	Raises RuntimeError if download fails.
 	"""
-	from browser_use.skill_cli.utils import get_bin_dir
+	from lz_browser_agent.skill_cli.utils import get_bin_dir
 
 	if not shutil.which('curl'):
 		raise RuntimeError(
@@ -91,11 +91,11 @@ def run_profile_use(args: list[str]) -> int:
 		print(f'Error: {e}', file=sys.stderr)
 		return 1
 
-	from browser_use.skill_cli.utils import get_home_dir
+	from lz_browser_agent.skill_cli.utils import get_home_dir
 
 	env = {**os.environ, 'BROWSER_USE_CONFIG_DIR': str(get_home_dir())}
 	# Forward API key from config.json for profile-use binary
-	from browser_use.skill_cli.config import get_config_value
+	from lz_browser_agent.skill_cli.config import get_config_value
 
 	api_key = get_config_value('api_key')
 	if api_key:

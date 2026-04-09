@@ -12,22 +12,22 @@ from typing import TYPE_CHECKING, Any, Generic, Literal, TypeVar, cast
 from urllib.parse import urlparse
 
 if TYPE_CHECKING:
-	from browser_use.skills.views import Skill
+	from lz_browser_agent.skills.views import Skill
 
 from dotenv import load_dotenv
 
-from browser_use.agent.cloud_events import (
+from lz_browser_agent.agent.cloud_events import (
 	CreateAgentOutputFileEvent,
 	CreateAgentSessionEvent,
 	CreateAgentStepEvent,
 	CreateAgentTaskEvent,
 	UpdateAgentTaskEvent,
 )
-from browser_use.agent.message_manager.utils import save_conversation
-from browser_use.llm.base import BaseChatModel
-from browser_use.llm.exceptions import ModelProviderError, ModelRateLimitError
-from browser_use.llm.messages import BaseMessage, ContentPartImageParam, ContentPartTextParam, UserMessage
-from browser_use.tokens.service import TokenCost
+from lz_browser_agent.agent.message_manager.utils import save_conversation
+from lz_browser_agent.llm.base import BaseChatModel
+from lz_browser_agent.llm.exceptions import ModelProviderError, ModelRateLimitError
+from lz_browser_agent.llm.messages import BaseMessage, ContentPartImageParam, ContentPartTextParam, UserMessage
+from lz_browser_agent.tokens.service import TokenCost
 
 load_dotenv()
 
@@ -35,16 +35,16 @@ from bubus import EventBus
 from pydantic import BaseModel, ValidationError
 from uuid_extensions import uuid7str
 
-from browser_use import Browser, BrowserProfile, BrowserSession
-from browser_use.agent.judge import construct_judge_messages
+from lz_browser_agent import Browser, BrowserProfile, BrowserSession
+from lz_browser_agent.agent.judge import construct_judge_messages
 
 # Lazy import for gif to avoid heavy agent.views import at startup
-# from browser_use.agent.gif import create_history_gif
-from browser_use.agent.message_manager.service import (
+# from lz_browser_agent.agent.gif import create_history_gif
+from lz_browser_agent.agent.message_manager.service import (
 	MessageManager,
 )
-from browser_use.agent.prompts import SystemPrompt
-from browser_use.agent.views import (
+from lz_browser_agent.agent.prompts import SystemPrompt
+from lz_browser_agent.agent.views import (
 	ActionResult,
 	AgentError,
 	AgentHistory,
@@ -61,18 +61,18 @@ from browser_use.agent.views import (
 	PlanItem,
 	StepMetadata,
 )
-from browser_use.browser.events import _get_timeout
-from browser_use.browser.session import DEFAULT_BROWSER_PROFILE
-from browser_use.browser.views import BrowserStateSummary
-from browser_use.config import CONFIG
-from browser_use.dom.views import DOMInteractedElement, MatchLevel
-from browser_use.filesystem.file_system import FileSystem
-from browser_use.observability import observe, observe_debug
-from browser_use.telemetry.service import ProductTelemetry
-from browser_use.telemetry.views import AgentTelemetryEvent
-from browser_use.tools.registry.views import ActionModel
-from browser_use.tools.service import Tools
-from browser_use.utils import (
+from lz_browser_agent.browser.events import _get_timeout
+from lz_browser_agent.browser.session import DEFAULT_BROWSER_PROFILE
+from lz_browser_agent.browser.views import BrowserStateSummary
+from lz_browser_agent.config import CONFIG
+from lz_browser_agent.dom.views import DOMInteractedElement, MatchLevel
+from lz_browser_agent.filesystem.file_system import FileSystem
+from lz_browser_agent.observability import observe, observe_debug
+from lz_browser_agent.telemetry.service import ProductTelemetry
+from lz_browser_agent.telemetry.views import AgentTelemetryEvent
+from lz_browser_agent.tools.registry.views import ActionModel
+from lz_browser_agent.tools.service import Tools
+from lz_browser_agent.utils import (
 	URL_PATTERN,
 	_log_pretty_path,
 	check_latest_browser_use_version,
@@ -222,12 +222,12 @@ class Agent(Generic[Context, AgentStructuredOutput]):
 		if llm is None:
 			default_llm_name = CONFIG.DEFAULT_LLM
 			if default_llm_name:
-				from browser_use.llm.models import get_llm_by_name
+				from lz_browser_agent.llm.models import get_llm_by_name
 
 				llm = get_llm_by_name(default_llm_name)
 			else:
 				# No default LLM specified, use the original default
-				from browser_use import ChatBrowserUse
+				from lz_browser_agent import ChatBrowserUse
 
 				llm = ChatBrowserUse()
 
@@ -338,7 +338,7 @@ class Agent(Generic[Context, AgentStructuredOutput]):
 		if skill_service is not None:
 			self.skill_service = skill_service
 		elif skill_ids:
-			from browser_use.skills import SkillService
+			from lz_browser_agent.skills import SkillService
 
 			self.skill_service = SkillService(skill_ids=skill_ids)
 
@@ -487,7 +487,7 @@ class Agent(Generic[Context, AgentStructuredOutput]):
 		self.browser_session.llm_screenshot_size = llm_screenshot_size
 
 		# Check if LLM is ChatAnthropic instance
-		from browser_use.llm.anthropic.chat import ChatAnthropic
+		from lz_browser_agent.llm.anthropic.chat import ChatAnthropic
 
 		is_anthropic = isinstance(self.llm, ChatAnthropic)
 
@@ -630,7 +630,7 @@ class Agent(Generic[Context, AgentStructuredOutput]):
 			if (browser_session := getattr(self, 'browser_session', None)) and browser_session.agent_focus_target_id
 			else '--'
 		)
-		return logging.getLogger(f'browser_use.Agent🅰 {_task_id} ⇢ 🅑 {_browser_session_id} 🅣 {_current_target_id}')
+		return logging.getLogger(f'lz_browser_agent.Agent🅰 {_task_id} ⇢ 🅑 {_browser_session_id} 🅣 {_current_target_id}')
 
 	@property
 	def browser_profile(self) -> BrowserProfile:
@@ -726,7 +726,7 @@ class Agent(Generic[Context, AgentStructuredOutput]):
 	def _set_screenshot_service(self) -> None:
 		"""Initialize screenshot service using agent directory"""
 		try:
-			from browser_use.screenshots.service import ScreenshotService
+			from lz_browser_agent.screenshots.service import ScreenshotService
 
 			self.screenshot_service = ScreenshotService(self.agent_directory)
 			self.logger.debug(f'📸 Screenshot service initialized in: {self.agent_directory}/screenshots')
@@ -1831,7 +1831,7 @@ class Agent(Generic[Context, AgentStructuredOutput]):
 		returns:
 			tuple[filtered_input_messages, urls we replaced {shorter_url: original_url}]
 		"""
-		from browser_use.llm.messages import AssistantMessage, UserMessage
+		from lz_browser_agent.llm.messages import AssistantMessage, UserMessage
 
 		urls_replaced: dict[str, str] = {}
 
@@ -2494,7 +2494,7 @@ class Agent(Generic[Context, AgentStructuredOutput]):
 		should_delay_close = False
 
 		# Set up the  signal handler with callbacks specific to this agent
-		from browser_use.utils import SignalHandler
+		from lz_browser_agent.utils import SignalHandler
 
 		# Define the custom exit callback function for second CTRL+C
 		def on_force_exit_log_telemetry():
@@ -2673,7 +2673,7 @@ class Agent(Generic[Context, AgentStructuredOutput]):
 					output_path = self.settings.generate_gif
 
 				# Lazy import gif module to avoid heavy startup cost
-				from browser_use.agent.gif import create_history_gif
+				from lz_browser_agent.agent.gif import create_history_gif
 
 				create_history_gif(task=self.task, history=self.history, output_path=output_path)
 
@@ -2866,7 +2866,7 @@ class Agent(Generic[Context, AgentStructuredOutput]):
 		self, original_task: str, results: list[ActionResult], summary_llm: BaseChatModel | None = None
 	) -> ActionResult:
 		"""Generate AI summary of rerun completion using screenshot and last step info"""
-		from browser_use.agent.views import RerunSummaryAction
+		from lz_browser_agent.agent.views import RerunSummaryAction
 
 		# Get current screenshot
 		screenshot_b64 = None
@@ -2883,7 +2883,7 @@ class Agent(Generic[Context, AgentStructuredOutput]):
 		error_count = sum(1 for r in results if r.error)
 		success_count = len(results) - error_count
 
-		from browser_use.agent.prompts import get_rerun_summary_message, get_rerun_summary_prompt
+		from lz_browser_agent.agent.prompts import get_rerun_summary_message, get_rerun_summary_prompt
 
 		prompt = get_rerun_summary_prompt(
 			original_task=original_task,
@@ -2903,7 +2903,7 @@ class Agent(Generic[Context, AgentStructuredOutput]):
 				self.logger.debug(f'Using provided LLM for rerun summary: {summary_llm.model}')
 
 			# Build message with prompt and optional screenshot
-			from browser_use.llm.messages import BaseMessage
+			from lz_browser_agent.llm.messages import BaseMessage
 
 			message = get_rerun_summary_message(prompt, screenshot_b64)
 			messages: list[BaseMessage] = [message]  # type: ignore[list-item]
@@ -2973,9 +2973,9 @@ class Agent(Generic[Context, AgentStructuredOutput]):
 		Returns:
 			ActionResult with extracted content
 		"""
-		from browser_use.agent.prompts import get_ai_step_system_prompt, get_ai_step_user_prompt, get_rerun_summary_message
-		from browser_use.llm.messages import SystemMessage, UserMessage
-		from browser_use.utils import sanitize_surrogates
+		from lz_browser_agent.agent.prompts import get_ai_step_system_prompt, get_ai_step_user_prompt, get_rerun_summary_message
+		from lz_browser_agent.llm.messages import SystemMessage, UserMessage
+		from lz_browser_agent.utils import sanitize_surrogates
 
 		# Use provided LLM or agent's LLM
 		llm = ai_step_llm or self.llm
@@ -2983,7 +2983,7 @@ class Agent(Generic[Context, AgentStructuredOutput]):
 
 		# Extract clean markdown
 		try:
-			from browser_use.dom.markdown_extractor import extract_clean_markdown
+			from lz_browser_agent.dom.markdown_extractor import extract_clean_markdown
 
 			content, content_stats = await extract_clean_markdown(
 				browser_session=self.browser_session, extract_links=extract_links
@@ -4020,13 +4020,13 @@ class Agent(Generic[Context, AgentStructuredOutput]):
 
 	def detect_variables(self) -> dict[str, DetectedVariable]:
 		"""Detect reusable variables in agent history"""
-		from browser_use.agent.variable_detector import detect_variables_in_history
+		from lz_browser_agent.agent.variable_detector import detect_variables_in_history
 
 		return detect_variables_in_history(self.history)
 
 	def _substitute_variables_in_history(self, history: AgentHistoryList, variables: dict[str, str]) -> AgentHistoryList:
 		"""Substitute variables in history with new values for rerunning with different data"""
-		from browser_use.agent.variable_detector import detect_variables_in_history
+		from lz_browser_agent.agent.variable_detector import detect_variables_in_history
 
 		# Detect variables in the history
 		detected_vars = detect_variables_in_history(history)

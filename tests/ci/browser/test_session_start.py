@@ -14,13 +14,13 @@ import logging
 
 import pytest
 
-from browser_use.browser.profile import (
+from lz_browser_agent.browser.profile import (
 	BROWSERUSE_DEFAULT_CHANNEL,
 	BrowserChannel,
 	BrowserProfile,
 )
-from browser_use.browser.session import BrowserSession
-from browser_use.config import CONFIG
+from lz_browser_agent.browser.session import BrowserSession
+from lz_browser_agent.config import CONFIG
 
 # Set up test logging
 logger = logging.getLogger('browser_session_start_tests')
@@ -77,7 +77,7 @@ class TestBrowserSessionStart:
 	# 	assert current_tab_id is not None
 
 	# 	# Close the current tab using the event system
-	# 	from browser_use.browser.events import CloseTabEvent
+	# 	from lz_browser_agent.browser.events import CloseTabEvent
 
 	# 	close_event = browser_session.event_bus.dispatch(CloseTabEvent(target_id=current_tab_id))
 	# 	await close_event
@@ -146,8 +146,8 @@ class TestBrowserSessionReusePatterns:
 
 	async def test_sequential_agents_same_profile_different_browser(self, mock_llm):
 		"""Test Sequential Agents, Same Profile, Different Browser pattern"""
-		from browser_use import Agent
-		from browser_use.browser.profile import BrowserProfile
+		from lz_browser_agent import Agent
+		from lz_browser_agent.browser.profile import BrowserProfile
 
 		# Create a reusable profile
 		reused_profile = BrowserProfile(
@@ -183,7 +183,7 @@ class TestBrowserSessionReusePatterns:
 
 	async def test_sequential_agents_same_profile_same_browser(self, mock_llm):
 		"""Test Sequential Agents, Same Profile, Same Browser pattern"""
-		from browser_use import Agent, BrowserSession
+		from lz_browser_agent import Agent, BrowserSession
 
 		# Create a reusable session with keep_alive
 		reused_session = BrowserSession(
@@ -252,7 +252,7 @@ class TestBrowserSessionEventSystem:
 		await browser_session.attach_all_watchdogs()
 
 		# Check that handlers are registered in the event bus
-		from browser_use.browser.events import (
+		from lz_browser_agent.browser.events import (
 			BrowserStartEvent,
 			BrowserStateRequestEvent,
 			BrowserStopEvent,
@@ -281,7 +281,7 @@ class TestBrowserSessionEventSystem:
 
 	async def test_direct_event_dispatching(self, browser_session):
 		"""Test direct event dispatching without using the public API."""
-		from browser_use.browser.events import BrowserConnectedEvent, BrowserStartEvent
+		from lz_browser_agent.browser.events import BrowserConnectedEvent, BrowserStartEvent
 
 		# Dispatch BrowserStartEvent directly
 		start_event = browser_session.event_bus.dispatch(BrowserStartEvent())
@@ -303,7 +303,7 @@ class TestBrowserSessionEventSystem:
 
 	async def test_event_system_error_handling(self, browser_session):
 		"""Test error handling in event system."""
-		from browser_use.browser.events import BrowserStartEvent
+		from lz_browser_agent.browser.events import BrowserStartEvent
 
 		# Create session with invalid CDP URL to trigger error
 		error_session = BrowserSession(
@@ -329,7 +329,7 @@ class TestBrowserSessionEventSystem:
 
 	async def test_concurrent_event_dispatching(self, browser_session: BrowserSession):
 		"""Test that concurrent events are handled properly."""
-		from browser_use.browser.events import ScreenshotEvent
+		from lz_browser_agent.browser.events import ScreenshotEvent
 
 		# Start browser first
 		await browser_session.start()
@@ -347,7 +347,7 @@ class TestBrowserSessionEventSystem:
 
 	# async def test_many_parallel_browser_sessions(self):
 	# 	"""Test spawning 12 parallel browser_sessions with different settings and ensure they all work"""
-	# 	from browser_use import BrowserSession
+	# 	from lz_browser_agent import BrowserSession
 
 	# 	browser_sessions = []
 

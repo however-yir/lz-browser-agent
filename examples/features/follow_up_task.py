@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 
-from browser_use import Agent, Browser
+from lz_browser_agent import Agent, Browser
 
 load_dotenv()
 

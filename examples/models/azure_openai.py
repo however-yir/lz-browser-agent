@@ -24,8 +24,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-from browser_use import Agent
-from browser_use.llm import ChatAzureOpenAI
+from lz_browser_agent import Agent
+from lz_browser_agent.llm import ChatAzureOpenAI
 
 # Make sure your deployment exists, double check the region and model name
 api_key = os.getenv('AZURE_OPENAI_KEY')

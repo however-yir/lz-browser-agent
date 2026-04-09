@@ -2,7 +2,7 @@ import asyncio
 
 from pydantic import BaseModel
 
-from browser_use import Browser, ChatOpenAI
+from lz_browser_agent import Browser, ChatOpenAI
 
 TASK = """
 On the current wikipedia page, find the latest huge edit and tell me what is was about.

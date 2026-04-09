@@ -26,9 +26,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use import Agent, Browser, ChatBrowserUse
-from browser_use.browser.events import AgentFocusChangedEvent, TabCreatedEvent
-from browser_use.browser.watchdog_base import BaseWatchdog
+from lz_browser_agent import Agent, Browser, ChatBrowserUse
+from lz_browser_agent.browser.events import AgentFocusChangedEvent, TabCreatedEvent
+from lz_browser_agent.browser.watchdog_base import BaseWatchdog
 
 CUSTOM_HEADERS = {
 	'X-Custom-Auth': 'Bearer my-secret-token',

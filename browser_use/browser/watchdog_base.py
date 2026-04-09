@@ -9,7 +9,7 @@ from typing import Any, ClassVar
 from bubus import BaseEvent, EventBus
 from pydantic import BaseModel, ConfigDict, Field
 
-from browser_use.browser.session import BrowserSession
+from lz_browser_agent.browser.session import BrowserSession
 
 
 class BaseWatchdog(BaseModel):
@@ -249,7 +249,7 @@ class BaseWatchdog(BaseModel):
 		# Register event handlers automatically based on method names
 		assert self.browser_session is not None, 'Root CDP client not initialized - browser may not be connected yet'
 
-		from browser_use.browser import events
+		from lz_browser_agent.browser import events
 
 		event_classes = {}
 		for name in dir(events):
@@ -316,6 +316,6 @@ class BaseWatchdog(BaseModel):
 						except Exception:
 							pass  # Ignore errors during cleanup
 		except Exception as e:
-			from browser_use.utils import logger
+			from lz_browser_agent.utils import logger
 
 			logger.error(f'⚠️ Error during BrowserSession {self.__class__.__name__} garbage collection __del__(): {type(e)}: {e}')

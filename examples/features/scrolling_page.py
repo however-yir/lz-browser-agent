@@ -10,8 +10,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use import Agent, ChatOpenAI
-from browser_use.browser import BrowserProfile, BrowserSession
+from lz_browser_agent import Agent, ChatOpenAI
+from lz_browser_agent.browser import BrowserProfile, BrowserSession
 
 if not os.getenv('OPENAI_API_KEY'):
 	raise ValueError('OPENAI_API_KEY is not set')

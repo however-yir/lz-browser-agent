@@ -24,7 +24,7 @@ if TYPE_CHECKING:
 	from cdp_use.cdp.page.types import Viewport
 	from cdp_use.cdp.runtime.commands import CallFunctionOnParameters
 
-	from browser_use.browser.session import BrowserSession
+	from lz_browser_agent.browser.session import BrowserSession
 
 # Type definitions for element operations
 ModifierType = Literal['Alt', 'Control', 'Meta', 'Shift']

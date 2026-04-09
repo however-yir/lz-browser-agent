@@ -16,7 +16,7 @@ load_dotenv()
 import asyncio
 import logging
 
-from browser_use import Agent, ChatOpenAI
+from lz_browser_agent import Agent, ChatOpenAI
 
 logger = logging.getLogger(__name__)
 

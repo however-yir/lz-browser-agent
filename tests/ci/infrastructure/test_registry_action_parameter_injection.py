@@ -5,7 +5,7 @@ import socketserver
 import pytest
 from pytest_httpserver import HTTPServer
 
-from browser_use.browser import BrowserProfile, BrowserSession
+from lz_browser_agent.browser import BrowserProfile, BrowserSession
 
 # Fix for httpserver hanging on shutdown - prevent blocking on socket close
 socketserver.ThreadingMixIn.block_on_close = False
@@ -83,7 +83,7 @@ class TestBrowserContext:
 		# Scenario 1: allowed_domains is None, any URL should be allowed.
 		from bubus import EventBus
 
-		from browser_use.browser.watchdogs.security_watchdog import SecurityWatchdog
+		from lz_browser_agent.browser.watchdogs.security_watchdog import SecurityWatchdog
 
 		config1 = BrowserProfile(allowed_domains=None, headless=True, user_data_dir=None)
 		context1 = BrowserSession(browser_profile=config1)
@@ -129,7 +129,7 @@ class TestBrowserContext:
 	async def test_navigate_and_get_current_page(self, browser_session, base_url):
 		"""Test that navigate method changes the URL and get_current_page returns the proper page."""
 		# Navigate to the test page
-		from browser_use.browser.events import NavigateToUrlEvent
+		from lz_browser_agent.browser.events import NavigateToUrlEvent
 
 		event = browser_session.event_bus.dispatch(NavigateToUrlEvent(url=f'{base_url}/'))
 		await event
@@ -149,7 +149,7 @@ class TestBrowserContext:
 	async def test_refresh_page(self, browser_session, base_url):
 		"""Test that refresh_page correctly reloads the current page."""
 		# Navigate to the test page
-		from browser_use.browser.events import NavigateToUrlEvent
+		from lz_browser_agent.browser.events import NavigateToUrlEvent
 
 		event = browser_session.event_bus.dispatch(NavigateToUrlEvent(url=f'{base_url}/'))
 		await event
@@ -176,7 +176,7 @@ class TestBrowserContext:
 	async def test_execute_javascript(self, browser_session, base_url):
 		"""Test that execute_javascript correctly executes JavaScript in the current page."""
 		# Navigate to a test page
-		from browser_use.browser.events import NavigateToUrlEvent
+		from lz_browser_agent.browser.events import NavigateToUrlEvent
 
 		event = browser_session.event_bus.dispatch(NavigateToUrlEvent(url=f'{base_url}/'))
 		await event
@@ -200,7 +200,7 @@ class TestBrowserContext:
 	async def test_get_scroll_info(self, browser_session, base_url):
 		"""Test that get_scroll_info returns the correct scroll position information."""
 		# Navigate to the scroll test page
-		from browser_use.browser.events import NavigateToUrlEvent
+		from lz_browser_agent.browser.events import NavigateToUrlEvent
 
 		event = browser_session.event_bus.dispatch(NavigateToUrlEvent(url=f'{base_url}/scroll_test'))
 		await event
@@ -230,7 +230,7 @@ class TestBrowserContext:
 	async def test_take_screenshot(self, browser_session, base_url):
 		"""Test that take_screenshot returns a valid base64 encoded image."""
 		# Navigate to the test page
-		from browser_use.browser.events import NavigateToUrlEvent
+		from lz_browser_agent.browser.events import NavigateToUrlEvent
 
 		event = browser_session.event_bus.dispatch(NavigateToUrlEvent(url=f'{base_url}/'))
 		await event
@@ -255,7 +255,7 @@ class TestBrowserContext:
 	async def test_switch_tab_operations(self, browser_session, base_url):
 		"""Test tab creation, switching, and closing operations."""
 		# Navigate to home page in first tab
-		from browser_use.browser.events import NavigateToUrlEvent
+		from lz_browser_agent.browser.events import NavigateToUrlEvent
 
 		event = browser_session.event_bus.dispatch(NavigateToUrlEvent(url=f'{base_url}/'))
 		await event
@@ -296,7 +296,7 @@ class TestBrowserContext:
 	# async def test_remove_highlights(self, browser_session, base_url):
 	# 	"""Test that remove_highlights successfully removes highlight elements."""
 	# 	# Navigate to a test page
-	# 	from browser_use.browser.events import NavigateToUrlEvent; event = browser_session.event_bus.dispatch(NavigateToUrlEvent(url=f'{base_url}/')
+	# 	from lz_browser_agent.browser.events import NavigateToUrlEvent; event = browser_session.event_bus.dispatch(NavigateToUrlEvent(url=f'{base_url}/')
 
 	# 	# Add a highlight via JavaScript
 	# 	await browser_session.execute_javascript("""
@@ -337,8 +337,8 @@ class TestBrowserContext:
 	@pytest.mark.skip(reason='TODO: fix')
 	async def test_custom_action_with_no_arguments(self, browser_session, base_url):
 		"""Test that custom actions with no arguments are handled correctly"""
-		from browser_use.agent.views import ActionResult
-		from browser_use.tools.registry.service import Registry
+		from lz_browser_agent.agent.views import ActionResult
+		from lz_browser_agent.tools.registry.service import Registry
 
 		# Create a registry
 		registry = Registry()
@@ -349,7 +349,7 @@ class TestBrowserContext:
 			return ActionResult(extracted_content='return some result')
 
 		# Navigate to a test page
-		from browser_use.browser.events import NavigateToUrlEvent
+		from lz_browser_agent.browser.events import NavigateToUrlEvent
 
 		event = browser_session.event_bus.dispatch(NavigateToUrlEvent(url=f'{base_url}/'))
 		await event

@@ -4,8 +4,8 @@ from typing import TYPE_CHECKING, ClassVar
 
 from bubus import BaseEvent
 
-from browser_use.browser.events import BrowserConnectedEvent
-from browser_use.browser.watchdog_base import BaseWatchdog
+from lz_browser_agent.browser.events import BrowserConnectedEvent
+from lz_browser_agent.browser.watchdog_base import BaseWatchdog
 
 if TYPE_CHECKING:
 	pass

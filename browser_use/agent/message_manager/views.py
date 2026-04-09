@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, Any
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from browser_use.llm.messages import (
+from lz_browser_agent.llm.messages import (
 	BaseMessage,
 )
 

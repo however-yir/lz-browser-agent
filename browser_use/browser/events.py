@@ -9,8 +9,8 @@ from bubus.models import T_EventResultType
 from cdp_use.cdp.target import TargetID
 from pydantic import BaseModel, Field, field_validator
 
-from browser_use.browser.views import BrowserStateSummary
-from browser_use.dom.views import EnhancedDOMTreeNode
+from lz_browser_agent.browser.views import BrowserStateSummary
+from lz_browser_agent.dom.views import EnhancedDOMTreeNode
 
 
 def _get_timeout(env_var: str, default: float) -> float | None:

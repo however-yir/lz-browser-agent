@@ -6,7 +6,7 @@ Setup:
 
 from dotenv import load_dotenv
 
-from browser_use import Agent, ChatBrowserUse
+from lz_browser_agent import Agent, ChatBrowserUse
 
 load_dotenv()
 

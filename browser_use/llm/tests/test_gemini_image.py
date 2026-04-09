@@ -5,9 +5,9 @@ import random
 
 from PIL import Image, ImageDraw, ImageFont
 
-from browser_use.llm.google.chat import ChatGoogle
-from browser_use.llm.google.serializer import GoogleMessageSerializer
-from browser_use.llm.messages import (
+from lz_browser_agent.llm.google.chat import ChatGoogle
+from lz_browser_agent.llm.google.serializer import GoogleMessageSerializer
+from lz_browser_agent.llm.messages import (
 	BaseMessage,
 	ContentPartImageParam,
 	ContentPartTextParam,

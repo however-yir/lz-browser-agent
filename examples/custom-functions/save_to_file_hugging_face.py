@@ -10,9 +10,9 @@ load_dotenv()
 
 from pydantic import BaseModel
 
-from browser_use import ChatOpenAI
-from browser_use.agent.service import Agent
-from browser_use.tools.service import Tools
+from lz_browser_agent import ChatOpenAI
+from lz_browser_agent.agent.service import Agent
+from lz_browser_agent.tools.service import Tools
 
 # Initialize tools first
 tools = Tools()

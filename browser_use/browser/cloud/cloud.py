@@ -10,8 +10,8 @@ import os
 
 import httpx
 
-from browser_use.browser.cloud.views import CloudBrowserAuthError, CloudBrowserError, CloudBrowserResponse, CreateBrowserRequest
-from browser_use.sync.auth import CloudAuthConfig
+from lz_browser_agent.browser.cloud.views import CloudBrowserAuthError, CloudBrowserError, CloudBrowserResponse, CreateBrowserRequest
+from lz_browser_agent.sync.auth import CloudAuthConfig
 
 logger = logging.getLogger(__name__)
 

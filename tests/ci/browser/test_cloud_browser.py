@@ -6,15 +6,15 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from browser_use.browser.cloud.cloud import (
+from lz_browser_agent.browser.cloud.cloud import (
 	CloudBrowserAuthError,
 	CloudBrowserClient,
 	CloudBrowserError,
 )
-from browser_use.browser.cloud.views import CreateBrowserRequest
-from browser_use.browser.profile import BrowserProfile
-from browser_use.browser.session import BrowserSession
-from browser_use.sync.auth import CloudAuthConfig
+from lz_browser_agent.browser.cloud.views import CreateBrowserRequest
+from lz_browser_agent.browser.profile import BrowserProfile
+from lz_browser_agent.browser.session import BrowserSession
+from lz_browser_agent.sync.auth import CloudAuthConfig
 
 
 @pytest.fixture

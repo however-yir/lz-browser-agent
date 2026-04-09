@@ -17,7 +17,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-from browser_use.config import CONFIG
+from lz_browser_agent.config import CONFIG
 
 logger = logging.getLogger(__name__)
 

@@ -30,7 +30,7 @@ Note: Cerebras has some limitations with complex structured output due to JSON s
 import asyncio
 import os
 
-from browser_use import Agent
+from lz_browser_agent import Agent
 
 
 async def main():
@@ -40,7 +40,7 @@ async def main():
 		raise ValueError('Please set CEREBRAS_API_KEY environment variable')
 
 	# Option 1: Use the pre-configured model instance (recommended)
-	from browser_use import llm
+	from lz_browser_agent import llm
 
 	# Choose your model:
 	# Small/Fast models:

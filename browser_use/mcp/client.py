@@ -4,8 +4,8 @@ This module provides integration between external MCP servers and browser-use's 
 MCP tools are dynamically discovered and registered as browser-use actions.
 
 Example usage:
-    from browser_use import Tools
-    from browser_use.mcp.client import MCPClient
+    from lz_browser_agent import Tools
+    from lz_browser_agent.mcp.client import MCPClient
 
     tools = Tools()
 
@@ -29,11 +29,11 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field, create_model
 
-from browser_use.agent.views import ActionResult
-from browser_use.telemetry import MCPClientTelemetryEvent, ProductTelemetry
-from browser_use.tools.registry.service import Registry
-from browser_use.tools.service import Tools
-from browser_use.utils import create_task_with_error_handling, get_browser_use_version
+from lz_browser_agent.agent.views import ActionResult
+from lz_browser_agent.telemetry import MCPClientTelemetryEvent, ProductTelemetry
+from lz_browser_agent.tools.registry.service import Registry
+from lz_browser_agent.tools.service import Tools
+from lz_browser_agent.utils import create_task_with_error_handling, get_browser_use_version
 
 logger = logging.getLogger(__name__)
 

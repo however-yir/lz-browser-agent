@@ -4,7 +4,7 @@ from typing import Any, overload
 
 from ollama._types import Image, Message
 
-from browser_use.llm.messages import (
+from lz_browser_agent.llm.messages import (
 	AssistantMessage,
 	BaseMessage,
 	SystemMessage,
@@ -139,5 +139,5 @@ class OllamaMessageSerializer:
 
 	@staticmethod
 	def serialize_messages(messages: list[BaseMessage]) -> list[Message]:
-		"""Serialize a list of browser_use messages to Ollama Messages."""
+		"""Serialize a list of lz_browser_agent messages to Ollama Messages."""
 		return [OllamaMessageSerializer.serialize(m) for m in messages]

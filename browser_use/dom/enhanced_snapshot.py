@@ -11,7 +11,7 @@ from cdp_use.cdp.domsnapshot.types import (
 	NodeTreeSnapshot,
 )
 
-from browser_use.dom.views import DOMRect, EnhancedSnapshotNode
+from lz_browser_agent.dom.views import DOMRect, EnhancedSnapshotNode
 
 # Only the ESSENTIAL computed styles for interactivity and visibility detection
 REQUIRED_COMPUTED_STYLES = [
@@ -50,7 +50,7 @@ def build_snapshot_lookup(
 	"""Build a lookup table of backend node ID to enhanced snapshot data with everything calculated upfront."""
 	import logging
 
-	logger = logging.getLogger('browser_use.dom.enhanced_snapshot')
+	logger = logging.getLogger('lz_browser_agent.dom.enhanced_snapshot')
 	snapshot_lookup: dict[int, EnhancedSnapshotNode] = {}
 
 	if not snapshot['documents']:

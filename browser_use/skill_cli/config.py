@@ -37,7 +37,7 @@ CONFIG_KEYS: dict = {
 
 
 def _get_config_path() -> Path:
-	from browser_use.skill_cli.utils import get_config_path
+	from lz_browser_agent.skill_cli.utils import get_config_path
 
 	return get_config_path()
 

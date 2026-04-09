@@ -1,3 +1,5 @@
-from browser_use.llm.browser_use.chat import ChatBrowserUse
+"""Backward-compatible alias for the renamed llm namespace."""
+
+from lz_browser_agent.llm.lz_browser_agent.chat import ChatBrowserUse
 
 __all__ = ['ChatBrowserUse']

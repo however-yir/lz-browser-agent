@@ -7,11 +7,12 @@ from ollama import AsyncClient as OllamaAsyncClient
 from ollama import Options
 from pydantic import BaseModel
 
-from browser_use.llm.base import BaseChatModel
-from browser_use.llm.exceptions import ModelProviderError
-from browser_use.llm.messages import BaseMessage
-from browser_use.llm.ollama.serializer import OllamaMessageSerializer
-from browser_use.llm.views import ChatInvokeCompletion
+from lz_browser_agent.llm.base import BaseChatModel
+from lz_browser_agent.llm.exceptions import ModelProviderError
+from lz_browser_agent.llm.messages import BaseMessage
+from lz_browser_agent.llm.ollama.serializer import OllamaMessageSerializer
+from lz_browser_agent.llm.views import ChatInvokeCompletion
+from lz_browser_agent.runtime.provider_settings import resolve_ollama_host
 
 T = TypeVar('T', bound=BaseModel)
 
@@ -35,6 +36,10 @@ class ChatOllama(BaseChatModel):
 	ollama_options: Mapping[str, Any] | Options | None = None
 
 	# Static
+	def __post_init__(self):
+		if self.host is None:
+			self.host = resolve_ollama_host()
+
 	@property
 	def provider(self) -> str:
 		return 'ollama'

@@ -1,0 +1,33 @@
+name: LZ Release Gate
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  python-package-gate:
+    name: Python Package Gate (py${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+      - name: Build package
+        run: |
+          uv build
+      - name: Validate distributions
+        run: |
+          uv run --with twine twine check dist/*
+      - name: Upload distribution artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-dist-py${{ matrix.python-version }}
+          path: dist/*

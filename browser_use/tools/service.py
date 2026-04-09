@@ -12,9 +12,9 @@ except ImportError:
 	Laminar = None  # type: ignore
 from pydantic import BaseModel
 
-from browser_use.agent.views import ActionModel, ActionResult
-from browser_use.browser import BrowserSession
-from browser_use.browser.events import (
+from lz_browser_agent.agent.views import ActionModel, ActionResult
+from lz_browser_agent.browser import BrowserSession
+from lz_browser_agent.browser.events import (
 	ClickCoordinateEvent,
 	ClickElementEvent,
 	CloseTabEvent,
@@ -28,15 +28,15 @@ from browser_use.browser.events import (
 	TypeTextEvent,
 	UploadFileEvent,
 )
-from browser_use.browser.views import BrowserError
-from browser_use.dom.service import EnhancedDOMTreeNode
-from browser_use.filesystem.file_system import FileSystem
-from browser_use.llm.base import BaseChatModel
-from browser_use.llm.messages import SystemMessage, UserMessage
-from browser_use.observability import observe_debug
-from browser_use.tools.registry.service import Registry
-from browser_use.tools.utils import get_click_description
-from browser_use.tools.views import (
+from lz_browser_agent.browser.views import BrowserError
+from lz_browser_agent.dom.service import EnhancedDOMTreeNode
+from lz_browser_agent.filesystem.file_system import FileSystem
+from lz_browser_agent.llm.base import BaseChatModel
+from lz_browser_agent.llm.messages import SystemMessage, UserMessage
+from lz_browser_agent.observability import observe_debug
+from lz_browser_agent.tools.registry.service import Registry
+from lz_browser_agent.tools.utils import get_click_description
+from lz_browser_agent.tools.views import (
 	ClickElementAction,
 	ClickElementActionIndexOnly,
 	CloseTabAction,
@@ -58,7 +58,7 @@ from browser_use.tools.views import (
 	SwitchTabAction,
 	UploadFileAction,
 )
-from browser_use.utils import create_task_with_error_handling, sanitize_surrogates, time_execution_sync
+from lz_browser_agent.utils import create_task_with_error_handling, sanitize_surrogates, time_execution_sync
 
 logger = logging.getLogger(__name__)
 
@@ -984,7 +984,7 @@ class Tools(Generic[Context]):
 			structured_model: type[BaseModel] | None = None
 			if output_schema is not None:
 				try:
-					from browser_use.tools.extraction.schema_utils import schema_dict_to_pydantic_model
+					from lz_browser_agent.tools.extraction.schema_utils import schema_dict_to_pydantic_model
 
 					structured_model = schema_dict_to_pydantic_model(output_schema)
 				except (ValueError, TypeError) as exc:
@@ -993,7 +993,7 @@ class Tools(Generic[Context]):
 
 			# Extract clean markdown using the unified method
 			try:
-				from browser_use.dom.markdown_extractor import extract_clean_markdown
+				from lz_browser_agent.dom.markdown_extractor import extract_clean_markdown
 
 				content, content_stats = await extract_clean_markdown(
 					browser_session=browser_session, extract_links=extract_links, extract_images=extract_images
@@ -1005,7 +1005,7 @@ class Tools(Generic[Context]):
 			final_filtered_length = content_stats['final_filtered_chars']
 
 			# Structure-aware chunking replaces naive char-based truncation
-			from browser_use.dom.markdown_extractor import chunk_markdown_by_structure
+			from lz_browser_agent.dom.markdown_extractor import chunk_markdown_by_structure
 
 			chunks = chunk_markdown_by_structure(content, max_chunk_chars=MAX_CHAR_LIMIT, start_from_char=start_from_char)
 			if not chunks:
@@ -1093,7 +1093,7 @@ You will be given a query, a JSON Schema, and the markdown of a webpage that has
 					current_url = await browser_session.get_current_page_url()
 					extracted_content = f'<url>\n{current_url}\n</url>\n<query>\n{query}\n</query>\n<structured_result>\n{result_json}\n</structured_result>'
 
-					from browser_use.tools.extraction.views import ExtractionResult
+					from lz_browser_agent.tools.extraction.views import ExtractionResult
 
 					extraction_meta = ExtractionResult(
 						data=result_data,
@@ -1578,7 +1578,7 @@ You will be given a query and the markdown of a webpage that has been filtered t
 				return ActionResult(extracted_content=msg)
 
 			# Dispatch SelectDropdownOptionEvent to the event handler
-			from browser_use.browser.events import SelectDropdownOptionEvent
+			from lz_browser_agent.browser.events import SelectDropdownOptionEvent
 
 			event = browser_session.event_bus.dispatch(SelectDropdownOptionEvent(node=node, text=params.text))
 			selection_data = await event.event_result()

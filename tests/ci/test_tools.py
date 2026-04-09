@@ -9,11 +9,11 @@ import pytest
 from pydantic import BaseModel, Field
 from pytest_httpserver import HTTPServer
 
-from browser_use.agent.views import ActionResult
-from browser_use.browser import BrowserSession
-from browser_use.browser.profile import BrowserProfile
-from browser_use.filesystem.file_system import FileSystem
-from browser_use.tools.service import Tools
+from lz_browser_agent.agent.views import ActionResult
+from lz_browser_agent.browser import BrowserSession
+from lz_browser_agent.browser.profile import BrowserProfile
+from lz_browser_agent.filesystem.file_system import FileSystem
+from lz_browser_agent.tools.service import Tools
 
 
 @pytest.fixture(scope='session')
@@ -655,7 +655,7 @@ class TestStructuredOutputDoneWithFiles:
 
 	async def test_structured_output_schema_hides_internal_fields(self):
 		"""The JSON schema for StructuredOutputAction hides success and files_to_display."""
-		from browser_use.tools.views import StructuredOutputAction
+		from lz_browser_agent.tools.views import StructuredOutputAction
 
 		class MyOutput(BaseModel):
 			name: str

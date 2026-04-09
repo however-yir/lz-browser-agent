@@ -17,21 +17,21 @@ import asyncio
 import os
 import sys
 
-# Ensure local repository (browser_use) is accessible
+# Ensure local repository (lz_browser_agent) is accessible
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use import Agent
-from browser_use.browser import BrowserSession
-from browser_use.tools.service import Tools
+from lz_browser_agent import Agent
+from lz_browser_agent.browser import BrowserSession
+from lz_browser_agent.tools.service import Tools
 
 
 def get_llm(provider: str):
 	if provider == 'anthropic':
-		from browser_use.llm import ChatAnthropic
+		from lz_browser_agent.llm import ChatAnthropic
 
 		api_key = os.getenv('ANTHROPIC_API_KEY')
 		if not api_key:
@@ -39,7 +39,7 @@ def get_llm(provider: str):
 
 		return ChatAnthropic(model='claude-3-5-sonnet-20240620', temperature=0.0)
 	elif provider == 'openai':
-		from browser_use import ChatOpenAI
+		from lz_browser_agent import ChatOpenAI
 
 		api_key = os.getenv('OPENAI_API_KEY')
 		if not api_key:

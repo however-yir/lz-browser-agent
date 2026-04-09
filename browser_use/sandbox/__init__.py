@@ -3,7 +3,7 @@
 This package provides type-safe sandbox code execution with SSE streaming.
 
 Example:
-    from browser_use.sandbox import sandbox, SSEEvent, SSEEventType
+    from lz_browser_agent.sandbox import sandbox, SSEEvent, SSEEventType
 
     @sandbox(log_level="INFO")
     async def my_task(browser: Browser) -> str:
@@ -14,8 +14,8 @@ Example:
     result = await my_task()
 """
 
-from browser_use.sandbox.sandbox import SandboxError, sandbox
-from browser_use.sandbox.views import (
+from lz_browser_agent.sandbox.sandbox import SandboxError, sandbox
+from lz_browser_agent.sandbox.views import (
 	BrowserCreatedData,
 	ErrorData,
 	ExecutionResponse,

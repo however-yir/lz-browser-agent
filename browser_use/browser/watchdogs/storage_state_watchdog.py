@@ -10,7 +10,7 @@ from bubus import BaseEvent
 from cdp_use.cdp.network import Cookie
 from pydantic import Field, PrivateAttr
 
-from browser_use.browser.events import (
+from lz_browser_agent.browser.events import (
 	BrowserConnectedEvent,
 	BrowserStopEvent,
 	LoadStorageStateEvent,
@@ -18,8 +18,8 @@ from browser_use.browser.events import (
 	StorageStateLoadedEvent,
 	StorageStateSavedEvent,
 )
-from browser_use.browser.watchdog_base import BaseWatchdog
-from browser_use.utils import create_task_with_error_handling
+from lz_browser_agent.browser.watchdog_base import BaseWatchdog
+from lz_browser_agent.utils import create_task_with_error_handling
 
 
 class StorageStateWatchdog(BaseWatchdog):

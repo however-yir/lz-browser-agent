@@ -11,10 +11,10 @@ because the dropdown closed during the wait between steps.
 
 from unittest.mock import AsyncMock
 
-from browser_use.agent.service import Agent
-from browser_use.agent.views import ActionResult, AgentHistory, AgentHistoryList, RerunSummaryAction, StepMetadata
-from browser_use.browser.views import BrowserStateHistory
-from browser_use.dom.views import DOMInteractedElement, DOMRect, MatchLevel, NodeType
+from lz_browser_agent.agent.service import Agent
+from lz_browser_agent.agent.views import ActionResult, AgentHistory, AgentHistoryList, RerunSummaryAction, StepMetadata
+from lz_browser_agent.browser.views import BrowserStateHistory
+from lz_browser_agent.dom.views import DOMInteractedElement, DOMRect, MatchLevel, NodeType
 from tests.ci.conftest import create_mock_llm
 
 
@@ -46,7 +46,7 @@ async def test_ax_name_matching_succeeds_when_hash_fails(httpserver):
 	async def custom_ainvoke(*args, **kwargs):
 		output_format = args[1] if len(args) > 1 else kwargs.get('output_format')
 		if output_format is RerunSummaryAction:
-			from browser_use.llm.views import ChatInvokeCompletion
+			from lz_browser_agent.llm.views import ChatInvokeCompletion
 
 			return ChatInvokeCompletion(completion=summary_action, usage=None)
 		raise ValueError('Unexpected output_format')
@@ -274,7 +274,7 @@ async def test_ax_name_matching_before_attribute_matching(httpserver):
 	async def custom_ainvoke(*args, **kwargs):
 		output_format = args[1] if len(args) > 1 else kwargs.get('output_format')
 		if output_format is RerunSummaryAction:
-			from browser_use.llm.views import ChatInvokeCompletion
+			from lz_browser_agent.llm.views import ChatInvokeCompletion
 
 			return ChatInvokeCompletion(completion=summary_action, usage=None)
 		raise ValueError('Unexpected output_format')

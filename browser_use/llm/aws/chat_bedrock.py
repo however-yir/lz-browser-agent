@@ -5,12 +5,12 @@ from typing import TYPE_CHECKING, Any, TypeVar, overload
 
 from pydantic import BaseModel
 
-from browser_use.llm.aws.serializer import AWSBedrockMessageSerializer
-from browser_use.llm.base import BaseChatModel
-from browser_use.llm.exceptions import ModelProviderError, ModelRateLimitError
-from browser_use.llm.messages import BaseMessage
-from browser_use.llm.schema import SchemaOptimizer
-from browser_use.llm.views import ChatInvokeCompletion, ChatInvokeUsage
+from lz_browser_agent.llm.aws.serializer import AWSBedrockMessageSerializer
+from lz_browser_agent.llm.base import BaseChatModel
+from lz_browser_agent.llm.exceptions import ModelProviderError, ModelRateLimitError
+from lz_browser_agent.llm.messages import BaseMessage
+from lz_browser_agent.llm.schema import SchemaOptimizer
+from lz_browser_agent.llm.views import ChatInvokeCompletion, ChatInvokeUsage
 
 if TYPE_CHECKING:
 	from boto3 import client as AwsClient  # type: ignore

@@ -7,7 +7,7 @@ import math
 from pathlib import Path
 from typing import Optional
 
-from browser_use.browser.profile import ViewportSize
+from lz_browser_agent.browser.profile import ViewportSize
 
 try:
 	import imageio.v2 as iio  # type: ignore[import-not-found]

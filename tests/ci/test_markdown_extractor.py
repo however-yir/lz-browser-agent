@@ -1,6 +1,6 @@
 """Tests for markdown extractor preprocessing."""
 
-from browser_use.dom.markdown_extractor import _preprocess_markdown_content
+from lz_browser_agent.dom.markdown_extractor import _preprocess_markdown_content
 
 
 class TestPreprocessMarkdownContent:

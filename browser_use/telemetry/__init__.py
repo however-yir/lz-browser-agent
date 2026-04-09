@@ -6,8 +6,8 @@ from typing import TYPE_CHECKING
 
 # Type stubs for lazy imports
 if TYPE_CHECKING:
-	from browser_use.telemetry.service import ProductTelemetry
-	from browser_use.telemetry.views import (
+	from lz_browser_agent.telemetry.service import ProductTelemetry
+	from lz_browser_agent.telemetry.views import (
 		BaseTelemetryEvent,
 		CLITelemetryEvent,
 		MCPClientTelemetryEvent,
@@ -16,11 +16,11 @@ if TYPE_CHECKING:
 
 # Lazy imports mapping
 _LAZY_IMPORTS = {
-	'ProductTelemetry': ('browser_use.telemetry.service', 'ProductTelemetry'),
-	'BaseTelemetryEvent': ('browser_use.telemetry.views', 'BaseTelemetryEvent'),
-	'CLITelemetryEvent': ('browser_use.telemetry.views', 'CLITelemetryEvent'),
-	'MCPClientTelemetryEvent': ('browser_use.telemetry.views', 'MCPClientTelemetryEvent'),
-	'MCPServerTelemetryEvent': ('browser_use.telemetry.views', 'MCPServerTelemetryEvent'),
+	'ProductTelemetry': ('lz_browser_agent.telemetry.service', 'ProductTelemetry'),
+	'BaseTelemetryEvent': ('lz_browser_agent.telemetry.views', 'BaseTelemetryEvent'),
+	'CLITelemetryEvent': ('lz_browser_agent.telemetry.views', 'CLITelemetryEvent'),
+	'MCPClientTelemetryEvent': ('lz_browser_agent.telemetry.views', 'MCPClientTelemetryEvent'),
+	'MCPServerTelemetryEvent': ('lz_browser_agent.telemetry.views', 'MCPServerTelemetryEvent'),
 }
 
 

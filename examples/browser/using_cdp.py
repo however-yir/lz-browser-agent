@@ -25,9 +25,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from browser_use import Agent, Tools
-from browser_use.browser import BrowserProfile, BrowserSession
-from browser_use.llm import ChatOpenAI
+from lz_browser_agent import Agent, Tools
+from lz_browser_agent.browser import BrowserProfile, BrowserSession
+from lz_browser_agent.llm import ChatOpenAI
 
 browser_session = BrowserSession(browser_profile=BrowserProfile(cdp_url='http://localhost:9222', is_local=True))
 tools = Tools()

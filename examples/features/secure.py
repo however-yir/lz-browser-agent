@@ -53,7 +53,7 @@ load_dotenv()
 os.environ['ANONYMIZED_TELEMETRY'] = 'false'
 
 
-from browser_use import Agent, BrowserProfile, ChatAzureOpenAI
+from lz_browser_agent import Agent, BrowserProfile, ChatAzureOpenAI
 
 # Configuration LLM
 api_key = os.getenv('AZURE_OPENAI_KEY')

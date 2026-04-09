@@ -6,7 +6,7 @@ from bubus import BaseEvent
 from cdp_use.cdp.target import TargetID
 from pydantic import PrivateAttr
 
-from browser_use.browser.events import (
+from lz_browser_agent.browser.events import (
 	AboutBlankDVDScreensaverShownEvent,
 	BrowserStopEvent,
 	BrowserStoppedEvent,
@@ -15,7 +15,7 @@ from browser_use.browser.events import (
 	TabClosedEvent,
 	TabCreatedEvent,
 )
-from browser_use.browser.watchdog_base import BaseWatchdog
+from lz_browser_agent.browser.watchdog_base import BaseWatchdog
 
 if TYPE_CHECKING:
 	pass

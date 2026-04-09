@@ -2,8 +2,8 @@ import os
 
 from onepassword.client import Client
 
-from browser_use import ActionResult, Agent, Browser, ChatOpenAI, Tools
-from browser_use.browser.session import BrowserSession
+from lz_browser_agent import ActionResult, Agent, Browser, ChatOpenAI, Tools
+from lz_browser_agent.browser.session import BrowserSession
 
 """
 Use Case: Securely log into a website using credentials stored in 1Password vault.

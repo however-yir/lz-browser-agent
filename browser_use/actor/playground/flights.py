@@ -1,6 +1,6 @@
 import asyncio
 
-from browser_use import Agent, Browser, ChatOpenAI
+from lz_browser_agent import Agent, Browser, ChatOpenAI
 
 llm = ChatOpenAI('gpt-4.1-mini')
 

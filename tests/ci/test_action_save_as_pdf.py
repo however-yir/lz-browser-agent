@@ -5,11 +5,11 @@ import anyio
 import pytest
 from pytest_httpserver import HTTPServer
 
-from browser_use.agent.views import ActionResult
-from browser_use.browser import BrowserSession
-from browser_use.browser.profile import BrowserProfile
-from browser_use.filesystem.file_system import FileSystem
-from browser_use.tools.service import Tools
+from lz_browser_agent.agent.views import ActionResult
+from lz_browser_agent.browser import BrowserSession
+from lz_browser_agent.browser.profile import BrowserProfile
+from lz_browser_agent.filesystem.file_system import FileSystem
+from lz_browser_agent.tools.service import Tools
 
 
 @pytest.fixture(scope='session')
@@ -258,7 +258,7 @@ class TestSaveAsPdf:
 
 	async def test_save_as_pdf_param_model_schema(self):
 		"""SaveAsPdfAction schema exposes the right fields with defaults."""
-		from browser_use.tools.views import SaveAsPdfAction
+		from lz_browser_agent.tools.views import SaveAsPdfAction
 
 		schema = SaveAsPdfAction.model_json_schema()
 		props = schema['properties']
