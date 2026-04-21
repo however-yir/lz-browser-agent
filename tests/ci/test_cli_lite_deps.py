@@ -3,7 +3,7 @@
 Creates a temp venv, installs browser-use with --no-deps, installs only the
 requirements-cli.txt deps, then verifies the CLI's critical import paths work.
 If this test fails, someone added a new import to the CLI path without updating
-lz_browser_agent/skill_cli/requirements-cli.txt.
+the canonical CLI dependency file under ``browser_use/skill_cli``.
 """
 
 import subprocess
@@ -15,7 +15,7 @@ import pytest
 
 # Path to the repo root (two levels up from tests/ci/)
 REPO_ROOT = Path(__file__).parent.parent.parent
-REQUIREMENTS_CLI = REPO_ROOT / 'lz_browser_agent' / 'skill_cli' / 'requirements-cli.txt'
+REQUIREMENTS_CLI = REPO_ROOT / 'browser_use' / 'skill_cli' / 'requirements-cli.txt'
 
 
 @pytest.fixture(scope='module')

@@ -8,9 +8,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+from examples.integrations.slack.slack_api import SlackBot, app
 from lz_browser_agent.browser import BrowserProfile
 from lz_browser_agent.llm import ChatGoogle
-from examples.integrations.slack.slack_api import SlackBot, app
 
 # load credentials from environment variables
 bot_token = os.getenv('SLACK_BOT_TOKEN')

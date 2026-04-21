@@ -1,7 +1,7 @@
 """Utilities for loading local development runtime settings."""
 
-from dataclasses import dataclass
 import os
+from dataclasses import dataclass
 
 
 @dataclass(frozen=True)

@@ -30,11 +30,11 @@ if TYPE_CHECKING:
 	from lz_browser_agent.llm.aws.chat_anthropic import ChatAnthropicBedrock
 	from lz_browser_agent.llm.aws.chat_bedrock import ChatAWSBedrock
 	from lz_browser_agent.llm.azure.chat import ChatAzureOpenAI
-	from lz_browser_agent.llm.lz_browser_agent.chat import ChatBrowserUse
 	from lz_browser_agent.llm.cerebras.chat import ChatCerebras
 	from lz_browser_agent.llm.deepseek.chat import ChatDeepSeek
 	from lz_browser_agent.llm.google.chat import ChatGoogle
 	from lz_browser_agent.llm.groq.chat import ChatGroq
+	from lz_browser_agent.llm.lz_browser_agent.chat import ChatBrowserUse
 	from lz_browser_agent.llm.mistral.chat import ChatMistral
 	from lz_browser_agent.llm.oci_raw.chat import ChatOCIRaw
 	from lz_browser_agent.llm.ollama.chat import ChatOllama

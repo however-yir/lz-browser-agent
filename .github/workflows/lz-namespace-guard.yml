@@ -21,7 +21,7 @@ jobs:
           fi
       - name: Block personal markers from source tree
         run: |
-          markers="$(git grep -nEi 'liuzhuoran|刘卓然|\\blzr\\b' -- . ':!**/package-lock.json' ':!**/bun.lock' ':!**/uv.lock' || true)"
+          markers="$(git grep -nEi 'liuzhuoran|刘卓然|\\blzr\\b' -- . ':!**/package-lock.json' ':!**/bun.lock' ':!**/uv.lock' ':!.github/workflows/lz-namespace-guard.yml' || true)"
           if [ -n "$markers" ]; then
             echo "Found personal markers:"
             echo "$markers"

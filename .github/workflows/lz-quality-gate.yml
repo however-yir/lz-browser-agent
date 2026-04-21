@@ -38,6 +38,6 @@ jobs:
           python-version: "3.12"
           enable-cache: true
       - name: Export dependency graph
-        run: uv export --all-extras --dev --format requirements-txt > /tmp/requirements-audit.txt
+        run: uv export --all-extras --dev --format requirements-txt --no-hashes --no-emit-project > /tmp/requirements-audit.txt
       - name: Run vulnerability audit
         run: uv run --with pip-audit pip-audit -r /tmp/requirements-audit.txt

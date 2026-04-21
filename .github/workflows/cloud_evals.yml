@@ -21,8 +21,14 @@ permissions: {}
 jobs:
   trigger_cloud_eval_image_build:
     runs-on: ubuntu-latest
+    env:
+      HAS_TRIGGER_CLOUD_BUILD_TOKEN: ${{ secrets.TRIGGER_CLOUD_BUILD_GH_KEY != '' }}
     steps:
+      - name: Skip when dispatch token is unavailable
+        if: env.HAS_TRIGGER_CLOUD_BUILD_TOKEN != 'true'
+        run: echo "TRIGGER_CLOUD_BUILD_GH_KEY is not configured; skipping cloud eval dispatch."
       - uses: actions/github-script@v7
+        if: env.HAS_TRIGGER_CLOUD_BUILD_TOKEN == 'true'
         with:
           github-token: ${{ secrets.TRIGGER_CLOUD_BUILD_GH_KEY }}
           script: |

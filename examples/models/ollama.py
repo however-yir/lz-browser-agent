@@ -3,9 +3,8 @@
 # 3. Pull a model you want to use:
 #    ollama pull qwen2.5:7b-instruct
 
-from lz_browser_agent import Agent, ChatOllama
-
 from examples.common.local_runtime import load_local_runtime_config
+from lz_browser_agent import Agent, ChatOllama
 
 config = load_local_runtime_config(default_task='帮我查一下 browser-use 仓库的核心能力并总结 3 点')
 

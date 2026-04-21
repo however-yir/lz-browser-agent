@@ -666,7 +666,12 @@ class BrowserUseApp(App):
 
 		# Also ensure agent loggers go to the main output
 		# Use a wildcard pattern to catch all agent-related loggers
-		for logger_name in ['lz_browser_agent.Agent', 'lz_browser_agent.controller', 'lz_browser_agent.agent', 'lz_browser_agent.agent.service']:
+		for logger_name in [
+			'lz_browser_agent.Agent',
+			'lz_browser_agent.controller',
+			'lz_browser_agent.agent',
+			'lz_browser_agent.agent.service',
+		]:
 			agent_logger = logging.getLogger(logger_name)
 			agent_logger.propagate = False
 			agent_logger.handlers = [log_handler]

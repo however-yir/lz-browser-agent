@@ -42,9 +42,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+from examples.integrations.discord.discord_api import DiscordBot
 from lz_browser_agent.browser import BrowserProfile
 from lz_browser_agent.llm import ChatGoogle
-from examples.integrations.discord.discord_api import DiscordBot
 
 # load credentials from environment variables
 bot_token = os.getenv('DISCORD_BOT_TOKEN')

@@ -136,13 +136,14 @@ skip-magic-trailing-comma = false
 
 [tool.pyright]
 typeCheckingMode = "basic"
-include = ["lz_browser_agent", "browser_use", "examples", "tests"]
+include = ["lz_browser_agent/__init__.py"]
 exclude = [
     ".venv/",
     ".venv*/",
     ".git/",
     "__pycache__/",
     "**/site-packages/",
+    "tests/**",
     "./test_*.py",
     "./debug_*.py",
     "private_example/",

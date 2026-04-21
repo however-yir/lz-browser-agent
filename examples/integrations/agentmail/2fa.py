@@ -9,8 +9,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from lz_browser_agent import Agent, Browser, ChatBrowserUse
 from examples.integrations.agentmail.email_tools import EmailTools
+from lz_browser_agent import Agent, Browser, ChatBrowserUse
 
 TASK = """
 Go to reddit.com, create a new account (use the get_email_address), make up password and all other information, confirm the 2fa with get_latest_email, and like latest post on r/elon subreddit.

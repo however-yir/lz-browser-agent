@@ -15,9 +15,9 @@ import os
 from typing import TYPE_CHECKING
 
 from lz_browser_agent.llm.azure.chat import ChatAzureOpenAI
-from lz_browser_agent.llm.lz_browser_agent.chat import ChatBrowserUse
 from lz_browser_agent.llm.cerebras.chat import ChatCerebras
 from lz_browser_agent.llm.google.chat import ChatGoogle
+from lz_browser_agent.llm.lz_browser_agent.chat import ChatBrowserUse
 from lz_browser_agent.llm.mistral.chat import ChatMistral
 from lz_browser_agent.llm.openai.chat import ChatOpenAI
 

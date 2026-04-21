@@ -13,8 +13,8 @@ import asyncio
 
 from langchain_openai import ChatOpenAI  # pyright: ignore
 
-from lz_browser_agent import Agent
 from examples.models.langchain.chat import ChatLangchain
+from lz_browser_agent import Agent
 
 
 async def main():

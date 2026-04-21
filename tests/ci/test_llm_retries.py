@@ -84,8 +84,8 @@ class TestChatBrowserUseRetries:
 	@pytest.mark.asyncio
 	async def test_no_retry_on_401(self, mock_env):
 		"""Test that 401 errors do NOT trigger retries."""
-		from lz_browser_agent.llm.lz_browser_agent.chat import ChatBrowserUse
 		from lz_browser_agent.llm.exceptions import ModelProviderError
+		from lz_browser_agent.llm.lz_browser_agent.chat import ChatBrowserUse
 		from lz_browser_agent.llm.messages import UserMessage
 
 		attempt_count = 0
@@ -148,8 +148,8 @@ class TestChatBrowserUseRetries:
 	@pytest.mark.asyncio
 	async def test_max_retries_exhausted(self, mock_env):
 		"""Test that error is raised after max retries exhausted."""
-		from lz_browser_agent.llm.lz_browser_agent.chat import ChatBrowserUse
 		from lz_browser_agent.llm.exceptions import ModelProviderError
+		from lz_browser_agent.llm.lz_browser_agent.chat import ChatBrowserUse
 		from lz_browser_agent.llm.messages import UserMessage
 
 		attempt_count = 0
